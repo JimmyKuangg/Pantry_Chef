@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
-const db = require('./config/keys').mongoURI;
+const db = require('./Pantry_Chef/config/keys').mongoURI;
 const users = require("./routes/api/users");
 const tweets = require("./routes/api/tweets");
 const bodyParser = require('body-parser');
@@ -23,7 +23,7 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
-require('./config/passport')(passport);
+require('./Pantry_Chef/config/passport')(passport);
 
 const port = process.env.PORT || 5000;
 
