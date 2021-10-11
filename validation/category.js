@@ -12,8 +12,6 @@ module.exports = function validateCategoryInput(data){
         errors.name = 'Name field is required'
     }
 
-    if (data.recipes.length === 0) errors.recipes = 'At least one recipe is required'
-
     return {
         errors,
         isValid: Object.keys(errors).length === 0
