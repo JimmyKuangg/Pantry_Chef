@@ -20,7 +20,6 @@
   "bugs": {
     "url": "https://github.com/JimmyKuangg/Pantry_Chef/issues"
   },
-  "proxy": "http://localhost:5000",
   "homepage": "https://github.com/JimmyKuangg/Pantry_Chef#readme",
   "description": "",
   "dependencies": {
