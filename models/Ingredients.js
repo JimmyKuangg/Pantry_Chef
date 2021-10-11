@@ -6,10 +6,10 @@ const IngredientSchema = new Schema({
         type: String,
         required: true
     },
-    // recipes: {
-    //     type: Array,
-    //     required: true
-    // },
+    recipes: {
+        type: Array,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now
