@@ -1,18 +1,26 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const PantryIngredients = new Schema({
+    ingredient: {
+        type: Schema.Types.ObjectId,
+        ref: 'ingredients'
+    },
+    quantity: Number,
+    unit: String
+})
+
 const PantrySchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
-    ingredients: {
-        type: Array
-    },
+    ingredients: [PantryIngredients],
     date: {
-        type: Date,
-        default: Date.now
+      type: Date,
+      default: Date.now
     }
 })
+
 
 module.exports = User = mongoose.model('Pantry', PantrySchema);

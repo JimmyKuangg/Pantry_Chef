@@ -27,10 +27,9 @@ router.post('/',
         if (!isValid){
             return res.status(400).json(errors)
         }
-
         const newIngredient = new Ingredient({
-            name: req.name,
-            recipes: req.recipes
+            name: req.body.name,
+            // recipes: req.body.recipes
         });
 
         newIngredient.save().then( ingredient => res.json(ingredient))
