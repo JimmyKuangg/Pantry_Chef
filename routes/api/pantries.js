@@ -23,6 +23,8 @@ router.post('/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         
+        
+
         const newPantry = new Pantry({
             user: req.body.user,
             ingredients: req.body.ingredients
