@@ -7,8 +7,7 @@ const CategorySchema = new Schema({
         required: true
     },
     recipes: {
-        type: Array,
-        required: true
+        
     },
     date: {
         type: Date,

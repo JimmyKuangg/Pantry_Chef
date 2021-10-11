@@ -4,7 +4,7 @@ const validText = require('./valid-text')
 module.exports = function validateIngredientInput(data){
     let errors = {}
     data.name = validText(data.name) ? data.name : ''
-    if (!Validator.isLength(data.text, {min: 2, max: 140})){
+    if (!Validator.isLength(data.name, {min: 2, max: 140})){
         errors.name = 'Ingredient name must be between 2 and 140 characters'
     }
 
@@ -12,7 +12,7 @@ module.exports = function validateIngredientInput(data){
         errors.name = 'Name field is required'
     }
 
-    if (data.recipes.length === 0) errors.recipes = 'At least one recipe is required'
+    // if (data.recipes.length === 0) errors.recipes = 'At least one recipe is required'
     
 
     return {
