@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
-const { text } = require('stream/consumers');
 const Schema = mongoose.Schema;
 
-const RecipeSchema = newSchema({
+const RecipeSchema = new Schema({
   name: {
     type: String,
     required: true
   }, 
   ingredients: {
-    type: Array,
+    type: [String],
     required: true
   },
   cookTime: {
@@ -16,10 +15,6 @@ const RecipeSchema = newSchema({
     required: true
   },
   calories: {
-    type: String,
-    required: true
-  },
-  description: {
     type: String,
     required: true
   },
@@ -36,3 +31,5 @@ const RecipeSchema = newSchema({
     default: Date.now
   }
 })
+
+module.exports = mongoose.model('Recipe', RecipeSchema);

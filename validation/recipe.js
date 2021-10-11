@@ -7,7 +7,6 @@ module.exports = function validateRecipeInput(data) {
   data.name = validText(data.name) ? data.name : '';
   data.cookTime = validText(data.cookTime) ? data.cookTime: '';
   data.calories = validText(data.calories) ? data.calories: '';
-  data.description = validText(data.description) ? data.description : '';
   
   if (Validator.isEmpty(data.name)) {
     errors.name = 'Name is required';
@@ -18,7 +17,7 @@ module.exports = function validateRecipeInput(data) {
   }
 
   if (Validator.isEmpty(data.cookTime)) {
-    errors.cookTime = 'Cooktime is required';
+    errors.cookTime = 'Cook time is required';
   }
 
   if (Validator.isEmpty(data.calories)) {
