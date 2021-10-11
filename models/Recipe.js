@@ -7,8 +7,12 @@ const RecipeSchema = new Schema({
     required: true
   }, 
   ingredients: [{
-    type: Schema.Types.ObjectId,
-    ref: 'ingredients'
+    ingredient: {
+      type: Schema.Types.ObjectId,
+      ref: 'ingredient'
+    },
+    quanitity: Number,
+    unit: String,
   }],
   cookTime: {
     type: String,

@@ -31,21 +31,7 @@ router.post('/create', (req, res) => {
         date: req.body.date
       })
 
-      newRecipe
-        .save()
-        .then(recipe => {
-          const payload = {
-            id: recipe.id,
-            name: recipe.name,
-            ingredients: recipe.ingredients,
-            cookTime: recipe.cookTime,
-            calories: recipe.calories,
-            description: recipe.description,
-            categories: recipe.categories,
-            authorId: recipe.authorId,
-            date: recipe.date
-          }
-        })
+      newRecipe.save().then(recipe => res.json(recipe))
     }
   })
 })
