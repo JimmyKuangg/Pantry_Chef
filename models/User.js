@@ -13,9 +13,15 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    pantry: [{
+        type: Schema.Types.ObjectId,
+        ref: 'pantries'
+    }],
+    date: {
+      type: Date,
+      default: Date.now
     }
-    }, {
-    timestamps: true
 })
 
 module.exports = User = mongoose.model('User', UserSchema);

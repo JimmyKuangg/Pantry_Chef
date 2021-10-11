@@ -12,7 +12,6 @@ export const receiveCurrentUser = (currentUser) => ({
 });
 
 export const receiveUserSignIn = () => {
-  debugger
   return {
     type: RECEIVE_USER_SIGN_IN,
   }
@@ -30,11 +29,11 @@ export const logoutUser = () => ({
 });
 
 export const signup = (user) => (dispatch) => {
-  debugger
   return APIUtil.signup(user).then(
     () => dispatch(receiveUserSignIn()),
     (err) => dispatch(receiveErrors(err.response.data))
     )
+
   }
     
 export const login = (user) => (dispatch) =>
