@@ -8,7 +8,7 @@ const PantrySchema = new Schema({
         ref: 'users'
     },
     ingredients: [{
-        ingredient:{
+        id:{
             type: Schema.Types.ObjectId,
             ref: 'ingredients'
         },
