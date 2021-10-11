@@ -6,10 +6,6 @@ const IngredientSchema = new Schema({
         type: String,
         required: true
     },
-    category: {
-        type: String,
-        required: true
-    },
     recipes: {
         type: Array,
         required: true
