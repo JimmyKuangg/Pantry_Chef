@@ -6,9 +6,6 @@ const CategorySchema = new Schema({
         type: String,
         required: true
     },
-    recipes: {
-        
-    },
     date: {
         type: Date,
         default: Date.now
