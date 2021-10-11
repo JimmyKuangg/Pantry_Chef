@@ -24,8 +24,8 @@ router.post('/',
     (req, res) => {
         
         const newPantry = new Pantry({
-            user: req.user,
-            recipes: req.recipes
+            user: req.body.user,
+            ingredients: req.body.ingredients
         });
 
         newPantry.save().then( pantry => res.json(pantry))
