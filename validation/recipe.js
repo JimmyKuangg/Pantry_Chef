@@ -1,12 +1,15 @@
 const Validator = require('validator');
 const validText = require('./valid-text');
+const validArray = require('./valid-array')
 
 module.exports = function validateRecipeInput(data) {
   let errors = {};
 
   data.name = validText(data.name) ? data.name : '';
-  data.cookTime = validText(data.cookTime) ? data.cookTime: '';
-  data.calories = validText(data.calories) ? data.calories: '';
+  data.ingredients = validArray(data.ingredients) ? data.ingredients: [];
+  data.cookTime = validText(data.cookTime) ? data.cookTime : '';
+  data.calories = validText(data.calories) ? data.calories : '';
+  data.categories = validArray(data.categories) ? data.categories : [];
   
   if (Validator.isEmpty(data.name)) {
     errors.name = 'Name is required';
@@ -22,10 +25,6 @@ module.exports = function validateRecipeInput(data) {
 
   if (Validator.isEmpty(data.calories)) {
     errors.calories = 'Calories is required';
-  }
-
-  if (Validator.isEmpty(data.description)) {
-    errors.description = 'Description is required';
   }
 
   if (data.categories.length === 0) {
