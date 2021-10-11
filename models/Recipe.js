@@ -6,13 +6,10 @@ const RecipeSchema = new Schema({
     type: String,
     required: true
   }, 
-  ingredients: {
-    type: [{
-      type: Schema.Types.ObjectId,
-      ref: 'ingredients'
-    }],
-    required: true
-  },
+  ingredients: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Ingredients',
+  }],
   cookTime: {
     type: String,
     required: true
@@ -25,10 +22,10 @@ const RecipeSchema = new Schema({
     type: [String],
     required: true
   },
-  authorId: {
-    type: Schema.Types.ObjectId,
-    ref: 'users'
-  },
+  // authorId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'users'
+  // },
   date: {
     type: Date,
     default: Date.now

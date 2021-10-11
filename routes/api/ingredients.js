@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose')
 const passport = require('passport')
 
-const Ingredient = require('../../models/Ingredient')
+const Ingredient = require('../../models/Ingredients')
 const validateIngredientInput = require('../../validation/ingredient')
 
 router.get("/test", (req, res) => res.json({ msg: "This is the ingredients route" }));
@@ -30,7 +30,7 @@ router.post('/',
 
         const newIngredient = new Ingredient({
             name: req.name,
-            recipes: req.recipes
+            // recipes: req.recipes
         });
 
         newIngredient.save().then( ingredient => res.json(ingredient))
