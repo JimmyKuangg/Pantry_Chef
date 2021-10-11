@@ -14,10 +14,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    pantry: {
+    pantry: [{
         type: Schema.Types.ObjectId,
         ref: 'pantries'
-    },
+    }],
     date: {
       type: Date,
       default: Date.now

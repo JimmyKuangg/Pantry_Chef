@@ -4,6 +4,7 @@ const validArray = require('./valid-array')
 
 module.exports = function validateRecipeInput(data) {
   let errors = {};
+  console.log(data);
 
   data.name = validText(data.name) ? data.name : '';
   data.ingredients = validArray(data.ingredients) ? data.ingredients: [];
