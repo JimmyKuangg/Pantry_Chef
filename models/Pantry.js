@@ -6,14 +6,9 @@ const PantrySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
-    category: {
-        type: String,
-        required: true
+    ingredients: {
+        type: Array
     },
-    recipes: {
-        type: Array,
-        required: true
-    }, 
     date: {
         type: Date,
         default: Date.now
