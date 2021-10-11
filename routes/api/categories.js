@@ -11,13 +11,13 @@
 // router.get('/', (req, res) => {
 //     Category.find()
 //         .then(categories => res.json(categories))
-//         .catch( err => res.status(404).json({ notweetsfound: 'No categories found' }))
+//         .catch( err => res.status(404).json({ nocategoriesfound: 'No categories found' }))
 // });
 
 // router.get('/:id', (req, res) => {
 //     Category.findById(req.params.id)
 //         .then(category => res.json(category))
-//         .catch( err => res.status(404).json( { notweetfound: 'No Category found with that ID'} ) )
+//         .catch( err => res.status(404).json( { nocategoryfound: 'No Category found with that ID'} ) )
 // });
 
 // router.post('/', 
@@ -33,7 +33,7 @@
 //             recipes: req.user.recipes
 //         });
 
-//         newTweet.save().then( tweet => res.json(tweet))
+//         newCategory.save().then( category => res.json(category))
 //     }
 // );
 
