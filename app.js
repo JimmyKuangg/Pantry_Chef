@@ -3,7 +3,6 @@ const app = express();
 const mongoose = require('mongoose');
 const db = require('./Pantry_Chef/config/keys').mongoURI;
 const users = require("./routes/api/users");
-const tweets = require("./routes/api/tweets");
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
