@@ -29,8 +29,8 @@ router.post('/',
         }
 
         const newCategory = new Category({
-            name: req.body.name,
-            recipes: req.user.recipes
+            name: req.name,
+            recipes: req.recipes
         });
 
         newCategory.save().then( category => res.json(category))
