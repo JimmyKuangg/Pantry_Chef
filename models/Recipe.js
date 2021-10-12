@@ -7,12 +7,8 @@ const RecipeSchema = new Schema({
     required: true
   }, 
   ingredients: [{
-    id: {
-      type: Schema.Types.ObjectId,
-      ref: 'ingredient'
-    },
-    quanitity: Number,
-    unit: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Ingredient'
   }],
   cookTime: {
     type: String,
@@ -23,14 +19,12 @@ const RecipeSchema = new Schema({
     required: true
   },
   categories: [{
-    id: {
-      type: Schema.Types.ObjectId,
-      ref: 'catergory'
-    },
-  }],
-  authorId: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: 'Category'
+  }],
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
   date: {
     type: Date,

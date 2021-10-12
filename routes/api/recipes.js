@@ -6,6 +6,25 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRecipeInput = require('../../validation/recipe.js');
 
+router.get('/:recipeId', (req, res) => {
+  Recipe.findById(req.params.recipeId)
+    .populate('ingredients', '-_id, name')
+    .populate('categories', '-_id, name')
+    .populate('author', '-_id, username')
+    .then(recipe => {
+      let recipeShow = {
+        name: recipe.name,
+        ingredients: [...recipe.ingredients],
+        cookTime: recipe.cookTime,
+        calories: recipe.calories,
+        categories: [...recipe.categories],
+        author: recipe.author.username
+      }
+
+      return res.json(recipeShow);
+    })
+})
+
 router.post('/create', 
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
@@ -28,7 +47,7 @@ router.post('/create',
         calories: req.body.calories,
         description: req.body.description,
         categories: req.body.categories,
-        authorId: req.body.authorId,
+        author: req.body.author,
         date: req.body.date
       })
 
