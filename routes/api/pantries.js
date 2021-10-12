@@ -9,7 +9,25 @@ router.get("/test", (req, res) => res.json({ msg: "This is the pantry route" }))
 
 router.get('/', (req, res) => {
     Pantry.find()
-        .then(pantries => res.json(pantries))
+        .populate('ingredients.ingredient', "name")
+        .populate('user', "username")
+        .then(pantries => {
+          let newPantries = []
+          pantries.forEach(pantry => {
+              newPantries.push({
+                user: pantry.user.username,
+                ingredients: (!pantry.ingredients) ? [] : 
+                  pantry.ingredients.map(ele => ({
+                    ingredient: ele.ingredient.name,
+                    quantity: ele.quantity,
+                    unit: ele.unit
+                }))
+              })
+            }
+          )
+          
+          return res.json(newPantries)
+        })
         .catch( err => res.status(404).json({ nopantriesfound: 'No pantries found' }))
 });
 
