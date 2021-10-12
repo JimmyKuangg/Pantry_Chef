@@ -6,7 +6,7 @@ export default class RecipeShow extends Component {
             <div className="show-container">
                 <div className="show-header">
                     <div className="recipe-picture">
-
+                        
                     </div>
                     <div className="recipe-info">
 
@@ -21,7 +21,7 @@ export default class RecipeShow extends Component {
                     </div>
                 </div>
                 <div className="show-reviews">
-                    
+
                 </div>
             </div>
         )
