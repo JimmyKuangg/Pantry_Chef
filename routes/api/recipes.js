@@ -6,6 +6,10 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRecipeInput = require('../../validation/recipe.js');
 
+router.get('/', (req, res) => {
+
+})
+
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
     .populate('ingredients', '-_id, name')
@@ -13,6 +17,7 @@ router.get('/:recipeId', (req, res) => {
     .populate('author', '-_id, username')
     .then(recipe => {
       let recipeShow = {
+        id: recipe._id,
         name: recipe.name,
         ingredients: [...recipe.ingredients],
         cookTime: recipe.cookTime,
