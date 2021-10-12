@@ -1,4 +1,5 @@
 import React from "react";
+import Modal from '../modal/modal';
 import { Link } from "react-router-dom";
 
 
@@ -36,9 +37,24 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Pantry Chef</h1>
-        {this.getLinks()}
+      <div className="navbar-container">
+
+        <div className="navbar-content">
+
+          <div className="navbar-right">
+            <div className="navbar-logo"></div>
+
+            <div className="navbar-about"></div>
+
+            <div className="navbar-github"></div>
+          </div>
+
+          <div className="navbar-left">
+            {this.props.openLoginModal}
+            {this.props.openSignupModal}
+          </div>
+
+        </div>
       </div>
     );
   }
