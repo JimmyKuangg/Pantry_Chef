@@ -22,8 +22,10 @@ router.get('/:id', (req, res) => {
 router.post('/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
-        
-        
+        const {errors, isValid} = validateIngredientInput(req.body);
+        if (!isValid){
+            return res.status(400).json(errors)
+        }
 
         const newPantry = new Pantry({
             user: req.body.user,
@@ -34,6 +36,27 @@ router.post('/',
     }
 );
 
+router.patch('/update/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    
+    const { errors, isValid } = validatePantryInput(req.body);
 
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    Pantry.findById(req.params.id).then(pantry => {
+      if (!recipe) {
+        errors.pantry = 'A pantry with that ID does not exist';
+        return res.status(404).json(errors);
+      } else {
+        pantry.ingredients = req.body.ingredients 
+        pantry.save()
+        return res.status(200).json(pantry)
+      }
+    })
+  }
+)
 
 module.exports = router;
