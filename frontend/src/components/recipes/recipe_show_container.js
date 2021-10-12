@@ -1,16 +1,18 @@
 import { connect } from "react-redux";
 import RecipeShow from "./recipe_show";
+import { fetchRecipe } from "../../util/recipe_util";
 
-const mSTP = state => {
-    // return (
-        
-    // )
-}
+
+const mSTP = (state, ownProps) => {
+    return {
+        recipe: state.recipes[ownProps.match.params.recipeId]
+    }
+};
 
 const mDTP = dispatch => {
-    // return (
-    //     null
-    // )
+    return {
+        fetchRecipe: (recipeId) => dispatch(fetchRecipe(recipeId))
+    }
 }
 
-export default connect(mSTP, mDTP)(RecipeShow)
+export default connect(mSTP, mDTP)(RecipeShow);

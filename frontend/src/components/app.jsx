@@ -13,7 +13,7 @@ const App = () => (
   <div>
     <NavBarContainer />
     <Switch>
-      <Route exact path='/show' component={RecipeShowContainer} />
+      <Route exact path='/recipes/:recipeId' component={RecipeShowContainer} />
       <AuthRoute exact path="/" component={MainPage} />
       {/* <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} /> */}

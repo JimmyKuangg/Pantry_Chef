@@ -1,6 +1,5 @@
 import { RECEIVE_RECIPES, RECEIVE_RECIPE, REMOVE_RECIPE } from "../actions/recipe_actions"
 
-
 const recipes = (state = {}, action) => {
   Object.freeze(state);
   let newState = Object.assign({}, state)
