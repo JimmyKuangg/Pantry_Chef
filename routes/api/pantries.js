@@ -52,13 +52,24 @@ router.get('/:id', (req, res) => {
 router.post('/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
+      const { errors, isValid } = validatePantryInput(req.body);
 
-      const newPantry = new Pantry({
-          user: req.body.user,
-          ingredients: req.body.ingredients
-      });
+      if (!isValid) {
+        return res.status(400).json(errors);
+      }
 
-      newPantry.save().then( pantry => res.json(pantry))
+      Pantry.findOne({ user: req.body.user }).then(user => {
+        if (user) {
+          errors.user = "Pantry already exists for this user already exists";
+          return res.status(400).json(errors);
+        } else {
+          const newPantry = new Pantry({
+            user: req.body.user,
+            ingredients: req.body.ingredients
+          });
+          newPantry.save().then( pantry => res.json(pantry))
+        }
+
     }
 );
 
@@ -71,7 +82,6 @@ router.patch('/update/:id',
         errors.pantry = 'A pantry with that ID does not exist';
         return res.status(404).json(errors);
       } else {
-        console.log(req.body)
         pantry.ingredients = req.body.ingredients 
         pantry.save()
         return res.status(200).json(pantry)

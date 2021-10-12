@@ -28,11 +28,18 @@ router.post('/',
             return res.status(400).json(errors)
         }
 
-        const newCategory = new Category({
-            name: req.body.name
-        });
+        Category.findOne({ name: req.body.name }).then(name => {
+            if (name) {
+              errors.name = "Category with this name already exists";
+              return res.status(400).json(errors);
+            } else {
+                const newCategory = new Category({
+                    name: req.body.name
+                });
+        
+                newCategory.save().then( category => res.json(category))
+            }
 
-        newCategory.save().then( category => res.json(category))
     }
 );
 
