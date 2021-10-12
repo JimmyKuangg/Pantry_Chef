@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
+const Ingredient = require('./Ingredient');
 const Schema = mongoose.Schema;
 
 
 const PantrySchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'User'
     },
     ingredients: [{
-        id:{
+        ingredient:{
             type: Schema.Types.ObjectId,
-            ref: 'ingredients'
+            ref: 'Ingredient'
         },
         quantity: Number,
         unit: String,

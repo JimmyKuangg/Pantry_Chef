@@ -15,42 +15,45 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     Pantry.findById(req.params.id)
-        .then(pantry => res.json(pantry))
+        .populate('ingredients.ingredient', "name")
+        .populate('user', "username")
+        .then(pantry => {
+            let newPantry = {
+              user: pantry.user.username,
+              ingredients: pantry.ingredients.map(ele => ({
+                ingredient: ele.ingredient.name,
+                quantity: ele.quantity,
+                unit: ele.unit
+              }))
+            }
+          return res.json(newPantry)
+          })
         .catch( err => res.status(404).json( { nopantryfound: 'No Pantry found with that ID'} ) )
 });
 
 router.post('/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
-        const {errors, isValid} = validateIngredientInput(req.body);
-        if (!isValid){
-            return res.status(400).json(errors)
-        }
 
-        const newPantry = new Pantry({
-            user: req.body.user,
-            ingredients: req.body.ingredients
-        });
+      const newPantry = new Pantry({
+          user: req.body.user,
+          ingredients: req.body.ingredients
+      });
 
-        newPantry.save().then( pantry => res.json(pantry))
+      newPantry.save().then( pantry => res.json(pantry))
     }
 );
 
 router.patch('/update/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    
-    const { errors, isValid } = validatePantryInput(req.body);
-
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
 
     Pantry.findById(req.params.id).then(pantry => {
-      if (!recipe) {
+      if (!pantry) {
         errors.pantry = 'A pantry with that ID does not exist';
         return res.status(404).json(errors);
       } else {
+        console.log(req.body)
         pantry.ingredients = req.body.ingredients 
         pantry.save()
         return res.status(200).json(pantry)
