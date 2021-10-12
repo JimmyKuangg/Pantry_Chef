@@ -3,15 +3,15 @@ import React, { Component } from 'react'
 class RecipeShow extends Component {
 
     componentDidMount(){
-        console.log(this.props)
-        this.props.fetchRecipe(this.props.recipe.id)
+        this.props.fetchRecipe(this.props.match.params.recipeId)
     }
-
+    
     render() {
-
+        console.log(this.props)
+        
         const { recipe } = this.props;
-
-        if (!recipe) {
+        
+        if (recipe === undefined ) {
             return null
         }
 
@@ -47,16 +47,16 @@ class RecipeShow extends Component {
             <div className="show-content">
               <div className="show-ingredients">
                 <ul>
-                    {/* {recipe.ingredients.map( (ingredient, i) => {
+                    {recipe.ingredients.map( (ingredient, i) => {
                         <li key={i} className='show-ingredient'> {ingredient.quantity}{ingredient.name}</li>
-                    })} */}
+                    })}
                 </ul>
               </div>
               <div className="show-directions">
                 <ol>
-                    {recipe.steps.map( (step, i) => {
+                    {/* {recipe.steps.map( (step, i) => {
                         <li key={i} className='show-direction'> {i}{step} </li>
-                    })}
+                    })} */}
                 </ol>
               </div>
             </div>
