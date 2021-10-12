@@ -24,8 +24,8 @@ class RecipeShow extends Component {
               <div className="recipe-info">
                 <div className="recipe-name"> {recipe.name} </div>
                 <ul className="recipe-category">
-                  {recipe.categories.map((category) => (
-                    <li>{category.name}</li>
+                  {recipe.categories.map((category, i) => (
+                    <li key={i}>{category.name}</li>
                   ))}
                 </ul>
                 <div className="recipe-info-bottom">
