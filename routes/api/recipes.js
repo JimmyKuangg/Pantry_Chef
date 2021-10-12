@@ -52,7 +52,13 @@ router.patch('/update/:id',
         errors.recipe = 'A recipe with that ID does not exist';
         return res.status(404).json(errors);
       } else {
-        console.log('hello'); 
+        recipe.ingredients = req.body.ingredients,
+        recipe.cookTime = req.body.cookTime,
+        recipe.calories = req.body.calories,
+        recipe.description = req.body.description,
+        recipe.categories = req.body.categories
+
+        recipe.save().then(recipe => res.json(recipe));
       }
     })
   }

@@ -22,14 +22,17 @@ const RecipeSchema = new Schema({
     type: String,
     required: true
   },
-  categories: {
-    type: [String],
+  categories: [{
+    id: {
+      type: Schema.Types.ObjectId,
+      ref: 'catergory'
+    },
     required: true
-  },
-  authorId: [{
+  }],
+  authorId: {
     type: Schema.Types.ObjectId,
     ref: 'users'
-  }],
+  },
   date: {
     type: Date,
     default: Date.now
