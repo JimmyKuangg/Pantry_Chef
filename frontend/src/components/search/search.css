@@ -5,10 +5,17 @@
 
 .search-input-wrapper {
   display: flex;
+  margin-top: 30px;
 }
 
 .search-bar {
-
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 25px;
+  font-size: 18px;
+  padding: 15px;
+  height: 20px;
+  width: 500px;
 }
 
 .selected-ingredients {

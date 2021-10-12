@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
-
+import navlogo from './navlogo.png';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class NavBar extends React.Component {
 
           <div className="navbar-item">
             <div className="navbar-signup">
-            {this.props.openSignupModal}
+              {this.props.openSignupModal}
             </div>
           </div>
 
@@ -51,9 +51,10 @@ class NavBar extends React.Component {
         
           <div className="navbar-left">
 
-            <div className="navbar-logo">
-              {/* <img src="./logo.png" alt="Pantry Chef logo" /> */}
-              Logo
+            <div className="navbar-logo-box">
+              <a href="/">
+                <img className="pc-logo" src={navlogo} alt="Pantry Chef logo" />
+              </a>
             </div>
 
             <div className="navbar-item">
@@ -63,8 +64,17 @@ class NavBar extends React.Component {
             </div>
 
             <div className="navbar-item">
+              <div className="navbar-about">
+                Meet the Team
+              </div>
+            </div>
+
+            <div className="navbar-item">
               <div className="navbar-github">
-                GitHub
+                <a href="https://github.com/JimmyKuangg/Pantry_Chef">
+                  {/* <img className="nav-github-logo" src={github} alt="GitHub repo" /> */}
+                  <i className="fab fa-github" id="nav-github-logo" />
+                </a>
               </div>
             </div>
 
