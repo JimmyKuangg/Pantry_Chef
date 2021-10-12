@@ -27,11 +27,20 @@ router.post('/',
         if (!isValid){
             return res.status(400).json(errors)
         }
-        const newIngredient = new Ingredient({
-            name: req.body.name,
-        });
 
-        newIngredient.save().then( ingredient => res.json(ingredient))
+        Ingredient.findOne({ name: req.body.name }).then(name => {
+            if (name) {
+              errors.name = "Ingredient with this name already exists";
+              return res.status(400).json(errors);
+            } else {
+                const newIngredient = new Ingredient({
+                    name: req.body.name,
+                });
+        
+                newIngredient.save().then( ingredient => res.json(ingredient))
+            }
+
+        })
     }
 );
 
