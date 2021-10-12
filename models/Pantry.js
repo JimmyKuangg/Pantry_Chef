@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Ingredient = require('./Ingredient');
 const Schema = mongoose.Schema;
 
 
