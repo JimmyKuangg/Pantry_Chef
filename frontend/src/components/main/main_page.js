@@ -4,6 +4,7 @@ import Search from '../search/search_container';
 import RecipeIndex from '../recipes/recipe_index_container';
 import logo from './logo.png';
 import "./main.css";
+import "../../index.css"
 
 class MainPage extends React.Component {
   render() {

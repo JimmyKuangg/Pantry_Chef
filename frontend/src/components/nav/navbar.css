@@ -13,8 +13,9 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   justify-content: space-between;
+  padding: 4px;
 }
 
 .navbar-right {
@@ -79,7 +80,7 @@
   border: none;
   color: white;
   border-radius: 5px;
-  padding: 8px 20px;
+  padding: 9px 21px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
