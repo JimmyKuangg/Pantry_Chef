@@ -27,7 +27,6 @@ const RecipeSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'catergory'
     },
-    required: true
   }],
   authorId: {
     type: Schema.Types.ObjectId,
