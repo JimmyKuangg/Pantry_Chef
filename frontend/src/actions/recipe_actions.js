@@ -22,24 +22,29 @@ export const removeRecipe = recipeId => ({
 export const fetchRecipes = () => dispatch => (
   RecipeUtil.fetchAllRecipes()
     .then(recipes => dispatch(receiveRecipes(recipes)))
+    .catch(err => console.log(err))
 );
 
 export const fetchRecipe = recipeId => dispatch => (
   RecipeUtil.fetchRecipe(recipeId)
     .then(recipeId => dispatch(receiveRecipe(recipeId)))
+    .catch(err => console.log(err))
 );
 
 export const createRecipe = recipe => dispatch => (
   RecipeUtil.createRecipe(recipe)
     .then(recipe => dispatch(receiveRecipe(recipe)))
+    .catch(err => console.log(err))
 );
 
 export const editRecipe = recipe => dispatch => (
   RecipeUtil.editRecipe(recipe)
     .then(recipe => dispatch(receiveRecipe(recipe)))
+    .catch(err => console.log(err))
 );
 
 export const deleteRecipe = recipeId => dispatch => (
   RecipeUtil.deleteRecipe(recipeId)
     .then(() => dispatch(removeRecipe(recipeId)))
+    .catch(err => console.log(err))
 );
