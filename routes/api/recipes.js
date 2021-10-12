@@ -83,4 +83,20 @@ router.patch('/update/:id',
   }
 )
 
+router.delete('/delete/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Recipe.findById(req.params.id).then(recipe => {
+      console.log(recipe.id);
+      console.log(req.user.id);
+      if (recipe.author.id != req.user.id) {
+        return res.status(400).json({ cannotdelete: 'You can only delete your own recipes'});
+      } else {
+        Recipe.deleteOne({ _id: req.params.id }).then( () => {
+          return res.status(200).json({ success: "Recipe deleted"});
+        })
+      }
+    })
+  }
+)
 module.exports = router;
