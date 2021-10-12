@@ -5,6 +5,7 @@ import ui from "./ui_reducer";
 import recipes from "./recipe_reducer"
 import pantries from "./pantry_reducer"
 import categories from './category_reducer'
+import ingredients from './ingredient_reducer'
 
 
 const RootReducer = combineReducers({

@@ -1,10 +1,10 @@
 import {
-    FETCH_CATEGORIES,
-    FETCH_CATEGORY,
-  } from "../actions/category_actions";
+    FETCH_ALL_INGREDIENTS,
+    FETCH_INGREDIENT,
+  } from "../actions/ingredient_actions";
   
   
-  const categories = (state = {}, action) => {
+  const ingredients = (state = {}, action) => {
     Object.freeze(state);
     switch (action.type) {
       case FETCH_ALL_INGREDIENTS:
@@ -18,5 +18,5 @@ import {
     }
   };
   
-  export default categories;
+  export default ingredients;
   

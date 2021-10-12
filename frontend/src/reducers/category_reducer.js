@@ -6,12 +6,12 @@ import {
   
   const categories = (state = {}, action) => {
     Object.freeze(state);
-    let newState = Object.assign({}, state)
     switch (action.type) {
       case FETCH_CATEGORIES:
-        return action.categories
+        return action.categories.data
       case FETCH_CATEGORY:
-        newState[action.category.id] = action.category
+        let newState = {}
+        newstate[action.category.data.id] = action.category.data
         return newState
       default:
         return state;
