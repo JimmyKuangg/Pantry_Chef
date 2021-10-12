@@ -5,13 +5,14 @@ const recipes = (state = {}, action) => {
   let newState = Object.assign({}, state)
   switch (action.type) {
     case RECEIVE_RECIPES:
-      return action.recipes;
+      return action.recipes.data;
     case RECEIVE_RECIPE:
-        newState[action.recipe.id] = action.recipe;
-        return newState;
-    case REMOVE_RECIPE:
-        delete newState[action.recipeId]
-        return newState
+        let newState = {};
+        newState[action.recipe.data.id] = action.recipe.data
+        return newState 
+    // case REMOVE_RECIPE:
+    //     delete newState[action.recipeId]
+    //     return newState
     default:
       return state;
   }
