@@ -1,0 +1,16 @@
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input-wrapper {
+  display: flex;
+}
+
+.search-bar {
+
+}
+
+.selected-ingredients {
+
+}

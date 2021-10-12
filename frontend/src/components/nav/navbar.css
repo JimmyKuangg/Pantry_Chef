@@ -1,0 +1,67 @@
+.navbar-container {
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  position: sticky;
+
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.navbar-right {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+  margin-right: 50px;
+}
+
+.navbar-left {
+  display: flex;
+  width: 50%;
+}
+
+.navbar-logo {
+
+}
+
+.navbar-item {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  min-height: 60px;
+  min-width: 80px;
+}
+
+.navbar-about {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-github {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+}
+
+.navbar-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+}
