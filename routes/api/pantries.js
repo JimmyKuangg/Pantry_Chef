@@ -60,7 +60,7 @@ router.post('/',
 
       Pantry.findOne({ user: req.body.user }).then(user => {
         if (user) {
-          errors.user = "Pantry already exists for this user already exists";
+          errors.user = "Pantry already exists for this user";
           return res.status(400).json(errors);
         } else {
           const newPantry = new Pantry({
@@ -69,7 +69,7 @@ router.post('/',
           });
           newPantry.save().then( pantry => res.json(pantry))
         }
-
+      })
     }
 );
 
