@@ -7,13 +7,14 @@ module.exports = function validatePantryInput(data) {
 
   data.ingredients = validArray(data.ingredients) ? data.ingredients : '';
   for(let i = 0; i < data.ingredients.length; i++) { 
-    if (!Validator.isNumeric(data.ingredients.quantity)) {
-      errors.ingredients.quantity = 'Quantity is required';
+    data.ingredients[i].quantity = validText(data.ingredients[i].quantity) ? data.ingredients[i].quantity : '';
+    if (!Validator.isNumeric(data.ingredients[i].quantity.toString())) {
+      errors.quantity = 'Quantity is required';
     }
 
-    data.ingredients.unit = validText(data.ingredients.unit) ? data.ingredients.unit : '';
-    if (Validator.isEmpty(data.ingredients.unit)) {
-      errors.ingredients.unit = 'Unit of measure is required';
+    data.ingredients[i].unit = validText(data.ingredients[i].unit) ? data.ingredients[i].unit : '';
+    if (Validator.isEmpty(data.ingredients[i].unit)) {
+      errors.unit = 'Unit of measure is required';
     }
   }
 

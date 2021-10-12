@@ -12,7 +12,7 @@ const PantrySchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Ingredient'
         },
-        quantity: Number,
+        quantity: String,
         unit: String,
     }],
     date: {

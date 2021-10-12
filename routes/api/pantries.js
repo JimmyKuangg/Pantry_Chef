@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 
 const Pantry = require('../../models/Pantry')
+const validatePantryInput = require('../../validation/pantry')
 
 router.get("/test", (req, res) => res.json({ msg: "This is the pantry route" }));
 
@@ -57,7 +58,7 @@ router.post('/',
       if (!isValid) {
         return res.status(400).json(errors);
       }
-
+      
       Pantry.findOne({ user: req.body.user }).then(user => {
         if (user) {
           errors.user = "Pantry already exists for this user";
