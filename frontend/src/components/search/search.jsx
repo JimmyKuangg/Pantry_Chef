@@ -8,9 +8,9 @@ export default class Search extends Component {
         <div className="search-wrapper">
 
           <div className="search-input-wrapper">
-            <div>toggle</div>
-            <input type="text" className="search-bar" />
-            <div>search button</div>
+            <input type="text" className="search-bar" placeholder="Enter an ingredient..." />
+            
+            <div className="search-icon"></div>
           </div>
 
           <div className="selected-ingredients">

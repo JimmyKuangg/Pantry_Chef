@@ -10,12 +10,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   openLoginModal: (
-    <button className="open-modal" onClick={() => dispatch(openModal('login'))}>
+    <button className="open-modal login-button" onClick={() => dispatch(openModal('login'))}>
       Login
     </button>
   ),
   openSignupModal: (
-    <button className="open-modal" onClick={() => dispatch(openModal('signup'))}>
+    <button className="open-modal signup-button" onClick={() => dispatch(openModal('signup'))}>
       Sign up
     </button>
   ),

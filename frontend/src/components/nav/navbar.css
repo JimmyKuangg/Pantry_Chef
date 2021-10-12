@@ -5,8 +5,6 @@
   top: 0;
   left: 0;
   z-index: 999;
-  position: sticky;
-
 }
 
 .navbar-content {
@@ -28,17 +26,21 @@
 .navbar-left {
   display: flex;
   width: 50%;
+  align-items: center;
 }
 
-.navbar-logo {
-
+.pc-logo {
+  width: 35px;
+  height: 35px;
+  padding: 3px;
+  border: 2px solid #3F48CC;
+  border-radius: 50%;
 }
 
 .navbar-item {
   display: flex;
   justify-content: center;
   text-align: center;
-  min-height: 60px;
   min-width: 80px;
 }
 
@@ -50,6 +52,11 @@
 .navbar-github {
   display: flex;
   align-items: center;
+}
+
+#nav-github-logo {
+  font-size: 35px;
+  color: #3F48CC;
 }
 
 .navbar-login {
@@ -64,4 +71,27 @@
   justify-content: center;
   align-items: center;
   min-width: 80px;
+}
+
+.login-button {
+  background-color: #3F48CC;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.signup-button {
+  margin-left: 3px;
+  background-color: transparent;
+  border: 1px solid #3F48CC;
+  color: #3F48CC;
+  border-radius: 5px;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
 }
