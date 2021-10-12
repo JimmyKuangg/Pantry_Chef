@@ -6,9 +6,10 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRecipeInput = require('../../validation/recipe.js');
 
-router.get("/test", (req, res) => res.json({ msg: "Hello! This is the recipes route"}));
-
-router.post('/create', (req, res) => {
+router.post('/create', 
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+  
   const { errors, isValid } = validateRecipeInput(req.body);
 
   if (!isValid) {
@@ -35,5 +36,26 @@ router.post('/create', (req, res) => {
     }
   })
 })
+
+router.patch('/update/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    
+    const { errors, isValid } = validateRecipeInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    Recipe.findById(req.params.id).then(recipe => {
+      if (!recipe) {
+        errors.recipe = 'A recipe with that ID does not exist';
+        return res.status(404).json(errors);
+      } else {
+        console.log('hello'); 
+      }
+    })
+  }
+)
 
 module.exports = router;

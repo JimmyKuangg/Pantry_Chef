@@ -29,7 +29,6 @@ router.post('/',
         }
         const newIngredient = new Ingredient({
             name: req.body.name,
-            // recipes: req.body.recipes
         });
 
         newIngredient.save().then( ingredient => res.json(ingredient))
