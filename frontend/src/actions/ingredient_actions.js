@@ -1,4 +1,4 @@
-import * as IngrecientAPI from '../util/ingredient_util'
+import * as IngredientAPI from '../util/ingredient_util'
 export const FETCH_ALL_INGREDIENTS = "FETCH_ALL_INGREDIENTS"
 export const FETCH_INGREDIENT = "FETCH_INGREDIENT"
 
