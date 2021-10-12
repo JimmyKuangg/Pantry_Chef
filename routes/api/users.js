@@ -7,6 +7,7 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRegisterInput = require('../../validation/register.js');
 const validateLoginInput = require('../../validation/login.js');
+const Pantry = require("../../models/Pantry");
 
 router.get("/test", (req, res) => res.json({ msg: "Testing Testing" }));
 
@@ -17,15 +18,19 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ username: req.body.username }).then(user => {
+  User.findOne({ $or: [ {username: req.body.username}, {email: req.body.email}]}).then(user => {
     if (user) {
-      errors.username = "User already exists";
+      errors.user = "Username / Email has already been taken";
       return res.status(400).json(errors);
     } else {
+      const newUserPantry = new Pantry();
+      newUserPantry.save();
+
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        pantry: newUserPantry
       });
 
       bcrypt.genSalt(10, (err, salt) => {
