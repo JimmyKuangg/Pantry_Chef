@@ -7,22 +7,52 @@ const passport = require('passport');
 const validateRecipeInput = require('../../validation/recipe.js');
 
 router.get('/', (req, res) => {
+  Recipe.find()
+    .populate('ingredients.ingredient', '-_id, name')
+    .populate('categories', '-_id, name')
+    .populate('author', '-_id, username')
+    .then(recipes => {
+      let recipesIndex = [];
 
+      for(let i = 0; i < recipes.length; i++) {
+        let recipeCard = {
+          id: recipes[i]._id,
+          name: recipes[i].name,
+          ingredients: recipes[i].ingredients.map(ele => ({
+            ingredient: ele.ingredient.name,
+            quantity: ele.quantity,
+            unit: ele.unit
+          })),
+          cookTime: recipes[i].cookTime,
+          calories: recipes[i].calories,
+          categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+          author: recipes[i].author.username
+        }
+
+        recipesIndex.push(recipeCard);
+      }
+
+      res.json(recipesIndex);
+    })
 })
 
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
-    .populate('ingredients', '-_id, name')
+    .populate('ingredients.ingredient', '-_id, name')
     .populate('categories', '-_id, name')
     .populate('author', '-_id, username')
     .then(recipe => {
       let recipeShow = {
         id: recipe._id,
         name: recipe.name,
-        ingredients: [...recipe.ingredients],
+        ingredients: recipe.ingredients.map(ele => ({
+          ingredient: ele.ingredient.name,
+          quantity: ele.quantity,
+          unit: ele.unit
+        })),
         cookTime: recipe.cookTime,
         calories: recipe.calories,
-        categories: [...recipe.categories],
+        categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
         author: recipe.author.username
       }
 

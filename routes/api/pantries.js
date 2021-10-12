@@ -8,6 +8,7 @@ const validatePantryInput = require('../../validation/pantry')
 
 router.get("/test", (req, res) => res.json({ msg: "This is the pantry route" }));
 
+//Marked for removal - Jimmy
 router.get('/', (req, res) => {
     Pantry.find()
         .populate('ingredients.ingredient', "name")

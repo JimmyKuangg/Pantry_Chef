@@ -14,12 +14,6 @@ router.get('/', (req, res) => {
         .catch( err => res.status(404).json({ nocategoriesfound: 'No categories found' }))
 });
 
-router.get('/:id', (req, res) => {
-    Category.findById(req.params.id)
-        .then(category => res.json(category))
-        .catch( err => res.status(404).json( { nocategoryfound: 'No Category found with that ID'} ) )
-});
-
 router.post('/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {

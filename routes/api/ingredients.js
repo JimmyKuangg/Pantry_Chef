@@ -14,12 +14,6 @@ router.get('/', (req, res) => {
         .catch( err => res.status(404).json({ noingredientsfound: 'No ingredients found' }))
 });
 
-router.get('/:id', (req, res) => {
-    Ingredient.findById(req.params.id)
-        .then(ingredient => res.json(ingredient))
-        .catch( err => res.status(404).json( { noingredientfound: 'No Ingredient found with that ID'} ) )
-});
-
 router.post('/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
