@@ -11,7 +11,7 @@ module.exports = function validateRecipeInput(data) {
   data.calories = validText(data.calories) ? data.calories : '';
   data.steps = validArray(data.steps) ? data.steps : [];
   data.categories = validArray(data.categories) ? data.categories : [];
-  
+
   if (Validator.isEmpty(data.name)) {
     errors.name = 'Name is required';
   }
@@ -50,6 +50,7 @@ module.exports = function validateRecipeInput(data) {
   } else {
     for(let i = 0; i < data.steps.length; i++){
       data.steps[i] = validText(data.steps[i]) ? data.steps[i] : '';
+      console.log(typeof data.steps[i]);
       if (Validator.isEmpty(data.steps[i])) {
         errors.steps = 'Error in step input';
       }

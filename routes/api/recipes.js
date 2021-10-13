@@ -82,6 +82,7 @@ router.post('/create',
         calories: req.body.calories,
         description: req.body.description,
         categories: req.body.categories,
+        steps: req.body.steps,
         author: req.body.author,
         date: req.body.date
       })
