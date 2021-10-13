@@ -74,24 +74,24 @@ export default class Search extends Component {
           </div>
           {
             this.state.ingredientSuggestions.length === 0 ? "" : 
-              <div className='ingredient-suggestions'>
-                <ul>
-                  {this.state.ingredientSuggestions.map((suggestion, i) => (
-                    this.state.selectedIngredients.includes(suggestion) ? 
-                    "" :
-                  <li key={i} className="suggestion-item" onClick={e => this.suggestionClickHandler(e, suggestion)}>{suggestion.name}</li>
-                  ))}
-                </ul>      
+              <div className='ingredient-suggestions-background'>
+                <div className='ingredient-suggestions'>
+                  <ul>
+                    {this.state.ingredientSuggestions.map((suggestion, i) => (
+                      this.state.selectedIngredients.includes(suggestion) ? 
+                      "" :
+                    <li key={i} className="suggestion-item" onClick={e => this.suggestionClickHandler(e, suggestion)}>{suggestion.name}</li>
+                    ))}
+                  </ul>      
+                </div>
               </div>
           }
           
           <div className="selected-ingredients-wrapper">
-            <div>
-              <p>Selected ingredients</p>
-            </div>
             <div className="selected-ingredients-box">
               <ul id='selected-ingredients'>
-                {this.state.selectedIngredients.map((ingredient,i) => <li key={i} className="selected-ingredient-item" onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}</li>)}
+                {this.state.selectedIngredients.map((ingredient,i) => 
+                <li key={i} className="selected-ingredient-item" onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}</li>)}
               </ul>
             </div>
           </div>
