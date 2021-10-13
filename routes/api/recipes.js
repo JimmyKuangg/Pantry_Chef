@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Recipe = require('../../models/Recipe');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+
+const Recipe = require('../../models/Recipe');
 const validateRecipeInput = require('../../validation/recipe.js');
 
 router.get('/', (req, res) => {
@@ -23,9 +24,10 @@ router.get('/', (req, res) => {
             quantity: ele.quantity,
             unit: ele.unit
           })),
-          cookTime: recipes[i].cookTime,
-          calories: recipes[i].calories,
+          // cookTime: recipes[i].cookTime,
+          // calories: recipes[i].calories,
           categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+          // steps: recipes[i].steps,
           author: recipes[i].author.username
         }
 
@@ -52,7 +54,8 @@ router.get('/:recipeId', (req, res) => {
         })),
         cookTime: recipe.cookTime,
         calories: recipe.calories,
-        categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+        categories: Object.values(recipe.categories).map(obj => (obj.name)),
+        steps: recipe.steps,
         author: recipe.author.username
       }
 
@@ -82,6 +85,7 @@ router.post('/create',
         calories: req.body.calories,
         description: req.body.description,
         categories: req.body.categories,
+        steps: req.body.steps,
         author: req.body.author,
         date: req.body.date
       })
@@ -110,6 +114,7 @@ router.patch('/update/:id',
         recipe.cookTime = req.body.cookTime,
         recipe.calories = req.body.calories,
         recipe.description = req.body.description,
+        recipe.steps = req.body.steps,
         recipe.categories = req.body.categories
 
         recipe.save().then(recipe => res.json(recipe));
