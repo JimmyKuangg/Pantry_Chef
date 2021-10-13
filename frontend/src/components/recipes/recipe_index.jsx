@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import './recipe_index.css';
+import { Link } from "react-router-dom";
 
 export default class RecipeIndex extends Component {
   constructor(props){
@@ -17,7 +19,10 @@ export default class RecipeIndex extends Component {
   }
 
   filterByIngredients(){
-
+    if(this.props.ingredients === undefined || this.props.ingredients.length === 0 ){
+      this.setState({recipes: this.props.recipes});
+      return
+    }
 
     let names = this.props.ingredients.map(ingredient => ingredient.name)
     let filtered = this.props.recipes.filter( recipe => {
@@ -67,19 +72,22 @@ export default class RecipeIndex extends Component {
 
     return (
         <div className="index-main">
-          <div>
+          <div className='category-wrapper'>
             <h1>Categories</h1>
-            <div>
-              <li key='clear' onClick={this.clearFilterClickHandler}>Clear all Category Filters</li>
-              {this.possibleCategories().map((category, i) => <li key={i} onClick={e => this.categoryClickHandler(e, category)}>{category}</li>)}
+            <div className="category-list">
+              <li key='clear' id='category-item' onClick={this.clearFilterClickHandler}>Clear all Category Filters</li>
+              {this.possibleCategories().map((category, i) => <li id='category-item' key={i} onClick={e => this.categoryClickHandler(e, category)}>{category}</li>)}
             </div>
           </div>
           <div className="index-recipes">
-            <ul> Recipes
+            <h2>Recipes</h2>
+            <ul id='index-recipe-items'>
               { this.state.recipes.map((recipe, i) => (
-                <li key={i} className="index-recipe">
-                  {recipe.name}
-                </li>
+                <Link to={`/recipes/${recipe.id}`}><li key={i} id="index-recipe-item">
+                  <img id='recipe-picture'src='https://i2.wp.com/www.awilsonsocialwork.net/wp-content/uploads/2017/01/placeholder.jpg?fit=1200%2C1200&ssl=1'/>
+                  <h3>{recipe.name}</h3>
+                  <p>by: {recipe.author}</p>
+                </li></Link>
               ))}
             </ul>
           </div>
