@@ -18,13 +18,31 @@ class NavBar extends React.Component {
   getLinks() {
     if (this.props.loggedIn) {
       return (
-        <div>
-          <button onClick={this.logoutUser}>Logout</button>
+        <div className="navbar-right">
+
+          <div className="navbar-item">
+            <div className="navbar-pantry">
+              <Link to="/pantries">My Pantry</Link>
+            </div>
+          </div>
+
+          <div className="navbar-item">
+            <div className="navbar-logout">
+              <button onClick={this.logoutUser}>Logout</button>
+            </div>
+          </div>
+
         </div>
       );
     } else {
       return (
         <div className="navbar-right">
+
+          <div className="navbar-item">
+            <div className="navbar-pantry">
+              {this.props.openNavSignupModal}
+            </div>
+          </div>
 
           <div className="navbar-item">
             <div className="navbar-login">
@@ -72,7 +90,6 @@ class NavBar extends React.Component {
             <div className="navbar-item">
               <div className="navbar-github">
                 <a href="https://github.com/JimmyKuangg/Pantry_Chef">
-                  {/* <img className="nav-github-logo" src={github} alt="GitHub repo" /> */}
                   <i className="fab fa-github" id="nav-github-logo" />
                 </a>
               </div>
