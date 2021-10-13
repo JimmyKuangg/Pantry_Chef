@@ -11,7 +11,7 @@ const RecipeSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Ingredient'
     },
-    quantity: Number,
+    quantity: String,
     unit: String
   }],
   cookTime: {
@@ -30,10 +30,10 @@ const RecipeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  steps: {
-    type: [String],
+  steps: [{
+    type: String,
     required: true
-  },
+  }],
   date: {
     type: Date,
     default: Date.now

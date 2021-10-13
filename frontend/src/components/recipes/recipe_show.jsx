@@ -53,9 +53,11 @@ class RecipeShow extends Component {
           </div>
           <div className="show-directions">
             <ol>
-              {recipe.steps.map( (step, i) => (
-                        <li key={i+1} className='show-direction'> {i+1}. {step} </li>
-              ))}
+              {
+                recipe.steps[0].split('.').slice(0, -1).map( (step, i) => (
+                          <li key={i+1} className='show-direction'> {i+1}. {step} </li>
+                ))
+              }
             </ol>
           </div>
         </div>
