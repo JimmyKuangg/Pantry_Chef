@@ -13,21 +13,20 @@ export default class RecipeIndex extends Component {
   }
 
   render() {
-    const { recipes } = this.props;
-
-    if (!recipes) {
-      return null;
+    if (this.props.recipes.length === 0){
+      return <div>
+        There are no recipes here
+      </div>
     }
-    console.log(this.props.recipes);
     return (
         <div className="index-main">
           <div className="index-recipes">
             <ul> Recipes
-              {this.props.recipes.map((recipe, i) => {
+              { this.props.recipes.map((recipe, i) => (
                 <li key={i} className="index-recipe">
                   {recipe.name}
-                </li>;
-              })}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
