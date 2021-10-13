@@ -16,7 +16,7 @@ router.get('/',
       if (!isValid) {
         return res.status(400).json(errors);
       }
-      
+
       Pantry.findById(req.user.pantry)
           .populate('ingredients.ingredient', "name")
           .populate('user', "username")
@@ -34,6 +34,7 @@ router.get('/',
           .catch( err => res.status(404).json( { nopantryfound: 'No Pantry found with that ID'} ) )
 });
 
+//Will we even need this anymore?
 router.post('/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {

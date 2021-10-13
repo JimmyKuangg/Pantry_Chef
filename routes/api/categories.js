@@ -6,8 +6,6 @@ const passport = require('passport')
 const  Category = require('../../models/Category')
 const validateCategoryInput = require('../../validation/category')
 
-router.get("/test", (req, res) => res.json({ msg: "This is the categories route" }));
-
 router.get('/', (req, res) => {
     Category.find()
         .then(categories => res.json(categories))

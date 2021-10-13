@@ -5,14 +5,14 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
-const validateRegisterInput = require('../../validation/register.js');
+const validateSignUpInput = require('../../validation/signup.js');
 const validateLoginInput = require('../../validation/login.js');
 const Pantry = require("../../models/Pantry");
 
 router.get("/test", (req, res) => res.json({ msg: "Testing Testing" }));
 
-router.post("/register", (req, res) => {
-  const { errors, isValid } = validateRegisterInput(req.body);
+router.post("/signup", (req, res) => {
+  const { errors, isValid } = validateSignUpInput(req.body);
 
   if (!isValid) {
     return res.status(400).json(errors);
@@ -104,8 +104,5 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     email: req.user.email
   });
 })
-
-
-
 
 module.exports = router;
