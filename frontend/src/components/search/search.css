@@ -75,16 +75,31 @@
   margin-left: 2px;
   margin-right: 2px;
   height: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 13px;
 }
 
 .selected-ingredients-wrapper {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
   display: flex;
+  flex-wrap: wrap;
+  max-height: 150px;
+  overflow: hidden;
+  overflow-y: auto;
+  justify-content: center;
 }
 
 .selected-ingredient-box {
   display: flex;
-  height: 150px;
-  overflow: hidden;
+ 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.selected-ingredients-box > ul {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
 }
 
 .selected-ingredient-item {
@@ -98,4 +113,6 @@
   margin-left: 2px;
   margin-right: 2px;
   height: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 13px;
 }
