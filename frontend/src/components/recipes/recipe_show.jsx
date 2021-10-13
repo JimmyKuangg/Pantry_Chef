@@ -16,25 +16,32 @@ class RecipeShow extends Component {
     return (
       <div className="show-wrapper">
         <div className="show-header">
-          <div className="recipe-photo">{/* <img src={recipe.photo} /> */}Photo</div>
+          <div className="recipe-photo-wrapper">
+            <img id='recipe-photo' src="https://i2.wp.com/www.awilsonsocialwork.net/wp-content/uploads/2017/01/placeholder.jpg?fit=1200%2C1200&ssl=1" />
+          </div>
           <div className="recipe-info">
             <div className="recipe-name"> {recipe.name} </div>
-            <ul className="recipe-category">
-              {
-                  recipe.categories.map( (category, i) => (
-                    <li key={i}>{category}</li>
-                  ))
-              }
-            </ul>
             <div className="recipe-info-bottom">
-              <div className="recipe-show-overview">
+              <div className="recipe-show-stats">
                 <div className="recipe-cooktime">{recipe.cookTime}</div>
-                <div className="recipe-ingredient-count">{recipe.ingredients.length}</div>
+                <div className="recipe-ingredient-count">
+                  {recipe.ingredients.length} Ingredients
+                </div>
+                <div className="recipe-calories">
+                  {recipe.calories} Calories
+                </div>
               </div>
-              <div className="recipe-show-social">
-                <div className="recipe-show-review-score">★★★★☆</div>
-                <div className="recipe-favorite-button">
-                  <button>Flava Fav</button>
+              <div className="recipe-show-stats-2">
+                <ul className="recipe-category">
+                  {recipe.categories.map((category, i) => (
+                    <li key={i}>{category}</li>
+                  ))}
+                </ul>
+                <div className="recipe-show-social">
+                  <div className="recipe-show-review-score">★★★★☆</div>
+                  <div className="recipe-favorite-button">
+                    <button>Flava Fav</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -42,27 +49,31 @@ class RecipeShow extends Component {
         </div>
         <div className="show-content">
           <div className="show-ingredients">
+            <h1 className='directions-header'>Ingredients</h1>
             <ul>
-              {
-                recipe.ingredients.map( (ingredient, i) => (
-                          <li key={i} className='show-ingredient'> {ingredient.quantity} {ingredient.ingredient}</li>
-                ))
-              }
+              {recipe.ingredients.map((ingredient, i) => (
+                <li key={i} className="show-ingredient">
+                  {" "}
+                  {ingredient.quantity} {ingredient.ingredient}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="show-directions">
+            <h1 className="directions-header">Directions</h1>
             <ol>
-              {
-                recipe.steps[0].split('.').slice(0, -1).map( (step, i) => (
-                          <li key={i+1} className='show-direction'> {i+1}. {step} </li>
-                ))
-              }
+              {recipe.steps[0]
+                .split(".")
+                .slice(0, -1)
+                .map((step, i) => (
+                  <li key={i} className="show-direction">{step}</li>
+                ))}
             </ol>
           </div>
         </div>
-        <div className="show-reviews">
+        {/* <div className="show-reviews">
           Reviews
-          {/* {
+          {
                 recipe.reviews.map( (review, i) => {
                   <li key={i} className='show-review'>
                     <div className='show-review-rating'> { review.rating } </div>
@@ -70,8 +81,8 @@ class RecipeShow extends Component {
                     <div className='show-review-body'> { review.body } </div> 
                   </li>
                 })
-              } */}
-        </div>
+              }
+        </div> */}
       </div>
     );
   }
