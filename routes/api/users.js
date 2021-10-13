@@ -24,14 +24,15 @@ router.post("/register", (req, res) => {
       return res.status(400).json(errors);
     } else {
       const newUserPantry = new Pantry();
-      newUserPantry.save();
-
+      
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
         pantry: newUserPantry
       });
+      newUserPantry.user = newUser;
+      newUserPantry.save(); 
 
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {

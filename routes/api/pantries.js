@@ -8,30 +8,6 @@ const validatePantryInput = require('../../validation/pantry')
 
 router.get("/test", (req, res) => res.json({ msg: "This is the pantry route" }));
 
-// router.get('/', (req, res) => {
-//     Pantry.find()
-//         .populate('ingredients.ingredient', "name")
-//         .populate('user', "username")
-//         .then(pantries => {
-//           let newPantries = []
-//           pantries.forEach(pantry => {
-//               newPantries.push({
-//                 user: pantry.user.username,
-//                 ingredients: (!pantry.ingredients) ? [] : 
-//                   pantry.ingredients.map(ele => ({
-//                     ingredient: ele.ingredient.name,
-//                     quantity: ele.quantity,
-//                     unit: ele.unit
-//                 }))
-//               })
-//             }
-//           )
-          
-//           return res.json(newPantries)
-//         })
-//         .catch( err => res.status(404).json({ nopantriesfound: 'No pantries found' }))
-// });
-
 router.get('/',
   passport.authenticate('jwt', { session: false }),
     (req, res) => {
@@ -40,12 +16,12 @@ router.get('/',
       if (!isValid) {
         return res.status(400).json(errors);
       }
-      console.log(req.user)
+      
       Pantry.findById(req.user.pantry)
           .populate('ingredients.ingredient', "name")
           .populate('user', "username")
           .then(pantry => {
-              let newPantry = {
+              let pantryShow = {
                 user: pantry.user.username,
                 ingredients: pantry.ingredients.map(ele => ({
                   ingredient: ele.ingredient.name,
@@ -53,7 +29,7 @@ router.get('/',
                   unit: ele.unit
                 }))
               }
-            return res.json(newPantry)
+            return res.json(pantryShow)
             })
           .catch( err => res.status(404).json( { nopantryfound: 'No Pantry found with that ID'} ) )
 });
