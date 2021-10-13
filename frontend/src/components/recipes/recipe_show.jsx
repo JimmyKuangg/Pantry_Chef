@@ -25,10 +25,10 @@ class RecipeShow extends Component {
               <div className="recipe-show-stats">
                 <div className="recipe-cooktime">{recipe.cookTime}</div>
                 <div className="recipe-ingredient-count">
-                  {recipe.ingredients.length} Ingredients
+                  {recipe.ingredients.length} ingredients
                 </div>
                 <div className="recipe-calories">
-                  {recipe.calories} Calories
+                  {recipe.calories} calories
                 </div>
               </div>
               <div className="recipe-show-stats-2">
@@ -38,7 +38,7 @@ class RecipeShow extends Component {
                   ))}
                 </ul>
                 <div className="recipe-show-social">
-                  <div className="recipe-show-review-score">★★★★☆</div>
+                  <div className="recipe-show-review-score">★★★★☆{recipe.rating}</div>
                   <div className="recipe-favorite-button">
                     <button>Flava Fav</button>
                   </div>
@@ -66,7 +66,7 @@ class RecipeShow extends Component {
                 .split(".")
                 .slice(0, -1)
                 .map((step, i) => (
-                  <li key={i} className="show-direction">{step}</li>
+                  <li key={i} className="show-direction">{step}<input type='checkbox'/></li>
                 ))}
             </ol>
           </div>
