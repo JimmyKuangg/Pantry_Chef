@@ -88,7 +88,8 @@ router.post('/create',
         categories: req.body.categories,
         steps: req.body.steps,
         author: req.body.author,
-        date: req.body.date
+        date: req.body.date,
+        imgUrl: req.body.imgUrl
       })
 
       newRecipe.save().then(recipe => res.json(recipe))
@@ -116,7 +117,8 @@ router.patch('/update/:id',
         recipe.calories = req.body.calories,
         recipe.description = req.body.description,
         recipe.steps = req.body.steps,
-        recipe.categories = req.body.categories
+        recipe.categories = req.body.categories,
+        recipe.imgUrl = req.body.imgUrl
 
         recipe.save().then(recipe => res.json(recipe));
       }
