@@ -24,9 +24,10 @@ router.get('/', (req, res) => {
             quantity: ele.quantity,
             unit: ele.unit
           })),
-          cookTime: recipes[i].cookTime,
-          calories: recipes[i].calories,
+          // cookTime: recipes[i].cookTime,
+          // calories: recipes[i].calories,
           categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+          // steps: recipes[i].steps,
           author: recipes[i].author.username
         }
 
