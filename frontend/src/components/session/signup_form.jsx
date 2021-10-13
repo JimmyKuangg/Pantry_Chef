@@ -12,6 +12,7 @@ class SignupForm extends React.Component {
       errors: {},
     };
 
+    this.demoLogin = this.demoLogin.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
   }
@@ -44,6 +45,12 @@ class SignupForm extends React.Component {
     // this.props.signup(user, this.props.history);
     this.props.signup(this.state)
       .then(this.props.closeModal());
+  }
+
+  demoLogin(e) {
+    e.preventDefault();
+    this.props.demoLogin();
+    this.props.closeModal();
   }
 
   renderErrors() {
@@ -92,6 +99,7 @@ class SignupForm extends React.Component {
             <br />
             <input type="submit" value="Submit" />
             {this.renderErrors()}
+            <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
           </div>
         </form>
       </div>
