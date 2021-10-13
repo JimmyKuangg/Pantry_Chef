@@ -20,7 +20,7 @@ router.post('/',
             return res.status(400).json(errors)
         }
 
-        Ingredient.findOne({ name: req.body.name }).then(name => {
+        Ingredient.findOne({ name: req.body.name.toLowerCase() }).then(name => {
             if (name) {
               errors.name = "Ingredient with this name already exists";
               return res.status(400).json(errors);

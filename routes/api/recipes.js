@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Recipe = require('../../models/Recipe');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+
+const Recipe = require('../../models/Recipe');
 const validateRecipeInput = require('../../validation/recipe.js');
 
 router.get('/', (req, res) => {
@@ -52,7 +53,8 @@ router.get('/:recipeId', (req, res) => {
         })),
         cookTime: recipe.cookTime,
         calories: recipe.calories,
-        categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+        categories: Object.values(recipe.categories).map(obj => (obj.name)),
+        steps: recipe.steps,
         author: recipe.author.username
       }
 

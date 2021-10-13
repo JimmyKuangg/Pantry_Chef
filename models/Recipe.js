@@ -11,7 +11,7 @@ const RecipeSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Ingredient'
     },
-    quantity: Number,
+    quantity: String,
     unit: String
   }],
   cookTime: {
