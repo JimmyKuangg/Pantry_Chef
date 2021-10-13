@@ -43,8 +43,8 @@ export default class Search extends Component {
     this.setState({selectedIngredients: newSelectedIngredients})
   }
 
-  removeSelectedClickHandler(e){
-    let newSelectedIngredients = this.state.selectedIngredients.filter(ingredient => ingredient !== e.currentTarget.value)
+  removeSelectedClickHandler(e, value){
+    let newSelectedIngredients = this.state.selectedIngredients.filter(ingredient => ingredient.name !== value)
     this.setState({selectedIngredients: newSelectedIngredients})
   }
 
@@ -82,10 +82,10 @@ export default class Search extends Component {
               ))}
             </ul>      
           </div>
-          <div className="selected-ingredients">
+          <div className="selected-ingredients-wrapper">
             Ingredients
-            <ul>
-              {this.state.selectedIngredients.map((ingredient,i) => <li key={i} onClick={this.removeSelectedClickHandler}>{ingredient.name}</li>)}
+            <ul id='selected-ingredients'>
+              {this.state.selectedIngredients.map((ingredient,i) => <li key={i} onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}</li>)}
             </ul>
           </div>
           <div>
