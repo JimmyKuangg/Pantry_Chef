@@ -113,6 +113,7 @@ router.patch('/update/:id',
         recipe.cookTime = req.body.cookTime,
         recipe.calories = req.body.calories,
         recipe.description = req.body.description,
+        recipe.steps = req.body.steps,
         recipe.categories = req.body.categories
 
         recipe.save().then(recipe => res.json(recipe));
