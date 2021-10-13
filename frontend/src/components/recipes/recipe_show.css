@@ -1,0 +1,25 @@
+.show-wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.show-header {
+    display: flex;
+    flex-direction: row
+}
+
+.recipe-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.show-content {
+    display: flex;
+    flex-direction: row;
+}
+
+/* .show-ingredients {
+
+} */

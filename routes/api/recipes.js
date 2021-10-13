@@ -53,6 +53,7 @@ router.get('/:recipeId', (req, res) => {
         cookTime: recipe.cookTime,
         calories: recipe.calories,
         categories: recipe.categories.map(obj => (obj.name)),
+        steps: recipe.steps,
         author: recipe.author.username
       }
 
