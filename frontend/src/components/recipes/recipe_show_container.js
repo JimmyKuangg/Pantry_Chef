@@ -4,7 +4,7 @@ import { fetchRecipe } from "../../actions/recipe_actions";
 
 
 const mSTP = (state, ownProps) => {
-    console.log(state)
+
     return {
         recipe: state.recipes[ownProps.match.params.recipeId]
         // recipe: {}
