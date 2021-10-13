@@ -9,7 +9,7 @@ export default class Search extends Component {
       ingredientSuggestions: [],
       selectedIngredients: []
     }
-    this.updateSuggestion = this.updateSuggestion.bind(this)
+    this.updateSuggestions = this.updateSuggestions.bind(this)
     this.suggestionClickHandler = this.suggestionClickHandler.bind(this)
     this.removeSelectedClickHandler = this.removeSelectedClickHandler.bind(this)
   }
@@ -24,7 +24,7 @@ export default class Search extends Component {
 
   updateSuggestions(){
     let suggestions = this.props.ingredients.filter(ingredient => 
-      !selectedIngredients.includes(ingredient) &&
+      !this.state.selectedIngredients.includes(ingredient) &&
       ingredient.name.includes(this.state.search))
     this.setState({ingredientSuggestions: suggestions})
   }
