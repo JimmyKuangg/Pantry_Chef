@@ -1,107 +1,135 @@
 const express = require("express");
 const router = express.Router();
-const Recipe = require("../../models/Recipe");
-const jwt = require("jsonwebtoken");
-const keys = require("../../config/keys");
-const passport = require("passport");
-const validateRecipeInput = require("../../validation/recipe.js");
+const Recipe = require('../../models/Recipe');
+const jwt = require('jsonwebtoken');
+const keys = require('../../config/keys');
+const passport = require('passport');
+const validateRecipeInput = require('../../validation/recipe.js');
 
-router.get("/:recipeId", (req, res) => {
+router.get('/', (req, res) => {
+  Recipe.find()
+    .populate('ingredients.ingredient', '-_id, name')
+    .populate('categories', '-_id, name')
+    .populate('author', '-_id, username')
+    .then(recipes => {
+      let recipesIndex = [];
+
+      for(let i = 0; i < recipes.length; i++) {
+        let recipeCard = {
+          id: recipes[i]._id,
+          name: recipes[i].name,
+          ingredients: recipes[i].ingredients.map(ele => ({
+            ingredient: ele.ingredient.name,
+            quantity: ele.quantity,
+            unit: ele.unit
+          })),
+          cookTime: recipes[i].cookTime,
+          calories: recipes[i].calories,
+          categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+          author: recipes[i].author.username
+        }
+
+        recipesIndex.push(recipeCard);
+      }
+
+      res.json(recipesIndex);
+    })
+})
+
+router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
-    .populate("ingredients", "-_id, name")
-    .populate("categories", "-_id, name")
-    .populate("author", "-_id, username")
-    .then((recipe) => {
+    .populate('ingredients.ingredient', '-_id, name')
+    .populate('categories', '-_id, name')
+    .populate('author', '-_id, username')
+    .then(recipe => {
       let recipeShow = {
         id: recipe._id,
         name: recipe.name,
-        ingredients: [...recipe.ingredients],
+        ingredients: recipe.ingredients.map(ele => ({
+          ingredient: ele.ingredient.name,
+          quantity: ele.quantity,
+          unit: ele.unit
+        })),
         cookTime: recipe.cookTime,
         calories: recipe.calories,
-        categories: [...recipe.categories],
-        author: recipe.author.username,
-      };
+        categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+        author: recipe.author.username
+      }
 
       return res.json(recipeShow);
-    });
-});
+    })
+})
 
-router.post(
-  "/create",
-  passport.authenticate("jwt", { session: false }),
+router.post('/create', 
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateRecipeInput(req.body);
+  
+  const { errors, isValid } = validateRecipeInput(req.body);
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-
-    Recipe.findOne({ name: req.body.name }).then((recipe) => {
-      if (recipe) {
-        errors.recipe = "A recipe with that name already exists";
-        return res.status(400).json(errors);
-      } else {
-        const newRecipe = new Recipe({
-          name: req.body.name,
-          ingredients: req.body.ingredients,
-          cookTime: req.body.cookTime,
-          calories: req.body.calories,
-          description: req.body.description,
-          categories: req.body.categories,
-          author: req.body.author,
-          date: req.body.date,
-        });
-
-        newRecipe.save().then((recipe) => res.json(recipe));
-      }
-    });
+  if (!isValid) {
+    return res.status(400).json(errors);
   }
-);
 
-router.patch(
-  "/update/:id",
-  passport.authenticate("jwt", { session: false }),
+  Recipe.findOne({ name: req.body.name }).then(recipe => {
+    if (recipe) {
+      errors.recipe = 'A recipe with that name already exists';
+      return res.status(400).json(errors);
+    } else {
+      const newRecipe = new Recipe({
+        name: req.body.name,
+        ingredients: req.body.ingredients,
+        cookTime: req.body.cookTime,
+        calories: req.body.calories,
+        description: req.body.description,
+        categories: req.body.categories,
+        author: req.body.author,
+        date: req.body.date
+      })
+
+      newRecipe.save().then(recipe => res.json(recipe))
+    }
+  })
+})
+
+router.patch('/update/:id',
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
+    
     const { errors, isValid } = validateRecipeInput(req.body);
 
     if (!isValid) {
       return res.status(400).json(errors);
     }
 
-    Recipe.findById(req.params.id).then((recipe) => {
+    Recipe.findById(req.params.id).then(recipe => {
       if (!recipe) {
-        errors.recipe = "A recipe with that ID does not exist";
+        errors.recipe = 'A recipe with that ID does not exist';
         return res.status(404).json(errors);
       } else {
-        (recipe.ingredients = req.body.ingredients),
-          (recipe.cookTime = req.body.cookTime),
-          (recipe.calories = req.body.calories),
-          (recipe.description = req.body.description),
-          (recipe.categories = req.body.categories);
+        recipe.ingredients = req.body.ingredients,
+        recipe.cookTime = req.body.cookTime,
+        recipe.calories = req.body.calories,
+        recipe.description = req.body.description,
+        recipe.categories = req.body.categories
 
-        recipe.save().then((recipe) => res.json(recipe));
+        recipe.save().then(recipe => res.json(recipe));
       }
-    });
+    })
   }
-);
+)
 
-router.delete(
-  "/delete/:id",
-  passport.authenticate("jwt", { session: false }),
+router.delete('/delete/:id',
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Recipe.findById(req.params.id).then((recipe) => {
-      console.log(recipe.id);
-      console.log(req.user.id);
-      if (recipe.author.id != req.user.id) {
-        return res
-          .status(400)
-          .json({ cannotdelete: "You can only delete your own recipes" });
+    Recipe.findById(req.params.id).then(recipe => {
+      if (recipe.author != req.user.id) {
+        return res.status(400).json({ cannotdelete: 'You can only delete your own recipes'});
       } else {
-        Recipe.deleteOne({ _id: req.params.id }).then(() => {
-          return res.status(200).json({ success: "Recipe deleted" });
-        });
+        Recipe.deleteOne({ _id: req.params.id }).then( () => {
+          return res.status(200).json({ success: "Recipe deleted"});
+        })
       }
-    });
+    })
   }
-);
+)
 module.exports = router;

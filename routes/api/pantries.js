@@ -8,48 +8,33 @@ const validatePantryInput = require('../../validation/pantry')
 
 router.get("/test", (req, res) => res.json({ msg: "This is the pantry route" }));
 
-router.get('/', (req, res) => {
-    Pantry.find()
-        .populate('ingredients.ingredient', "name")
-        .populate('user', "username")
-        .then(pantries => {
-          let newPantries = []
-          pantries.forEach(pantry => {
-              newPantries.push({
+router.get('/',
+  passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+      const { errors, isValid } = validatePantryInput(req.body);
+
+      if (!isValid) {
+        return res.status(400).json(errors);
+      }
+
+      Pantry.findById(req.user.pantry)
+          .populate('ingredients.ingredient', "name")
+          .populate('user', "username")
+          .then(pantry => {
+              let pantryShow = {
                 user: pantry.user.username,
-                ingredients: (!pantry.ingredients) ? [] : 
-                  pantry.ingredients.map(ele => ({
-                    ingredient: ele.ingredient.name,
-                    quantity: ele.quantity,
-                    unit: ele.unit
+                ingredients: pantry.ingredients.map(ele => ({
+                  ingredient: ele.ingredient.name,
+                  quantity: ele.quantity,
+                  unit: ele.unit
                 }))
-              })
-            }
-          )
-          
-          return res.json(newPantries)
-        })
-        .catch( err => res.status(404).json({ nopantriesfound: 'No pantries found' }))
+              }
+            return res.json(pantryShow)
+            })
+          .catch( err => res.status(404).json( { nopantryfound: 'No Pantry found with that ID'} ) )
 });
 
-router.get('/:id', (req, res) => {
-    Pantry.findById(req.params.id)
-        .populate('ingredients.ingredient', "name")
-        .populate('user', "username")
-        .then(pantry => {
-            let newPantry = {
-              user: pantry.user.username,
-              ingredients: pantry.ingredients.map(ele => ({
-                ingredient: ele.ingredient.name,
-                quantity: ele.quantity,
-                unit: ele.unit
-              }))
-            }
-          return res.json(newPantry)
-          })
-        .catch( err => res.status(404).json( { nopantryfound: 'No Pantry found with that ID'} ) )
-});
-
+//Will we even need this anymore?
 router.post('/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {

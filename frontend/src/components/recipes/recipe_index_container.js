@@ -5,8 +5,7 @@ import { fetchRecipes } from "../../actions/recipe_actions";
 const mSTP = (state) => {
     console.log(state)
     return {
-        recipes: Object.values(state.recipes),
-        state: state
+        recipes: state.recipes,
     }
 };
 
