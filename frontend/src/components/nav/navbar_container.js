@@ -19,6 +19,11 @@ const mapDispatchToProps = dispatch => ({
       Sign up
     </button>
   ),
+  openNavSignupModal: (
+    <button className="open-modal signup-button" onClick={() => dispatch(openModal('signup'))}>
+      My Pantry
+    </button>
+  ),
   logout: () => dispatch(logout())
 })
 
