@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Pantry from './pantry'
 
-const mSTP = state => ({
+const mSTP = (state, ownProps) => ({
   pantries: state.pantries
 });
 
