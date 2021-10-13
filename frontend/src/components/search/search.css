@@ -78,15 +78,11 @@
 }
 
 .selected-ingredients-wrapper {
-  position: absolute;
-  top: 310px;
-  z-index: -1;
   display: flex;
 }
 
 .selected-ingredient-box {
   display: flex;
-  width: 1000px;
   height: 150px;
   overflow: hidden;
 }

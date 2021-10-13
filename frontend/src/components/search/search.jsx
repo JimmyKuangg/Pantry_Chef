@@ -86,7 +86,9 @@ export default class Search extends Component {
           }
           
           <div className="selected-ingredients-wrapper">
-            <p>Selected ingredients</p>
+            <div>
+              <p>Selected ingredients</p>
+            </div>
             <div className="selected-ingredients-box">
               <ul id='selected-ingredients'>
                 {this.state.selectedIngredients.map((ingredient,i) => <li key={i} className="selected-ingredient-item" onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}</li>)}
