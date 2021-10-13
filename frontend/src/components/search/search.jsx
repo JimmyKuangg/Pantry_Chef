@@ -94,7 +94,7 @@ export default class Search extends Component {
             </div>
           </div>
           <div>
-            {/* <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/> */}
+            <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
           </div>
         </div>
       </div>
