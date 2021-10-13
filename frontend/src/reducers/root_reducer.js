@@ -15,6 +15,7 @@ const RootReducer = combineReducers({
   recipes,
   categories,
   pantries,
+  ingredients,
 });
 
 export default RootReducer;
