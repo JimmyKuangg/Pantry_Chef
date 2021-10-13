@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import RecipeIndexContainer from '../recipes/recipe_index_container';
 import "./search.css";
 
 export default class Search extends Component {
@@ -89,7 +90,7 @@ export default class Search extends Component {
             </ul>
           </div>
           <div>
-            {/* <Link to=''>Search Pantry Recipes</Link> */}
+            <RecipeIndexContainer ingredients={this.state.selectedIngredients}/>
           </div>
         </div>
       </div>

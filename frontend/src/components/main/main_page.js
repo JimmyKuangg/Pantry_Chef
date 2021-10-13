@@ -18,10 +18,6 @@ class MainPage extends React.Component {
             <Search />
           </div>
 
-          <div className="main-tail">
-           <RecipeIndex />
-          </div>
-
         </div>
       </div>
     );
