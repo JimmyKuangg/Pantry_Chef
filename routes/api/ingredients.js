@@ -6,8 +6,6 @@ const passport = require('passport')
 const Ingredient = require('../../models/Ingredient')
 const validateIngredientInput = require('../../validation/ingredient')
 
-router.get("/test", (req, res) => res.json({ msg: "This is the ingredients route" }));
-
 router.get('/', (req, res) => {
     Ingredient.find()
         .then(ingredients => res.json(ingredients))
