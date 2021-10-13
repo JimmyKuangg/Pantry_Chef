@@ -23,7 +23,7 @@ export default class Search extends Component {
       let search = e.target.value;
       let suggestions = this.props.ingredients.filter(ingredient => 
       !this.state.selectedIngredients.includes(ingredient) &&
-      ingredient.name.includes(search))
+      ingredient.name.includes(search) && search != '')
 
     this.setState({search: search, 
       ingredientSuggestions: suggestions
@@ -90,7 +90,7 @@ export default class Search extends Component {
             </ul>
           </div>
           <div>
-            <RecipeIndexContainer ingredients={this.state.selectedIngredients}/>
+            <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
           </div>
         </div>
       </div>
