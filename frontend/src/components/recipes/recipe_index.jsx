@@ -30,7 +30,6 @@ export default class RecipeIndex extends Component {
             </ul>
           </div>
         </div>
-
     );
   }
 }
