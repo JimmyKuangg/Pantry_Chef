@@ -19,10 +19,6 @@ export default class RecipeIndex extends Component {
   }
 
   filterByIngredients(){
-    if(this.props.ingredients === undefined || this.props.ingredients.length === 0 ){
-      this.setState({recipes: this.props.recipes});
-      return
-    }
 
     let names = this.props.ingredients.map(ingredient => ingredient.name)
     let filtered = this.props.recipes.filter( recipe => {
@@ -35,10 +31,14 @@ export default class RecipeIndex extends Component {
   filterByCategories(){
     if (this.state.filteredCategories === []) return null;
     let filtered = this.state.recipes.filter( recipe => {
-      return recipe.categories.sort() === this.state.filterCategories.sort()
-    })
-    this.setState({recipes: filtered})
-  }
+      if (this.state.filterCategories.length === 0) return true;
+      return recipe.categories.some(category => {
+        return this.state.filterCategories.includes(category)})
+      })
+      
+      this.setState({recipes: filtered})
+    }
+
 
   possibleCategories(){
     let possibleCategories = []
@@ -54,13 +54,16 @@ export default class RecipeIndex extends Component {
   }
 
   categoryClickHandler(e, value){
-    let newCats = this.state.filterCategories
+    let newCats = []
     newCats.push(value)
     this.setState({filterCategories: newCats})
+    this.filterByCategories();
+
   }
 
   clearFilterClickHandler(){
-    this.setState({filterCategories: []})
+    this.setState({filterCategories: [], recipes: this.props.recipes})
+    this.filterByIngredients();
   }
 
   render() {
@@ -69,7 +72,6 @@ export default class RecipeIndex extends Component {
         There are no recipes here
       </div>
     }
-
     return (
         <div className="index-main">
           <div className='category-wrapper'>
