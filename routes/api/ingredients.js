@@ -6,8 +6,6 @@ const passport = require('passport')
 const Ingredient = require('../../models/Ingredient')
 const validateIngredientInput = require('../../validation/ingredient')
 
-router.get("/test", (req, res) => res.json({ msg: "This is the ingredients route" }));
-
 router.get('/', (req, res) => {
     Ingredient.find()
         .then(ingredients => res.json(ingredients))
@@ -22,7 +20,7 @@ router.post('/',
             return res.status(400).json(errors)
         }
 
-        Ingredient.findOne({ name: req.body.name }).then(name => {
+        Ingredient.findOne({ name: req.body.name.toLowerCase() }).then(name => {
             if (name) {
               errors.name = "Ingredient with this name already exists";
               return res.status(400).json(errors);
