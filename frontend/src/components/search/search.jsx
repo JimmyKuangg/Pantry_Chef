@@ -48,6 +48,12 @@ export default class Search extends Component {
     this.setState({selectedIngredients: newSelectedIngredients})
   }
 
+ // let firstFilter = Recipes.filter( recipe => 
+ // recipe.ingredients.name.all(ingredient => selectedArray.includes(ingredient)))
+//  let secondFilter = firstFilter.filter( recipe => recipe.category === category)
+ 
+
+
 
   render() {
 
