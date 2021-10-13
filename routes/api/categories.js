@@ -6,18 +6,10 @@ const passport = require('passport')
 const  Category = require('../../models/Category')
 const validateCategoryInput = require('../../validation/category')
 
-router.get("/test", (req, res) => res.json({ msg: "This is the categories route" }));
-
 router.get('/', (req, res) => {
     Category.find()
         .then(categories => res.json(categories))
         .catch( err => res.status(404).json({ nocategoriesfound: 'No categories found' }))
-});
-
-router.get('/:id', (req, res) => {
-    Category.findById(req.params.id)
-        .then(category => res.json(category))
-        .catch( err => res.status(404).json( { nocategoryfound: 'No Category found with that ID'} ) )
 });
 
 router.post('/', 
