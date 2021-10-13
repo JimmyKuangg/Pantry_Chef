@@ -52,7 +52,7 @@ router.get('/:recipeId', (req, res) => {
         })),
         cookTime: recipe.cookTime,
         calories: recipe.calories,
-        categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+        categories: recipe.categories.map(obj => (obj.name)),
         author: recipe.author.username
       }
 
