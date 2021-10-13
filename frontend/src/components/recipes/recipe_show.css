@@ -1,25 +1,40 @@
 .show-wrapper {
-    width: 100vw;
-    height: 100vh;
+    /* width: 100vw;
+    height: 100vh; */
     display: flex;
     flex-direction: column;
 }
 
 .show-header {
     display: flex;
-    flex-direction: row
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+.recipe-photo {
+    border: 1px solid green;
 }
 
 .recipe-info {
+    border: 1px solid green;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .show-content {
+    border: 1px solid black;
     display: flex;
     flex-direction: row;
 }
 
-/* .show-ingredients {
+.show-ingredients {
+    border: 1px solid red;
+}
 
-} */
+.show-directions {
+    border: 1px solid red;
+}
+
+.show-reviews {
+    border: 1px solid blue;
+}

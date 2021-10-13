@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./recipe_show.css"
 
 class RecipeShow extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class RecipeShow extends Component {
     return (
       <div className="show-wrapper">
         <div className="show-header">
-          <div className="recipe-photo">{/* <img src={recipe.photo} /> */}</div>
+          <div className="recipe-photo">{/* <img src={recipe.photo} /> */}Photo</div>
           <div className="recipe-info">
             <div className="recipe-name"> {recipe.name} </div>
             <ul className="recipe-category">
@@ -28,9 +29,7 @@ class RecipeShow extends Component {
             <div className="recipe-info-bottom">
               <div className="recipe-show-overview">
                 <div className="recipe-cooktime">{recipe.cookTime}</div>
-                <div className="recipe-ingredient-count">
-                  {recipe.ingredients.length}
-                </div>
+                <div className="recipe-ingredient-count">{recipe.ingredients.length}</div>
               </div>
               <div className="recipe-show-social">
                 <div className="recipe-show-review-score">★★★★☆</div>
