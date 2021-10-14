@@ -37,9 +37,9 @@ export default class Pantry extends Component {
     for(let i = 0; i < this.state.ingredients.length; i++){
       inPantry.push(this.state.ingredients[i].ingredient);
     }
-    
+   
     this.setState({notInPantry: this.props.ingredients.filter(ingredient => (
-      !inPantry.includes(ingredient.name)
+      !inPantry.includes(ingredient._id)
     ))})
 
     this.setState({showSelect: true});
@@ -54,7 +54,7 @@ export default class Pantry extends Component {
   removePantryItem(e, itemId) {
     this.setState({ingredients: this.state.ingredients.filter(
       ingredient => (ingredient.ingredient !== itemId)
-    )})
+      )})
   }
   
   updatePantry() {
@@ -77,6 +77,7 @@ export default class Pantry extends Component {
     });
 
     this.setState({ingredients: newPantryIngredients})
+    this.setState({showSelect: false});
   }
 
   render() {
