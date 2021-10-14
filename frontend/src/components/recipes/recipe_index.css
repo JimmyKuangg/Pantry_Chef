@@ -1,3 +1,7 @@
+.index-main {
+  max-width: 500px;
+}
+
 #index-recipe-items {
     display: flex;
     flex-wrap: wrap;
@@ -13,32 +17,32 @@
 }
 
 .index-recipes{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .category-wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #category-item  {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 1px solid #3F48CC;
-    height: 100px;
-    width: 100px;
-    text-align: center;
-    margin: 5px;
-    /* overflow: hidden; */
-    list-style: none;
-    cursor: pointer;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid #3F48CC;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  margin: 5px;
+  /* overflow: hidden; */
+  list-style: none;
+  cursor: pointer;
 }
 
 #recipe-picture{
@@ -48,8 +52,8 @@
 }
 
 .category-list{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 80%;
 }
