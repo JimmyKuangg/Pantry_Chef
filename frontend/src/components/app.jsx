@@ -6,6 +6,7 @@ import Modal from './modal/modal';
 import NavBarContainer from "./nav/navbar_container";
 import RecipeShowContainer from './recipes/recipe_show_container';
 import PantryShowContainer from './pantry/pantry_container';
+import RecipeIndexContainer from "./recipes/recipe_index_container";
 import "./app.css";
 
 import MainPage from "./main/main_page";
@@ -16,6 +17,7 @@ const App = () => (
     <Modal />
     <Switch>
       <Route exact path='/recipes/:recipeId' component={RecipeShowContainer} />
+      <Route exact path='/recipes/' component={RecipeIndexContainer} />
       <Route exact path='/pantries' component={PantryShowContainer} />
       <Route exact path="/" component={MainPage} />
     </Switch>
