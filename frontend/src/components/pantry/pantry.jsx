@@ -4,14 +4,31 @@ export default class Pantry extends Component {
   constructor(props){
     super(props);
 
-    this.state = this.props.pantry.ingredients;
+    this.state = this.props.pantry;
+    this.removePantryItem = this.removePantryItem.bind(this);
+    this.updatePantry = this.updatePantry.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchPantry();
-    this.setState({ingredients: this.props.pantry.ingredients});
   }
   
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState(this.props.pantry);
+    }
+  }
+
+  removePantryItem(e, itemId) {
+    this.setState({ingredients: this.state.ingredients.filter(
+      ingredient => (ingredient.id !== itemId)
+    )})
+  }
+  
+  updatePantry() {
+    this.props.editPantry(this.state);
+  }
+
   render() {
     if (!this.props.pantry.ingredients) {
       return null;
@@ -21,12 +38,14 @@ export default class Pantry extends Component {
       <div>
         My Pantry
         <ul>
-          {this.props.pantry.ingredients.map((ingredient, i) => (
-            <li key={i}>{ingredient.quantity} {ingredient.unit} {ingredient.ingredient}</li>
-          ))}
+          {this.state.ingredients ? this.state.ingredients.map((ingredient, i) => (
+            <li key={i}>
+              {ingredient.quantity} {ingredient.unit} {ingredient.ingredient}
+              <button onClick={e => this.removePantryItem(e, ingredient.id)}>X</button>
+            </li>
+          )) : ''}
         </ul>
-        {console.log(this.state)}
-        <button onClick={() => console.log(this.state)}>Click me!</button>
+        <button onClick={() => this.updatePantry()}>Save your pantry</button>
       </div>
     )
   }

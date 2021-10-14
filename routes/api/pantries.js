@@ -24,6 +24,7 @@ router.get('/',
               let pantryShow = {
                 user: pantry.user.username,
                 ingredients: pantry.ingredients.map(ele => ({
+                  id: ele._id,
                   ingredient: ele.ingredient.name,
                   quantity: ele.quantity,
                   unit: ele.unit
