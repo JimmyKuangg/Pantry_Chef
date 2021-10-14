@@ -22,7 +22,16 @@ export default class Pantry extends Component {
   }
 
   addToPantry() {
+    let inPantry = [];
+    for(let i = 0; i < this.state.ingredients.length; i++){
+      inPantry.push(this.state.ingredients[i].ingredient);
+    }
     
+    let notInPantry = this.props.ingredients.filter(ingredient => (
+      !inPantry.includes(ingredient.name)
+    ));
+
+    console.log(notInPantry);
   }
 
   removePantryItem(e, itemId) {
@@ -51,6 +60,7 @@ export default class Pantry extends Component {
             </li>
           )) : ''}
         </ul>
+        <button onClick={() => this.addToPantry()}>Add things to your pantry!</button>
         <button onClick={() => this.updatePantry()}>Save your pantry</button>
       </div>
     )
