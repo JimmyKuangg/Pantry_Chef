@@ -55,20 +55,31 @@
 }
 
 .index-recipe-item{
-    margin: 10px;
-    border: 1px solid #3F48CC;
-    border-radius: 5px;
-    padding: 5px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+  border: 1px solid #3F48CC;
+  border-radius: 5px;
+  padding: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
+  height: 300px;
 }
 
 .index-recipe-item h3{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    text-align: center;
     width: 200px;
     font-size: 25px;
     color: #3F48CC;
+}
+
+#recipe-links{
+  text-decoration: none;
 }
 
 h3{
