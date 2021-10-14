@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './recipe_index.css'
 
 export default class RecipeIndex extends Component {
   constructor(props){
@@ -83,17 +84,24 @@ export default class RecipeIndex extends Component {
 
     return (
         <div className="index-main">
-          <div>
+          <div className='category-wrapper'>
             <h1>Categories</h1>
-            <div>
-              <li key='clear' onClick={this.clearFilterClickHandler}>Clear all Category Filters</li>
-              {this.possibleCategories().map((category, i) => <li key={i} onClick={e => this.categoryClickHandler(e, category)}>{category}</li>)}
+            <div className='category-list'>
+              <li key='clear' id='category-item' onClick={this.clearFilterClickHandler}>Clear all Category Filters</li>
+              {this.possibleCategories().map((category, i) => 
+              <li key={i} 
+                id='category-item' 
+                onClick={e => this.categoryClickHandler(e, category)}>
+                  {category}
+              </li>)}
             </div>
           </div>
           <div className="index-recipes">
-            <ul> Recipes
+            <h3>Recipes</h3>
+            <ul id='index-recipe-items'> 
               { this.state.exactRecipes.map((recipe, i) => (
                 <li key={i} className="index-recipe" id="exact-match">
+                  <img id='recipe-picture' src={recipe.imgUrl}/>
                   <h3>{recipe.name}</h3>
                   <p>{recipe.author}</p>
                   <p>Exact Match</p>
@@ -101,6 +109,7 @@ export default class RecipeIndex extends Component {
               ))}
               { this.state.closeRecipes.map((recipe, i) => (
                 <li key={i} className="index-recipe" id="close-match">
+                  <img id='recipe-picture' src={recipe.imgUrl}/>
                   <h3>{recipe.name}</h3>
                   <p>{recipe.author}</p>
                   <p>Close Match</p>
