@@ -18,6 +18,10 @@
   width: 500px;
 }
 
-.selected-ingredients {
-
+.selected-ingredients-wrapper {
+  border: 1px solid black;
 }
+
+/* #selected-ingredients{
+
+} */

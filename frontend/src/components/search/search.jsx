@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import RecipeIndexContainer from '../recipes/recipe_index_container';
 import "./search.css";
 
 export default class Search extends Component {
@@ -9,7 +10,6 @@ export default class Search extends Component {
       ingredientSuggestions: [],
       selectedIngredients: []
     }
-    this.updateSuggestions = this.updateSuggestions.bind(this)
     this.suggestionClickHandler = this.suggestionClickHandler.bind(this)
     this.removeSelectedClickHandler = this.removeSelectedClickHandler.bind(this)
   }
@@ -18,25 +18,27 @@ export default class Search extends Component {
     this.props.fetchAllIngredients()
   }  
 
-  update(){
-    return e => this.setState({search: e.currentTarget.value})
-  }
-
-  updateSuggestions(){
-    let suggestions = this.props.ingredients.filter(ingredient => 
+  update(e){
+      let search = e.target.value;
+      let suggestions = this.props.ingredients.filter(ingredient => 
       !this.state.selectedIngredients.includes(ingredient) &&
-      ingredient.name.includes(this.state.search))
-    this.setState({ingredientSuggestions: suggestions})
+      ingredient.name.includes(search) && search != '')
+
+    this.setState({search: search, 
+      ingredientSuggestions: suggestions
+    })
   }
 
-  suggestionClickHandler(e){
+
+  suggestionClickHandler(e, value){
+    e.preventDefault();
     let newSelectedIngredients = this.state.selectedIngredients;
-    newSelectedIngredients.push(e.currentTarget.value)
+    newSelectedIngredients.push(value)
     this.setState({selectedIngredients: newSelectedIngredients})
   }
 
-  removeSelectedClickHandler(e){
-    let newSelectedIngredients = this.state.selectedIngredients.filter(ingredient => ingredient !== e.currentTarget.value)
+  removeSelectedClickHandler(e, value){
+    let newSelectedIngredients = this.state.selectedIngredients.filter(ingredient => ingredient.name !== value)
     this.setState({selectedIngredients: newSelectedIngredients})
   }
 
@@ -52,25 +54,31 @@ export default class Search extends Component {
           <div className="search-input-wrapper">
             <input type="text" 
               className="search-bar" 
-              value={this.state.serach} 
+              value={this.state.search} 
               placeholder="Enter an ingredient..."
-              onChange={this.update()}
+              onChange={e => this.update(e)}
             />
             
             <div className="search-icon"></div>
           </div>
           <div className='ingredient-suggestions'>
             <ul>
-              {this.state.ingredientSuggestions.map((suggestion, i) => <li key={i} onClick={this.suggestionClickHandler}>{suggestion}</li>)}
+              {this.state.ingredientSuggestions.map((suggestion, i) => (
+                this.state.selectedIngredients.includes(suggestion) ? 
+                "" :
+              <li key={i} onClick={e => this.suggestionClickHandler(e, suggestion)}>{suggestion.name}</li>
+              ))}
             </ul>      
           </div>
-          <div className="selected-ingredients">
+          <div className="selected-ingredients-wrapper">
             Ingredients
-            <ul>
-              {this.state.selectedIngredients.map((ingredient,i) => <li key={i} onClick={this.removeSelectedClickHandler}>{ingredient}</li>)}
+            <ul id='selected-ingredients'>
+              {this.state.selectedIngredients.map((ingredient,i) => <li key={i} onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}</li>)}
             </ul>
           </div>
-    
+          <div>
+            <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
+          </div>
         </div>
       </div>
     )
