@@ -1,4 +1,3 @@
-import { listenerCount } from 'process';
 import React, { Component } from 'react'
 import "./recipe_create.css";
 
@@ -8,21 +7,24 @@ export default class RecipeCreateForm extends Component {
 
     this.state = {
       name: "",
-      ingredients: [{
-        ingredient: "",
-        quantity: "",
-        unit: ""
-      }],
+      ingredients: [],
       cookTime: "",
       calories: "",
-      categories: [],
+      categories: this.props.categories,
       author: this.props.currentUser.id,
       steps: [],
-      imgUrl: "https://imgur.com/a/GZYbnvX"
-    }
+      imgUrl: "https://imgur.com/a/GZYbnvX",
 
-    this.unselected = this.props.ingredients.slice(0);
-    this.selected = [];
+      ingredient: "",
+      quantity: "",
+      unit: "",
+
+      category: "",
+
+      step: ""
+    }
+    
+    this.inputUpdate = this.inputUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
   }
@@ -33,27 +35,34 @@ export default class RecipeCreateForm extends Component {
   }
 
   update(field) {
-    return e => this.setState({ [field]: e.currentTarget.value });
+    return e => this.setState({ [field]: e.target.value });
   }
 
-  updateIngredient(e) {
-    
+  inputUpdate(field) {
+    return e => this.tempIngredient[field] += e.target.value;
   }
 
   ingredientSelect() {
-    const { ingredient } = this.state.ingredients;
     return (
-      <select className="ingredients-select-box" onChange={this.update()}>
-        {this.unselected.map(ingredient => <option id="testing" value={ingredient.name}>{ingredient.name}</option>)}
+      <select className="ingredients-select-box" onChange={this.update("ingredient")}>
+        <option defaultValue>Choose an ingredient</option>
+        {this.props.ingredients.map(ingredient => <option id="testing" key={ingredient._id} value={ingredient._id}>{ingredient.name}</option>)}
       </select>
 
     )
   }
 
+  nestedUpdate(field) {
+    return e => this.setState(state => {
+      state.ingredients[0][field] = e.target.value
+      return state;
+    })
+  }
+
   quantityInput() {
     return (
       <div>Quantity 
-        <input type="text" value={this.state.ingredients.quantity} onChange={this.update("quantity")} />
+        <input type="text" onChange={this.update("quantity")} />
       </div>
     )
   }
@@ -61,17 +70,53 @@ export default class RecipeCreateForm extends Component {
   unitInput() {
     return (
       <div>Unit 
-        <input type="text" value={this.state.ingredients.unit} onChange={this.update("unit")} />
+        <input type="text" placeholder="Ex: grams" onChange={this.update("unit")} />
       </div>
     )
   }
 
-  addToIngredients(ingredient) {
-    this.setState({ ingredients: [...this.state.ingredients, ingredient] })
+  addToIngredients() {
+    this.setState({ ingredients: [...this.state.ingredients,
+      { ingredient: this.state.ingredient,
+        quantity: this.state.quantity,
+        unit: this.state.unit
+    }]});
+
+    this.setState({ ingredient: "", quantity: "", unit: "" })
   }
 
+  addToCategories() {
+    this.setState({ categories: [...this.state.categories,
+      this.state.category
+    ]});
+
+    this.setState({ category: "" })
+  }
+
+  addToSteps() {
+    this.setState({ steps: [...this.state.steps,
+      this.state.step
+    ]});
+
+    this.setState({ step: "" })
+  }
+
+  componentDidMount() {
+    this.props.fetchAllCategories();
+  }
+
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.categories !== this.state.categories) {
+  //     this.props.fetchAllCategories();
+  //   }
+  // }
+
   render() {
-    console.log(this.state.ingredients);
+
+    console.log(this.state.categories)
+
+    if (!!!Array.isArray(this.state.categories)) return null;
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -98,14 +143,15 @@ export default class RecipeCreateForm extends Component {
                 {this.quantityInput()}
                 {this.unitInput()}
               </div>
+              <button onClick={this.addToIngredients}>Add ingredient</button>
             </label>
-            <button onClick={this.addToIngredients}>Add ingredient</button>
           </div>
 
           <div>
             <label>Time to cook
               <input 
                 type="text"
+                placeholder="Ex: 10 minutes"
                 value={this.state.cookTime}
                 onChange={this.update("cookTime")}
               />
@@ -122,7 +168,29 @@ export default class RecipeCreateForm extends Component {
             </label>
           </div>
 
-        <input type="submit" onSubmit={this.handleSubmit} />
+          <div>
+            <label>Categories
+              <select>
+                  {this.state.categories.map(category =>
+                    <option>{category.name}</option>
+                  )}
+              </select>
+              <button onClick={this.addToCategories}>Add category</button>
+            </label>
+          </div>
+
+          <div>
+            <label>Steps
+              <input 
+                type="text" 
+                value={this.state.step}
+                onChange={this.update("step")}
+              />
+              <button onClick={this.addToSteps}>Add step</button>
+            </label>
+          </div>
+
+        <input type="submit" onSubmit={this.handleSubmit} value="Create Recipe" />
         </form>
       </div>
     )

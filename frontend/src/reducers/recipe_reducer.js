@@ -9,9 +9,9 @@ const recipes = (state = [], action) => {
     case RECEIVE_RECIPE:
         newState.push(action.recipe.data)
         return newState 
-    // case REMOVE_RECIPE:
-    //     delete newState[action.recipeId]
-    //     return newState
+    case REMOVE_RECIPE:
+        delete newState[action.recipeId]
+        return newState
     default:
       return state;
   }
