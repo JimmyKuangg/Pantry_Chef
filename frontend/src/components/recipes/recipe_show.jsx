@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import "./recipe_show.css"
 
 class RecipeShow extends Component {
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.recipeId !== this.props.match.params.recipeId) {
+      this.props.fetchRecipe(this.props.match.params.recipeId)
+    }
+  }
+
   componentDidMount() {
     this.props.fetchRecipe(this.props.match.params.recipeId);
   }
@@ -12,6 +19,7 @@ class RecipeShow extends Component {
     if ((recipe === undefined) || (recipe.steps === undefined)) {
       return null;
     }
+
     console.log('recipe', recipe);
     return (
       <div className="show-wrapper">
