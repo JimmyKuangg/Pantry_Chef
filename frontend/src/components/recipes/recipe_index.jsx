@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import './recipe_index.css'
+import { Link } from "react-router-dom";
 
 export default class RecipeIndex extends Component {
   constructor(props){
@@ -29,8 +31,8 @@ export default class RecipeIndex extends Component {
     let closeFiltered = this.props.recipes.filter( recipe => {
       let length = recipe.ingredients.length;
       let ingredients = []
-      recipe.ingredients.forEach(ingredient => {if (names.includes(ingredient)) ingredients.push(ingredient)})
-      return ingredients.length > length * 0.8;
+      recipe.ingredients.forEach(ingredient => {if (names.includes(ingredient.ingredient)) ingredients.push(ingredient)})
+      return ingredients.length !== length && ingredients.length >= length * 0.8;
     })
 
     this.setState({exactRecipes: exactFiltered})
@@ -83,28 +85,37 @@ export default class RecipeIndex extends Component {
 
     return (
         <div className="index-main">
-          <div>
+          <div className='category-wrapper'>
             <h1>Categories</h1>
-            <div>
-              <li key='clear' onClick={this.clearFilterClickHandler}>Clear all Category Filters</li>
-              {this.possibleCategories().map((category, i) => <li key={i} onClick={e => this.categoryClickHandler(e, category)}>{category}</li>)}
+            <div className='category-list'>
+              <li key='clear' id='category-item' onClick={this.clearFilterClickHandler}>Clear all Category Filters</li>
+              {this.possibleCategories().map((category, i) => 
+              <li key={i} 
+                id='category-item' 
+                onClick={e => this.categoryClickHandler(e, category)}>
+                  {category}
+              </li>)}
             </div>
           </div>
           <div className="index-recipes">
-            <ul> Recipes
+            <h3>Recipes</h3>
+            <ul id='index-recipe-items'> 
               { this.state.exactRecipes.map((recipe, i) => (
-                <li key={i} className="index-recipe" id="exact-match">
+                <Link to={`/recipes/${recipe.id}`}><li key={i} className="index-recipe-item" id="exact-match">
+                   <div id='recipe-picture' alt-text={recipe.name} style={{ backgroundImage:`url(${recipe.imgUrl})`}}>      <p id='match-label'>Exact Match</p>
+                  </div>
+                  {/* <img id='recipe-picture' src={recipe.imgUrl}/> */}
                   <h3>{recipe.name}</h3>
                   <p>{recipe.author}</p>
-                  <p>Exact Match</p>
-                </li>
+                </li></Link>
               ))}
               { this.state.closeRecipes.map((recipe, i) => (
-                <li key={i} className="index-recipe" id="close-match">
+                <Link to={`/recipes/${recipe.id}`}><li key={i} className="index-recipe-item" id="close-match">
+                  <div id='recipe-picture' style={{ backgroundImage:`url(${recipe.imgUrl})`}}>      <p id='match-label'>Close Match</p>
+                  </div>
                   <h3>{recipe.name}</h3>
                   <p>{recipe.author}</p>
-                  <p>Close Match</p>
-                </li>
+                </li></Link>
               ))}
             </ul>
           </div>
