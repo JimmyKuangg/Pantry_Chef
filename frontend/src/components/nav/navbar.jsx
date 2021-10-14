@@ -77,7 +77,7 @@ class NavBar extends React.Component {
 
             <div className="navbar-item">
               <div className="navbar-about">
-                About
+                <Link to='/recipes'>All Recipes</Link>
               </div>
             </div>
 

@@ -45,7 +45,7 @@ export default class Search extends Component {
 
 
   render() {
-
+    console.log(this.state.selectedIngredients)
     return (
       <div>
         <div className="search-wrapper">

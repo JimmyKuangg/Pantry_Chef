@@ -98,10 +98,10 @@ export default class RecipeIndex extends Component {
   }
 
   render() {
-    if (this.props.recipes.length === 0){
-      return <div>
-        There are no recipes here
-      </div>
+    if (this.props.ingredients && [...this.state.exactRecipes, ...this.state.closeRecipes].length === 0){
+      return <h2>
+        Add some more ingredients to see what you can make!
+      </h2>
     }
     return (
         <div className="index-main">
