@@ -6,6 +6,7 @@ export default class RecipeIndex extends Component {
   constructor(props){
     super(props);
     this.state = {
+      recipes: this.props.recipes,
       exactRecipes: [],
       closeRecipes: [],
       filterCategories: []
@@ -16,7 +17,7 @@ export default class RecipeIndex extends Component {
 
   componentDidMount() {
     this.props.fetchRecipes()
-    this.filterByIngredients()
+    if (this.props.ingredients) this.filterByIngredients()
   }
 
   filterByIngredients(){
@@ -40,25 +41,41 @@ export default class RecipeIndex extends Component {
   }
 
   filterByCategories(){
-    if (this.state.filteredCategories === []) return null;
-    let exactFiltered = this.state.exactRecipes.filter( recipe => {
-      return recipe.categories.sort() === this.state.filterCategories.sort()
-    })
-    let closeFiltered = this.state.closeRecipes.filter( recipe => {
-      return recipe.categories.sort() === this.state.filterCategories.sort()
-    })
-    this.setState({recipes: exactFiltered})
-    this.setState({recipes: closeFiltered})
+    console.log(this.state.filterCategories)
+    if (this.props.ingredients){
+      if (this.state.filteredCategories === []) return null;
+      let exactFiltered = this.state.exactRecipes.filter( recipe => {
+        if (this.state.filterCategories.length  === 0) return true
+        return recipe.categories.some(cat => this.state.filterCategories.includes(cat))
+      })
+      let closeFiltered = this.state.closeRecipes.filter( recipe => {
+        if (this.state.filterCategories.length  === 0) return true
+        return recipe.categories.some(cat => this.state.filterCategories.includes(cat))
+      })
+      this.setState({exactRecipes: exactFiltered})
+      this.setState({closeRecipes: closeFiltered})
+    } else {
+      let filtered = this.props.recipes.filter( recipe => {
+        if (this.state.filterCategories.length  === 0) return true
+        return recipe.categories.some(cat => this.state.filterCategories.includes(cat))
+      })
+
+      this.setState({recipes: filtered})
+    }
 
   }
 
   possibleCategories(){
     let possibleCategories = []
-
-    this.state.exactRecipes.forEach(recipe => possibleCategories.push(...recipe.categories) )
-    this.state.closeRecipes.forEach(recipe => possibleCategories.push(...recipe.categories) )
     let hash = {}
-
+    if (this.props.ingredients){
+      this.state.exactRecipes.forEach(recipe => possibleCategories.push(...recipe.categories) )
+      this.state.closeRecipes.forEach(recipe => possibleCategories.push(...recipe.categories) )
+  
+      
+    } else {
+      this.props.recipes.forEach(recipe => possibleCategories.push(...recipe.categories) )
+    }
     possibleCategories.forEach(category => {
       if (!hash[category]) hash[category] = 0
       hash[category] += 1
@@ -67,13 +84,17 @@ export default class RecipeIndex extends Component {
   }
 
   categoryClickHandler(e, value){
-    let newCats = this.state.filterCategories
-    newCats.push(value)
-    this.setState({filterCategories: newCats})
+    if (!this.state.filterCategories.includes(value) ){
+      let newCats = this.state.filterCategories
+      newCats.push(value)
+      this.setState({filterCategories: newCats})
+      this.filterByCategories();
+    }
   }
 
   clearFilterClickHandler(){
-    this.setState({filterCategories: []})
+    if(this.props.ingredients) this.filterByIngredients();
+    this.setState({filterCategories: []}, () => this.filterByCategories())
   }
 
   render() {
@@ -82,7 +103,6 @@ export default class RecipeIndex extends Component {
         There are no recipes here
       </div>
     }
-
     return (
         <div className="index-main">
           <div className='category-wrapper'>
@@ -100,15 +120,27 @@ export default class RecipeIndex extends Component {
           <div className="index-recipes">
             <h3>Recipes</h3>
             <ul id='index-recipe-items'> 
+
+              { !this.props.ingredients ? 
+                  this.state.recipes.map((recipe, i) => (
+                    <Link to={`/recipes/${recipe.id}`}><li key={i} className="index-recipe-item" id="exact-match">
+                      <div id='recipe-picture' alt-text={recipe.name} style={{ backgroundImage:`url(${recipe.imgUrl})`}}></div>
+                      <h3>{recipe.name}</h3>
+                      <p>{recipe.author}</p>
+                    </li></Link>
+                  )) : ""}
+
+
               { this.state.exactRecipes.map((recipe, i) => (
                 <Link to={`/recipes/${recipe.id}`}><li key={i} className="index-recipe-item" id="exact-match">
                    <div id='recipe-picture' alt-text={recipe.name} style={{ backgroundImage:`url(${recipe.imgUrl})`}}>      <p id='match-label'>Exact Match</p>
                   </div>
-                  {/* <img id='recipe-picture' src={recipe.imgUrl}/> */}
                   <h3>{recipe.name}</h3>
                   <p>{recipe.author}</p>
                 </li></Link>
               ))}
+
+
               { this.state.closeRecipes.map((recipe, i) => (
                 <Link to={`/recipes/${recipe.id}`}><li key={i} className="index-recipe-item" id="close-match">
                   <div id='recipe-picture' style={{ backgroundImage:`url(${recipe.imgUrl})`}}>      <p id='match-label'>Close Match</p>
