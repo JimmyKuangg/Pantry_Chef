@@ -9,7 +9,6 @@ export default class Pantry extends Component {
       user: this.props.pantry.user,
       showSelect: false,
       notInPantry: [],
-      // selectedIngredientId: '',
       selectedIngredient: '',
       selectedQuantity: '',
       selectedUnit: '',
@@ -19,6 +18,7 @@ export default class Pantry extends Component {
     this.addToPantry = this.addToPantry.bind(this);
     this.updateCurrentPantry = this.updateCurrentPantry.bind(this);
     this.updateField = this.updateField.bind(this);
+    this.findName = this.findName.bind(this);
   }
 
   componentDidMount(){
@@ -45,9 +45,15 @@ export default class Pantry extends Component {
     this.setState({showSelect: true});
   }
 
+  findName(ingredientId) {
+    for(let i = 0; i < this.props.ingredients.length; i++){
+      if (ingredientId === this.props.ingredients[i]._id) return this.props.ingredients[i].name
+    }
+  }
+
   removePantryItem(e, itemId) {
     this.setState({ingredients: this.state.ingredients.filter(
-      ingredient => (ingredient.id !== itemId)
+      ingredient => (ingredient.ingredient !== itemId)
     )})
   }
   
@@ -57,13 +63,13 @@ export default class Pantry extends Component {
 
   updateField(field) {
     return e => {
-      console.log(this.state);
       this.setState({ [field]: e.target.value })
     }
   }
-
+  
   updateCurrentPantry() {
     let newPantryIngredients = this.state.ingredients
+
     newPantryIngredients.push({
       ingredient: this.state.selectedIngredient,
       quantity: this.state.selectedQuantity,
@@ -77,22 +83,22 @@ export default class Pantry extends Component {
     if (!this.props.pantry.ingredients) {
       return null;
     }
-    console.log(this.state.ingredients);
+    
     return (
       <div>
         My Pantry
         <ul>
           {this.state.ingredients ? this.state.ingredients.map((ingredient, i) => (
             <li key={i}>
-              {ingredient.quantity} {ingredient.unit} {ingredient.ingredient}
-              <button onClick={e => this.removePantryItem(e, ingredient.id)}>X</button>
+              {ingredient.quantity} {ingredient.unit} {this.findName(ingredient.ingredient)}
+              <button onClick={e => this.removePantryItem(e, ingredient.ingredient)}>X</button>
             </li>
           )) : ''}
         </ul>
         { this.state.showSelect ? 
         <form onSubmit={this.updateCurrentPantry}>
           <select className="ingredients-select-box" onChange={this.updateField('selectedIngredient') }>
-            <option value="none" selected disabled hidden/>
+            <option value="Please select an ingredient" defaultValue disabled hidden/>
             {this.state.notInPantry.map((ingredient, i) => <option key={i} value={ingredient._id}>{ingredient.name}</option>)}
           </select> 
           <input type="text" placeholder="QUANTITY" onChange={this.updateField('selectedQuantity')}/>
