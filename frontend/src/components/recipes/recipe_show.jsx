@@ -17,7 +17,7 @@ class RecipeShow extends Component {
       <div className="show-wrapper">
         <div className="show-header">
           <div className="recipe-photo-wrapper">
-            <img id='recipe-photo' src="https://i2.wp.com/www.awilsonsocialwork.net/wp-content/uploads/2017/01/placeholder.jpg?fit=1200%2C1200&ssl=1" />
+            <img id="recipe-photo" src={recipe.imgUrl} />
           </div>
           <div className="recipe-info">
             <div className="recipe-name"> {recipe.name} </div>
@@ -38,7 +38,9 @@ class RecipeShow extends Component {
                   ))}
                 </ul>
                 <div className="recipe-show-social">
-                  <div className="recipe-show-review-score">★★★★☆{recipe.rating}</div>
+                  <div className="recipe-show-review-score">
+                    ★★★★☆{recipe.rating}
+                  </div>
                   <div className="recipe-favorite-button">
                     <button>Flava Fav</button>
                   </div>
@@ -49,11 +51,10 @@ class RecipeShow extends Component {
         </div>
         <div className="show-content">
           <div className="show-ingredients">
-            <h1 className='directions-header'>Ingredients</h1>
+            <h1 className="directions-header">Ingredients</h1>
             <ul>
               {recipe.ingredients.map((ingredient, i) => (
                 <li key={i} className="show-ingredient">
-                  {" "}
                   {ingredient.quantity} {ingredient.ingredient}
                 </li>
               ))}
@@ -66,7 +67,10 @@ class RecipeShow extends Component {
                 .split(".")
                 .slice(0, -1)
                 .map((step, i) => (
-                  <li key={i} className="show-direction">{step}<input type='checkbox'/></li>
+                  <li key={i} className="show-direction">
+                    <input type="checkbox"/>
+                    {step}
+                  </li>
                 ))}
             </ol>
           </div>
