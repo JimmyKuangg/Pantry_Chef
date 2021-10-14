@@ -10,8 +10,8 @@ export default class Pantry extends Component {
       showSelect: false,
       notInPantry: [],
       selectedIngredient: '',
-      selectedQuantity: '',
-      selectedUnit: '',
+      // selectedQuantity: '',
+      // selectedUnit: '',
     }
     this.removePantryItem = this.removePantryItem.bind(this);
     this.updatePantry = this.updatePantry.bind(this);
@@ -72,8 +72,8 @@ export default class Pantry extends Component {
 
     newPantryIngredients.push({
       ingredient: this.state.selectedIngredient,
-      quantity: this.state.selectedQuantity,
-      unit: this.state.selectedUnit
+      // quantity: this.state.selectedQuantity,
+      // unit: this.state.selectedUnit
     });
 
     this.setState({ingredients: newPantryIngredients})
@@ -91,19 +91,19 @@ export default class Pantry extends Component {
         <ul>
           {this.state.ingredients ? this.state.ingredients.map((ingredient, i) => (
             <li key={i}>
-              {ingredient.quantity} {ingredient.unit} {this.findName(ingredient.ingredient)}
+              {this.findName(ingredient.ingredient)}
               <button onClick={e => this.removePantryItem(e, ingredient.ingredient)}>X</button>
             </li>
           )) : ''}
         </ul>
         { this.state.showSelect ? 
         <form onSubmit={this.updateCurrentPantry}>
-          <select className="ingredients-select-box" onChange={this.updateField('selectedIngredient') }>
-            <option value="Please select an ingredient" defaultValue disabled hidden/>
+          <select className="ingredients-select-box" onChange={this.updateField('selectedIngredient')}>
+            {/* <option value="Please select an ingredient" defaultValue disabled hidden/> */}
             {this.state.notInPantry.map((ingredient, i) => <option key={i} value={ingredient._id}>{ingredient.name}</option>)}
           </select> 
-          <input type="text" placeholder="QUANTITY" onChange={this.updateField('selectedQuantity')}/>
-          <input type="text" placeholder="UNIT" onChange={this.updateField('selectedUnit')}/>
+          {/* <input type="text" placeholder="QUANTITY" onChange={this.updateField('selectedQuantity')}/>
+          <input type="text" placeholder="UNIT" onChange={this.updateField('selectedUnit')}/> */}
           <button type="submit">Add to your current pantry</button>
         </form>
         : ''}
