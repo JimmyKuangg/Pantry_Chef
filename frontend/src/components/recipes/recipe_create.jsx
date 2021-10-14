@@ -10,10 +10,10 @@ export default class RecipeCreateForm extends Component {
       ingredients: [],
       cookTime: "",
       calories: "",
-      categories: this.props.categories,
+      categories: [],
       author: this.props.currentUser.id,
       steps: [],
-      imgUrl: "https://imgur.com/a/GZYbnvX",
+      imgUrl: "FOOD",
 
       ingredient: "",
       quantity: "",
@@ -27,6 +27,9 @@ export default class RecipeCreateForm extends Component {
     this.inputUpdate = this.inputUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
+    this.addToCategories = this.addToCategories.bind(this);
+    this.addToSteps = this.addToSteps.bind(this);
+    this.findName = this.findName.bind(this);
   }
 
   handleSubmit(e) {
@@ -86,10 +89,14 @@ export default class RecipeCreateForm extends Component {
   }
 
   addToCategories() {
-    this.setState({ categories: [...this.state.categories,
-      this.state.category
-    ]});
-
+    if (!Array.isArray(this.state.categories)) {
+      this.setState({ categories: [this.state.category] });
+    } else {
+      this.setState({ categories: [...this.state.categories,
+        this.state.category
+      ]});
+    }
+    
     this.setState({ category: "" })
   }
 
@@ -103,19 +110,23 @@ export default class RecipeCreateForm extends Component {
 
   componentDidMount() {
     this.props.fetchAllCategories();
+    this.setState({ categories: this.props.categories })
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.categories !== this.state.categories) {
-      this.props.fetchAllCategories();
+  findName(ingredientId) {
+    for (let i = 0; i < this.props.ingredients; i++) {
+      if (ingredientId === this.props.ingredients[i]._id) {
+        console.log(this.props.ingredients[i].name)
+        return this.props.ingredients[i].name;
+      }
     }
   }
 
   render() {
-
-    console.log(this.state.categories)
-
-    if (!!!Array.isArray(this.state.categories)) return null;
+    
+    if (!Array.isArray(this.props.categories)) {
+      return null;
+    }
 
     return (
       <div>
@@ -142,8 +153,11 @@ export default class RecipeCreateForm extends Component {
                 {this.ingredientSelect()}
                 {this.quantityInput()}
                 {this.unitInput()}
+                <button onClick={this.addToIngredients}>Add ingredient</button>
+                <div>
+                  {this.state.ingredients.map(ingredient => <p>{this.findName(ingredient._id)}</p>)}
+                </div>
               </div>
-              <button onClick={this.addToIngredients}>Add ingredient</button>
             </label>
           </div>
 
@@ -170,10 +184,10 @@ export default class RecipeCreateForm extends Component {
 
           <div>
             <label>Categories
-              <select>
-                  {this.state.categories.map(category =>
-                    <option>{category.name}</option>
-                  )}
+              <select className="ingredients-select-box" onChange={this.update("category")}>
+                <option defaultValue>Select a category</option>
+                {this.props.categories.map(category =>
+                  <option key={category._id} value={category._id} >{category.name}</option>)}
               </select>
               <button onClick={this.addToCategories}>Add category</button>
             </label>
