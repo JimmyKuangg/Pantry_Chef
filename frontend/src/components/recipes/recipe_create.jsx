@@ -105,11 +105,11 @@ export default class RecipeCreateForm extends Component {
     this.props.fetchAllCategories();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.categories !== this.state.categories) {
-  //     this.props.fetchAllCategories();
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.categories !== this.state.categories) {
+      this.props.fetchAllCategories();
+    }
+  }
 
   render() {
 
