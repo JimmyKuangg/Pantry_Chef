@@ -1,4 +1,6 @@
+import { connect } from 'react-redux';
 import { closeSidemenu } from "../../actions/sidemenu_actions";
+import './sidemenu.css';
 import Pantry from "../pantry/pantry_container";
 
 function SideMenu(props) {
@@ -7,7 +9,8 @@ function SideMenu(props) {
   }
 
   return(
-    <div id="sidemenu">
+    <div className="sidemenu">
+      <button className="close-sidemenu" onClick={props.closeSidemenu}>X</button>
       <Pantry />
     </div>
   )
@@ -15,7 +18,7 @@ function SideMenu(props) {
 
 const mSTP = state => {
   return {
-    sidemenu: state.ui.sidemenu
+    sidemenu: state.ui.sideMenu
   };
 };
 
