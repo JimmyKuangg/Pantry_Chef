@@ -21,6 +21,8 @@ export default class RecipeCreateForm extends Component {
       imgUrl: "https://imgur.com/a/GZYbnvX"
     }
 
+    this.unselected = this.props.ingredients.slice(0);
+    this.selected = [];
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
   }
@@ -34,8 +36,34 @@ export default class RecipeCreateForm extends Component {
     return e => this.setState({ [field]: e.currentTarget.value });
   }
 
-  ingredientsCheck() {
+  updateIngredient(e) {
     
+  }
+
+  ingredientSelect() {
+    const { ingredient } = this.state.ingredients;
+    return (
+      <select className="ingredients-select-box" onChange={this.update()}>
+        {this.unselected.map(ingredient => <option id="testing" value={ingredient.name}>{ingredient.name}</option>)}
+      </select>
+
+    )
+  }
+
+  quantityInput() {
+    return (
+      <div>Quantity 
+        <input type="text" value={this.state.ingredients.quantity} onChange={this.update("quantity")} />
+      </div>
+    )
+  }
+
+  unitInput() {
+    return (
+      <div>Unit 
+        <input type="text" value={this.state.ingredients.unit} onChange={this.update("unit")} />
+      </div>
+    )
   }
 
   addToIngredients(ingredient) {
@@ -65,13 +93,13 @@ export default class RecipeCreateForm extends Component {
 
           <div>
             <label>Ingredients
-              <div className="ingredients-select-box">
-                {this.props.ingredients.map(ingredient =>
-                    <div onClick={ingredient => this.addToIngredients(ingredient)} value={ingredient}>
-                      {ingredient.name}
-                    </div>)}
+              <div>
+                {this.ingredientSelect()}
+                {this.quantityInput()}
+                {this.unitInput()}
               </div>
             </label>
+            <button onClick={this.addToIngredients}>Add ingredient</button>
           </div>
 
           <div>
@@ -94,6 +122,7 @@ export default class RecipeCreateForm extends Component {
             </label>
           </div>
 
+        <input type="submit" onSubmit={this.handleSubmit} />
         </form>
       </div>
     )
