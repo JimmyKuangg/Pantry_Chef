@@ -26,7 +26,7 @@ router.post("/signup", (req, res) => {
     } else {
       const newUserPantry = new Pantry();
       
-      const newUser = new User({
+      const newUser = new User({  
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
