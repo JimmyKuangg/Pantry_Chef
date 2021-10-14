@@ -35,6 +35,11 @@
   border-radius: 50%;
 }
 
+a {
+  text-decoration: none;
+  color: #3F48CC;
+}
+
 .navbar-item {
   display: flex;
   justify-content: center;
