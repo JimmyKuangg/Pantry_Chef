@@ -30,8 +30,8 @@ export default class RecipeIndex extends Component {
     let closeFiltered = this.props.recipes.filter( recipe => {
       let length = recipe.ingredients.length;
       let ingredients = []
-      recipe.ingredients.forEach(ingredient => {if (names.includes(ingredient)) ingredients.push(ingredient)})
-      return ingredients.length > length * 0.8;
+      recipe.ingredients.forEach(ingredient => {if (names.includes(ingredient.ingredient)) ingredients.push(ingredient)})
+      return ingredients.length !== length && ingredients.length >= length * 0.8;
     })
 
     this.setState({exactRecipes: exactFiltered})
