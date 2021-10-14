@@ -10,7 +10,6 @@ export default class Search extends Component {
       ingredientSuggestions: [],
       selectedIngredients: []
     }
-    // this.updateSuggestions = this.updateSuggestions.bind(this)
     this.suggestionClickHandler = this.suggestionClickHandler.bind(this)
     this.removeSelectedClickHandler = this.removeSelectedClickHandler.bind(this)
   }
@@ -30,12 +29,6 @@ export default class Search extends Component {
     })
   }
 
-  // updateSuggestions(){
-  //   let suggestions = this.props.ingredients.filter(ingredient => 
-  //     !this.state.selectedIngredients.includes(ingredient) &&
-  //     ingredient.name.includes(this.state.search))
-  //   this.setState({ingredientSuggestions: suggestions})
-  // }
 
   suggestionClickHandler(e, value){
     e.preventDefault();
@@ -48,12 +41,6 @@ export default class Search extends Component {
     let newSelectedIngredients = this.state.selectedIngredients.filter(ingredient => ingredient.name !== value)
     this.setState({selectedIngredients: newSelectedIngredients})
   }
-
- // let firstFilter = Recipes.filter( recipe => 
- // recipe.ingredients.name.all(ingredient => selectedArray.includes(ingredient)))
-//  let secondFilter = firstFilter.filter( recipe => recipe.category === category)
- 
-
 
 
   render() {

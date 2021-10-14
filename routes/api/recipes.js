@@ -56,7 +56,8 @@ router.get('/:recipeId', (req, res) => {
         calories: recipe.calories,
         categories: Object.values(recipe.categories).map(obj => (obj.name)),
         steps: recipe.steps,
-        author: recipe.author.username
+        author: recipe.author.username,
+        imgUrl: recipe.imgUrl
       }
 
       return res.json(recipeShow);
@@ -87,7 +88,8 @@ router.post('/create',
         categories: req.body.categories,
         steps: req.body.steps,
         author: req.body.author,
-        date: req.body.date
+        date: req.body.date,
+        imgUrl: req.body.imgUrl
       })
 
       newRecipe.save().then(recipe => res.json(recipe))
@@ -115,7 +117,8 @@ router.patch('/update/:id',
         recipe.calories = req.body.calories,
         recipe.description = req.body.description,
         recipe.steps = req.body.steps,
-        recipe.categories = req.body.categories
+        recipe.categories = req.body.categories,
+        recipe.imgUrl = req.body.imgUrl
 
         recipe.save().then(recipe => res.json(recipe));
       }
