@@ -1,0 +1,48 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3F48CC;
+}
+h1{
+    margin: 50px;
+    font-size: 50px;
+}
+
+h2{
+    font-size: 30px;
+    padding: 20px;
+}
+
+i{
+    font-size: 30px;
+    padding: 10px;
+}
+
+#meet-the-team-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#team-members{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.team-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: 20px;
+}
+
+.team-wrapper img{
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+}

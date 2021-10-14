@@ -83,7 +83,7 @@ class NavBar extends React.Component {
 
             <div className="navbar-item">
               <div className="navbar-about">
-                Meet the Team
+                <Link to='/meet-the-team'>Meet the Team</Link>
               </div>
             </div>
 
