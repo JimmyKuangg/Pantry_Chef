@@ -86,7 +86,7 @@ export default class RecipeIndex extends Component {
             <ul id='index-recipe-items'>
               { this.state.recipes.map((recipe, i) => (
                 <Link to={`/recipes/${recipe.id}`}><li key={i} id="index-recipe-item">
-                  <img id='recipe-picture'src={recipe.imgURL} />
+                  <img id='recipe-picture'src={recipe.imgUrl} />
                   <h3>{recipe.name}</h3>
                   <p>by: {recipe.author}</p>
                 </li></Link>

@@ -27,7 +27,8 @@ router.get('/', (req, res) => {
           cookTime: recipes[i].cookTime,
           calories: recipes[i].calories,
           categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
-          author: recipes[i].author.username
+          author: recipes[i].author.username,
+          imgUrl: recipes[i].imgUrl
         }
 
         recipesIndex.push(recipeCard);
