@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
+import { fetchPantry, editPantry } from '../../actions/pantry_actions';
 import Pantry from './pantry'
 
 const mSTP = (state, ownProps) => ({
-  pantries: state.pantries
+  pantry: state.pantries
 });
 
 const mDTP = dispatch => ({
-  
+  fetchPantry: () => dispatch(fetchPantry()),
+  editPantry: pantry => dispatch(editPantry(pantry))
 });
 
 export default connect(mSTP, mDTP)(Pantry);

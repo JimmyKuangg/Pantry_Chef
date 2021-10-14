@@ -59,11 +59,11 @@ router.post('/',
     }
 );
 
-router.patch('/update/:id',
+router.patch('/update',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
 
-    Pantry.findById(req.params.id).then(pantry => {
+    Pantry.findById(req.user.pantry).then(pantry => {
       if (!pantry) {
         errors.pantry = 'A pantry with that ID does not exist';
         return res.status(404).json(errors);

@@ -21,5 +21,4 @@ const PantrySchema = new Schema({
     }
 })
 
-
 module.exports = User = mongoose.model('Pantry', PantrySchema);

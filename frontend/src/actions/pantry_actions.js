@@ -7,14 +7,8 @@ export const receivePantry = pantry => ({
   pantry
 });
 
-export const fetchPantry = pantryId => dispatch => (
-  PantryUtil.fetchPantry(pantryId)
-    .then(recipeId => dispatch(receivePantry(recipeId)))
-    .catch(err => console.log(err))
-);
-
-export const createPantry = pantry => dispatch => (
-  PantryUtil.createPantry(pantry)
+export const fetchPantry = () => dispatch => (
+  PantryUtil.fetchPantry()
     .then(pantry => dispatch(receivePantry(pantry)))
     .catch(err => console.log(err))
 );
