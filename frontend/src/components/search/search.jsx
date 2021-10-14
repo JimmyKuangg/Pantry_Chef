@@ -32,9 +32,10 @@ export default class Search extends Component {
 
   suggestionClickHandler(e, value){
     e.preventDefault();
-    let newSelectedIngredients = this.state.selectedIngredients;
-    newSelectedIngredients.push(value)
-    this.setState({selectedIngredients: newSelectedIngredients})
+    this.setState({selectedIngredients: [...this.state.selectedIngredients, value]})
+    let filtered = this.state.ingredientSuggestions.filter(ingredient => ingredient.name !== value.name)
+
+    this.setState({ingredientSuggestions: filtered})
   }
 
   removeSelectedClickHandler(e, value){
@@ -61,8 +62,8 @@ export default class Search extends Component {
           </div>
           {
             this.state.ingredientSuggestions.length === 0 ? "" : 
-              <div className='ingredient-suggestions-background'>
-                <div className='ingredient-suggestions'>
+              <div className='ingredient-suggestions-background' >
+                <div className='ingredient-suggestions' style={{display: this.state.ingredientSuggestions === [] ? 'none' : 'block'}}>
                   <ul>
                     {this.state.ingredientSuggestions.map((suggestion, i) => (
                       this.state.selectedIngredients.includes(suggestion) ? 
