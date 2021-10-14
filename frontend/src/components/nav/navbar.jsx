@@ -88,6 +88,18 @@ class NavBar extends React.Component {
             </div>
 
             <div className="navbar-item">
+              <div className="navbar-about">
+                {this.props.openRecipeCreateModal}
+              </div>
+            </div>
+
+            <div className="navbar-item">
+              <div className="navbar-about">
+                {this.props.openRecipeEditModal}
+              </div>
+            </div>
+
+            <div className="navbar-item">
               <div className="navbar-github">
                 <a href="https://github.com/JimmyKuangg/Pantry_Chef">
                   <i className="fab fa-github" id="nav-github-logo" />

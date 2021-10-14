@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import "./modal.css";
 import LoginFormContainer from '../session/login_form_container';
 import SignupFormContainer from '../session/signup_form_container';
+import CreateRecipeContainer from "../recipes/recipe_create_container";
+import EditRecipeContainer from "../recipes/recipe_edit_container";
 
 function Modal(props) {
   if (!props.modal) {
@@ -17,6 +19,12 @@ function Modal(props) {
       break;
     case 'signup':
       component = <SignupFormContainer />;
+      break;
+    case 'createRecipe':
+      component = <CreateRecipeContainer />;
+      break;
+    case 'editRecipe':
+      component = <EditRecipeContainer />;
       break;
     default:
       return null;

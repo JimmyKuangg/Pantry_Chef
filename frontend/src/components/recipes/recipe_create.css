@@ -1,0 +1,9 @@
+.ingredients-select-box {
+  width: 300px;
+  height: 100px;
+  overflow: hidden;
+  overflow-y: auto;
+  border: 1px solid black;
+  border-radius: 4px;
+  display: flex;
+}
