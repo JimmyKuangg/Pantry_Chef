@@ -71,9 +71,7 @@ class RecipeShow extends Component {
           <div className="show-directions">
             <h1 className="directions-header">Directions</h1>
             <ol>
-              {recipe.steps[0]
-                .split(".")
-                .slice(0, -1)
+              {recipe.steps
                 .map((step, i) => (
                   <li key={i} className="show-direction">
                     <input type="checkbox"/>
