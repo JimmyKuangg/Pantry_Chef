@@ -100,19 +100,20 @@ export default class RecipeIndex extends Component {
             <h3>Recipes</h3>
             <ul id='index-recipe-items'> 
               { this.state.exactRecipes.map((recipe, i) => (
-                <li key={i} className="index-recipe" id="exact-match">
-                  <img id='recipe-picture' src={recipe.imgUrl}/>
+                <li key={i} className="index-recipe-item" id="exact-match">
+                   <div id='recipe-picture' style={{ backgroundImage:`url(${recipe.imgUrl})`}}>      <p id='match-label'>Exact Match</p>
+                  </div>
+                  {/* <img id='recipe-picture' src={recipe.imgUrl}/> */}
                   <h3>{recipe.name}</h3>
                   <p>{recipe.author}</p>
-                  <p>Exact Match</p>
                 </li>
               ))}
               { this.state.closeRecipes.map((recipe, i) => (
-                <li key={i} className="index-recipe" id="close-match">
-                  <img id='recipe-picture' src={recipe.imgUrl}/>
+                <li key={i} className="index-recipe-item" id="close-match">
+                  <div id='recipe-picture' style={{ backgroundImage:`url(${recipe.imgUrl})`}}>      <p id='match-label'>Close Match</p>
+                  </div>
                   <h3>{recipe.name}</h3>
                   <p>{recipe.author}</p>
-                  <p>Close Match</p>
                 </li>
               ))}
             </ul>
