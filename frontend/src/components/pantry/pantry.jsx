@@ -7,16 +7,22 @@ export default class Pantry extends Component {
     this.state = this.props.pantry;
     this.removePantryItem = this.removePantryItem.bind(this);
     this.updatePantry = this.updatePantry.bind(this);
+    this.addToPantry = this.addToPantry.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchPantry();
+    this.props.fetchAllIngredients();
   }
   
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.setState(this.props.pantry);
     }
+  }
+
+  addToPantry() {
+    
   }
 
   removePantryItem(e, itemId) {
