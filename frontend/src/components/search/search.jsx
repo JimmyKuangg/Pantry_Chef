@@ -47,7 +47,6 @@ export default class Search extends Component {
 
   addIngredientsToPantry(e){
     e.preventDefault();
-    // console.log(this.props.pantry.data)
     let selectIngredients = this.state.selectedIngredients.map(ingredient => ingredient._id)
     let hash = {};
     let merged = [...selectIngredients, ...this.props.pantry.data.ingredients]
@@ -106,7 +105,7 @@ export default class Search extends Component {
               </ul>
             </div>
           </div>
-            <button onClick={this.addIngredientsToPantry}>Add Ingredients to Pantry</button>
+            {this.state.selectedIngredients.length > 0 ? <button onClick={this.addIngredientsToPantry}>Add Ingredients to Pantry</button> : ""}
           <div>
             <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
           </div>
