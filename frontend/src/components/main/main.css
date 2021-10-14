@@ -1,12 +1,27 @@
+body {
+  background: rgba(226, 253, 209, 0.288);
+}
+
 .home-logo {
   width: 230px;
   height: 130px;
   margin-top: 30px;
 }
 
-.main-content {
+.main-head {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+
+.main-instructions {
+  padding-top: 50px;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5em;
 }

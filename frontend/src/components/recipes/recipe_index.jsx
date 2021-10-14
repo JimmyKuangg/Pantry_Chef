@@ -100,7 +100,7 @@ export default class RecipeIndex extends Component {
   render() {
     if (this.props.recipes.length === 0){
       return <div>
-        There are no recipes here
+        There are no recipes containing this exact list of ingredients
       </div>
     }
     return (
