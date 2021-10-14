@@ -98,8 +98,8 @@ export default class Pantry extends Component {
         </ul>
         { this.state.showSelect ? 
         <form onSubmit={this.updateCurrentPantry}>
-          <select className="ingredients-select-box" onChange={this.updateField('selectedIngredient')}>
-            {/* <option value="Please select an ingredient" defaultValue disabled hidden/> */}
+          <select className="ingredients-select-box" onChange={this.updateField('selectedIngredient')} >
+            <option selected disabled hidden>Please select an ingredient</option>
             {this.state.notInPantry.map((ingredient, i) => <option key={i} value={ingredient._id}>{ingredient.name}</option>)}
           </select> 
           {/* <input type="text" placeholder="QUANTITY" onChange={this.updateField('selectedQuantity')}/>
