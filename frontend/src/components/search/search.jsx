@@ -10,12 +10,14 @@ export default class Search extends Component {
       ingredientSuggestions: [],
       selectedIngredients: []
     }
+    this.addIngredientsToPantry = this.addIngredientsToPantry.bind(this)
     this.suggestionClickHandler = this.suggestionClickHandler.bind(this)
     this.removeSelectedClickHandler = this.removeSelectedClickHandler.bind(this)
   }
 
   componentDidMount(){
     this.props.fetchAllIngredients()
+    this.props.fetchPantry();
   }  
 
   update(e){
@@ -43,9 +45,30 @@ export default class Search extends Component {
     this.setState({selectedIngredients: newSelectedIngredients})
   }
 
+  addIngredientsToPantry(e){
+    e.preventDefault();
+    // console.log(this.props.pantry.data)
+    let selectIngredients = this.state.selectedIngredients.map(ingredient => ingredient._id)
+    let hash = {};
+    let merged = [...selectIngredients, ...this.props.pantry.data.ingredients]
+    
+    merged.forEach(ingredient => {
+      if (!hash[ingredient]) hash[ingredient] = 0;
+      hash[ingredient] += 1
+    })
+
+    merged = Object.keys(hash)
+
+    let arrayOfObjects = []
+    merged.forEach(ele => arrayOfObjects.push({ingredient: ele}))
+
+    let newPantry = {
+      ingredients: arrayOfObjects
+    }
+    this.props.editPantry(newPantry)
+  }
 
   render() {
-    console.log(this.state.selectedIngredients)
     return (
       <div>
         <div className="search-wrapper">
@@ -83,6 +106,7 @@ export default class Search extends Component {
               </ul>
             </div>
           </div>
+            <button onClick={this.addIngredientsToPantry}>Add Ingredients to Pantry</button>
           <div>
             <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
           </div>
