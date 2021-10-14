@@ -24,6 +24,16 @@ const mapDispatchToProps = dispatch => ({
       My Pantry
     </button>
   ),
+  openRecipeCreateModal: (
+    <button className="open-modal signup-button" onClick={() => dispatch(openModal('createRecipe'))}>
+      Create Recipe
+    </button>
+  ),
+  openRecipeEditModal: (
+    <button className="open-modal signup-button" onClick={() => dispatch(openModal('editRecipe'))}>
+      Edit Recipe
+    </button>
+  ),
   logout: () => dispatch(logout())
 })
 
