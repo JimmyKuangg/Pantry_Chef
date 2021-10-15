@@ -10,6 +10,7 @@ const MeetTheTeam = () => {
                     <h2 id='name'>Darrick Shin</h2>
                     <div className='socials'>
                         <a href='https://www.linkedin.com/in/darrick-shin/'><i class="fab fa-linkedin"/></a>
+                        <a href='https://angel.co/u/darrick-shin'><i class="fab fa-angellist"/></a>
                         <a href='https://github.com/GIT-DS'><i class="fab fa-github"/></a>
                     </div>
                 </div>
@@ -18,6 +19,7 @@ const MeetTheTeam = () => {
                     <h2 id='name'>Jimmy Kuang</h2>
                     <div className='socials'>
                         <a href='https://www.linkedin.com/in/jimmy-kuang-789967183/'><i class="fab fa-linkedin"/></a>
+                        <a href='https://angel.co/u/jimmy-kuang'><i class="fab fa-angellist"/></a>
                         <a href='https://github.com/JimmyKuangg'><i class="fab fa-github"/></a>
                     </div>
                 </div>
@@ -26,7 +28,9 @@ const MeetTheTeam = () => {
                     <h2 id='name'>David Oh</h2>
                     <div className='socials'>
                         <a href='https://www.linkedin.com/in/david-oh-790071123/'><i class="fab fa-linkedin"/></a>
+                        <a href='https://angel.co/u/david-oh-9'><i class="fab fa-angellist"/></a>
                         <a href='https://github.com/davidoh14'><i class="fab fa-github"/></a>
+
                     </div>
                 </div>
                 <div className='team-wrapper'>
@@ -34,6 +38,7 @@ const MeetTheTeam = () => {
                     <h2 id='name'>Vincent Hsu</h2>
                     <div className='socials'>
                         <a href='https://www.linkedin.com/in/vincent-hsu-45a6a1220/'><i class="fab fa-linkedin"/></a>
+                        <a href='https://angel.co/u/vincent-hsu-4'><i class="fab fa-angellist"/></a>
                         <a href='https://github.com/imvincenth'><i class="fab fa-github"/></a>
                     </div>
                 </div>
