@@ -20,7 +20,6 @@ class RecipeShow extends Component {
       return null;
     }
 
-    console.log('recipe', recipe);
     return (
       <div className="show-wrapper">
         <div className="show-header">

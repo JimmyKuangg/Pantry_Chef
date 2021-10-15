@@ -16,11 +16,19 @@ export default class Search extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchAllIngredients().then( () => this.props.fetchPantry()).then(()=>  
-      this.setState({selectedIngredients: this.props.pantry.ingredients.map(ingredient => ({_id: ingredient.ingredient, name: ingredient.name}))})
-    )
+    this.props.fetchAllIngredients()
+    if(this.props.currentUser.id) { this.props.fetchPantry()
+      .then(()=>  this.setState({selectedIngredients: this.props.pantry.ingredients.map(ingredient => ({_id: ingredient.ingredient, name: ingredient.name}))})
+    )}
 
   }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.currentUser !== this.props.currentUser){
+      window.location.reload();
+    }
+  }
+
 
   update(e){
       let search = e.target.value;
@@ -36,7 +44,6 @@ export default class Search extends Component {
 
   suggestionClickHandler(e, value){
     e.preventDefault();
-    console.log(this.state.selectedIngredients)
     this.setState({selectedIngredients: [...this.state.selectedIngredients, value]})
     let filtered = this.state.ingredientSuggestions.filter(ingredient => ingredient.name !== value.name)
 
@@ -69,7 +76,6 @@ export default class Search extends Component {
   }
 
   render() {
-    console.log(this.state.selectedIngredients)
     return (
       <div>
         <div className="search-wrapper">

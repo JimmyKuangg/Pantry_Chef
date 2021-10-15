@@ -41,7 +41,6 @@ export default class RecipeIndex extends Component {
   }
 
   filterByCategories(){
-    console.log(this.state.filterCategories)
     if (this.props.ingredients){
       if (this.state.filteredCategories === []) return null;
       let exactFiltered = this.state.exactRecipes.filter( recipe => {

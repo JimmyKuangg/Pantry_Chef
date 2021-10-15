@@ -18,16 +18,21 @@ export default class Pantry extends Component {
     this.updateCurrentPantry = this.updateCurrentPantry.bind(this);
     this.updateField = this.updateField.bind(this);
     this.findName = this.findName.bind(this);
+
+    this.filterUsersRecipes = this.filterUsersRecipes.bind(this);
+
   }
 
   componentDidMount(){
     this.props.fetchPantry();
     this.props.fetchAllIngredients();
+    this.props.fetchRecipes();
   }
   
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.setState(this.props.pantry);
+      this.filterUsersRecipes();
     }
   }
 
@@ -42,6 +47,13 @@ export default class Pantry extends Component {
     ))})
 
     this.setState({showSelect: true});
+  }
+
+  filterUsersRecipes() {
+    this.setState({usersRecipes: this.props.recipes.filter(recipe => (
+      recipe.author === this.props.currentUser
+    ))})
+
   }
 
   findName(ingredientId) {
@@ -83,7 +95,7 @@ export default class Pantry extends Component {
     if (!this.props.pantry.ingredients) {
       return null;
     }
-    
+
     return (
       <div>
         My Pantry
@@ -108,6 +120,20 @@ export default class Pantry extends Component {
         : ''}
         <button onClick={() => this.addToPantry()}>Add items to your pantry</button>
         <button onClick={() => this.updatePantry()}>Save your pantry</button>
+        
+        <h1>My Recipes</h1>
+        <ul>
+          {this.state.usersRecipes ? this.state.usersRecipes.map((recipe, i) => (
+            <li key={i}>
+              {recipe.name}
+              <button className="open-modal signup-button" onClick={() => this.props.openModal('editRecipe', recipe)}>
+                Edit Recipe
+              </button>
+            </li>
+          ))
+          : ''}
+        </ul>
+
       </div>
     )
   }

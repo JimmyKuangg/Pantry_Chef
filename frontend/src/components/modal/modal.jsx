@@ -24,7 +24,7 @@ function Modal(props) {
       component = <CreateRecipeContainer />;
       break;
     case 'editRecipe':
-      component = <EditRecipeContainer />;
+      component = <EditRecipeContainer potatoes={props.potatoes}/>;
       break;
     default:
       return null;

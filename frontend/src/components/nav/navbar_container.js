@@ -25,6 +25,8 @@ const mapDispatchToProps = dispatch => ({
       MY PANTRY    
     </button>
   ),
+  openSidemenu: () => dispatch(openSidemenu()),
+  closeSidemenu: () => dispatch(closeSidemenu()),
   openRecipeCreateModal: (
     <button className="navbar-button" onClick={() => dispatch(openModal('createRecipe'))}>
       CREATE RECIPE
