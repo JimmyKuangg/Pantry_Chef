@@ -13,7 +13,7 @@ export const createRecipe = (recipe) => {
 };
 
 export const editRecipe = (recipe) => {
-    return axios.post(`/api/recipes/update/${recipe.id}`, recipe)
+    return axios.patch(`/api/recipes/update/${recipe.id}`, recipe)
 }
 
 export const deleteRecipe = (recipeId) => {

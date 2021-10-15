@@ -37,11 +37,11 @@ export const createRecipe = recipe => dispatch => (
     .catch(err => console.log(err))
 );
 
-export const editRecipe = recipe => dispatch => (
-  RecipeUtil.editRecipe(recipe)
+export const editRecipe = recipe => dispatch => {
+  return RecipeUtil.editRecipe(recipe)
     .then(recipe => dispatch(receiveRecipe(recipe)))
     .catch(err => console.log(err))
-);
+};
 
 export const deleteRecipe = recipeId => dispatch => (
   RecipeUtil.deleteRecipe(recipeId)
