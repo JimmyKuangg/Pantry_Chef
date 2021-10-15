@@ -7,6 +7,8 @@ import { fetchRecipes } from '../../actions/recipe_actions';
 const mSTP = (state, ownProps) => ({
   pantry: state.pantries,
   ingredients: state.ingredients,
+  recipes: state.recipes,
+  currentUser: state.session.user.username
 });
 
 const mDTP = dispatch => ({

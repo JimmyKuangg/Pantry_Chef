@@ -12,6 +12,7 @@ export default class Pantry extends Component {
       selectedIngredient: '',
       // selectedQuantity: '',
       // selectedUnit: '',
+      usersRecipes: [],
     }
     this.removePantryItem = this.removePantryItem.bind(this);
     this.updatePantry = this.updatePantry.bind(this);
@@ -19,6 +20,7 @@ export default class Pantry extends Component {
     this.updateCurrentPantry = this.updateCurrentPantry.bind(this);
     this.updateField = this.updateField.bind(this);
     this.findName = this.findName.bind(this);
+    this.filterUsersRecipes = this.filterUsersRecipes.bind(this);
   }
 
   componentDidMount(){
@@ -30,6 +32,7 @@ export default class Pantry extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.setState(this.props.pantry);
+      this.filterUsersRecipes();
     }
   }
 
@@ -44,6 +47,15 @@ export default class Pantry extends Component {
     ))})
 
     this.setState({showSelect: true});
+  }
+
+  filterUsersRecipes() {
+    console.log(this.props.currentUser)
+    this.setState({usersRecipes: this.props.recipes.filter(recipe => (
+      recipe.author === this.props.currentUser
+    ))})
+    console.log(this.props.recipes.filter(recipe => (
+      recipe.author === this.props.currentUser)))
   }
 
   findName(ingredientId) {
@@ -85,7 +97,7 @@ export default class Pantry extends Component {
     if (!this.props.pantry.ingredients) {
       return null;
     }
-    
+  
     return (
       <div>
         My Pantry
