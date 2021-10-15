@@ -123,7 +123,7 @@ export default class RecipeIndex extends Component {
 
               { !this.props.ingredients ? 
                   this.state.recipes.map((recipe, i) => (
-                    <Link to={`/recipes/${recipe.id}`} id='recipe-links'><li key={i} className="index-recipe-item" id="exact-match">
+                    <Link to={`/recipes/${recipe.id}`} id='recipe-links' key={i}><li className="index-recipe-item" id="exact-match">
                       <div id='recipe-picture' alt-text={recipe.name} style={{ backgroundImage:`url(${recipe.imgUrl})`}}></div>
                       <h3>{recipe.name}</h3>
                       <p>{recipe.author}</p>
@@ -132,7 +132,7 @@ export default class RecipeIndex extends Component {
 
 
               { this.state.exactRecipes.map((recipe, i) => (
-                <Link to={`/recipes/${recipe.id}`} id='recipe-links'><li key={i} className="index-recipe-item" id="exact-match">
+                <Link to={`/recipes/${recipe.id}`} id='recipe-links' key={i}><li className="index-recipe-item" id="exact-match">
                   <div id='recipe-picture' alt-text={recipe.name} style={{ backgroundImage:`url(${recipe.imgUrl})`}}>      <p id='match-label'>Exact Match</p></div>
                   <h3>{recipe.name}</h3>
                   <p>{recipe.author}</p>
@@ -141,7 +141,7 @@ export default class RecipeIndex extends Component {
 
 
               { this.state.closeRecipes.map((recipe, i) => (
-                <Link to={`/recipes/${recipe.id}`} id='recipe-links'><li key={i} className="index-recipe-item" id="close-match">
+                <Link to={`/recipes/${recipe.id}`} id='recipe-links' key={i}><li className="index-recipe-item" id="close-match">
                   <div id='recipe-picture' style={{ backgroundImage:`url(${recipe.imgUrl})`}}>      <p id='match-label'>Close Match</p>
                   </div>
                   <h3>{recipe.name}</h3>
