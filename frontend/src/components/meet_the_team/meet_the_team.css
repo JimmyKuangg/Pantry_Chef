@@ -1,18 +1,23 @@
-body{
+meet-the-team-wrapper * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+#meet-the-team-header{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #3F48CC;
-}
-h1{
     margin: 50px;
     font-size: 50px;
 }
 
-h2{
+#name{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3F48CC;
     font-size: 30px;
     padding: 20px;
 }
 
-i{
+.socials i{
+    color: #3F48CC;
     font-size: 30px;
     padding: 10px;
 }
