@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { logout } from "../../actions/session_actions";
 import { openModal } from "../../actions/modal_actions";
+import { closeSidemenu, openSidemenu } from "../../actions/sidemenu_actions";
 
 import NavBar from "./navbar";
 
@@ -34,6 +35,8 @@ const mapDispatchToProps = dispatch => ({
       Edit Recipe
     </button>
   ),
+  openSidemenu: () => dispatch(openSidemenu()),
+  closeSidemenu: () => dispatch(closeSidemenu()),
   logout: () => dispatch(logout())
 })
 

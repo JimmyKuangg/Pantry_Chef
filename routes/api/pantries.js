@@ -6,6 +6,8 @@ const passport = require('passport')
 const Pantry = require('../../models/Pantry')
 const validatePantryInput = require('../../validation/pantry')
 
+router.get("/test", (req, res) => res.json({ msg: "This is the pantry route" }));
+
 router.get('/',
   passport.authenticate('jwt', { session: false }),
     (req, res) => {
@@ -22,7 +24,7 @@ router.get('/',
               let pantryShow = {
                 user: pantry.user.username,
                 ingredients: pantry.ingredients.map(ele => ({
-                  ingredient: ele.ingredient.name,
+                  ingredient: ele.ingredient.id,
                   quantity: ele.quantity,
                   unit: ele.unit
                 }))

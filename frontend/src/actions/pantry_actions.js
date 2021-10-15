@@ -13,12 +13,6 @@ export const fetchPantry = () => dispatch => (
     .catch(err => console.log(err))
 );
 
-export const createPantry = pantry => dispatch => (
-  PantryUtil.createPantry(pantry)
-    .then(pantry => dispatch(receivePantry(pantry)))
-    .catch(err => console.log(err))
-);
-
 export const editPantry = pantry => dispatch => (
   PantryUtil.editPantry(pantry)
     .then(pantry => dispatch(receivePantry(pantry)))

@@ -22,7 +22,7 @@ class NavBar extends React.Component {
 
           <div className="navbar-item">
             <div className="navbar-pantry">
-              <Link to="/pantries">My Pantry</Link>
+              <button onClick={this.props.openSidemenu}>My Pantry</button>
             </div>
           </div>
 
