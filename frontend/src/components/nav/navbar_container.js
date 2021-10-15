@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { logout } from "../../actions/session_actions";
 import { openModal } from "../../actions/modal_actions";
+import { closeSidemenu, openSidemenu } from "../../actions/sidemenu_actions";
 
 import NavBar from "./navbar";
 
@@ -24,6 +25,8 @@ const mapDispatchToProps = dispatch => ({
       My Pantry
     </button>
   ),
+  openSidemenu: () => dispatch(openSidemenu()),
+  closeSidemenu: () => dispatch(closeSidemenu()),
   openRecipeCreateModal: (
     <button className="open-modal signup-button" onClick={() => dispatch(openModal('createRecipe'))}>
       Create Recipe

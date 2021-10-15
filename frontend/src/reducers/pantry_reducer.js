@@ -8,7 +8,7 @@ const pantry = (oldState = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_PANTRY:
-      return action.pantry;
+      return action.pantry.data;
     default:
       return oldState;
   }
