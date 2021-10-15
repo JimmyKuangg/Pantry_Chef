@@ -133,7 +133,12 @@ export default class RecipeCreateForm extends Component {
   
   removeCategory(e, categoryId) {
     let newCategories = this.state.categories.filter(category => category !== categoryId);
-    this.setState({ categories: newCategories })
+    this.setState({ categories: newCategories });
+  }
+
+  removeStep(e, stepId) {
+    let newSteps = this.state.steps.filter(step => step !== stepId);
+    this.setState({ steps: newSteps });
   }
 
   render() {
@@ -234,6 +239,15 @@ export default class RecipeCreateForm extends Component {
               />
               <div onClick={this.addToSteps}>Add step</div>
             </label>
+            <div>
+              
+                {this.state.steps.length > 0 ?
+                  <ol>
+                    {this.state.steps.map(step => <li>{step}<p onClick={e => this.removeStep(e, step)}> x</p></li>)}
+                  </ol> : ""
+                }
+              
+            </div>
           </div>
 
         <input type="submit" onSubmit={this.handleSubmit} value="Create Recipe" />
