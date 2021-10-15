@@ -5,7 +5,7 @@ import { fetchAllCategories } from '../../actions/category_actions';
 import RecipeEditForm from './recipe_edit';
 
 const mSTP = (state, ownProps) => {
-  // console.log(ownProps)
+
   return{
   ingredients: state.ingredients,
   categories: state.categories,
