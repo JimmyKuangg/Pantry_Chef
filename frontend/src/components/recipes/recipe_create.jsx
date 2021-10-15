@@ -44,9 +44,12 @@ export default class RecipeCreateForm extends Component {
 
   ingredientSelect() {
     return (
-      <select className="ingredients-select-box" onChange={this.update("ingredient")}>
+      <select className="ingredients-select-box" value={this.state.ingredient} onChange={this.update("ingredient")}>
         <option defaultValue>Choose an ingredient</option>
-        {this.props.ingredients.map(ingredient => <option id="testing" key={ingredient._id} value={ingredient._id}>{ingredient.name}</option>)}
+        {this.props.ingredients.map(ingredient => <option 
+        id="testing" 
+        key={ingredient._id} 
+        value={ingredient._id}>{ingredient.name}</option>)}
       </select>
 
     )
@@ -62,7 +65,7 @@ export default class RecipeCreateForm extends Component {
   quantityInput() {
     return (
       <div>Quantity 
-        <input type="text" onChange={this.update("quantity")} />
+        <input type="text" value={this.state.quantity} onChange={this.update("quantity")} />
       </div>
     )
   }
@@ -70,7 +73,7 @@ export default class RecipeCreateForm extends Component {
   unitInput() {
     return (
       <div>Unit 
-        <input type="text" placeholder="Ex: grams" onChange={this.update("unit")} />
+        <input type="text" placeholder="Ex: grams" value={this.state.unit} onChange={this.update("unit")} />
       </div>
     )
   }
@@ -107,7 +110,7 @@ export default class RecipeCreateForm extends Component {
 
   componentDidMount() {
     this.props.fetchAllCategories();
-    this.setState({ categories: this.props.categories })
+    // this.setState({ categories: this.props.categories })
   }
 
   findName(ingredientId) {
@@ -218,9 +221,9 @@ export default class RecipeCreateForm extends Component {
               
                 {this.state.categories.length > 0 ? 
                   <ul>
-                    {this.state.categories.map(categoryId => 
-                    <li>{this.findCateName(categoryId)}
-                    <button onClick={e => this.removeCategory(e, categoryId)}> x</button>
+                    {this.state.categories.map((categoryId, i) => 
+                    <li key={i}>{this.findCateName(categoryId)}
+                      <button onClick={e => this.removeCategory(e, categoryId)}> x</button>
                     </li>)} 
                   </ul> : ""
                 }

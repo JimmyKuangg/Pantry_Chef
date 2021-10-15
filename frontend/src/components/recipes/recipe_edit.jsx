@@ -6,14 +6,6 @@ export default class RecipeEditForm extends Component {
     super(props);
 
     this.state = {
-      // name: "",
-      // ingredients: [],
-      // cookTime: "",
-      // calories: "",
-      // categories: [],
-      // author: this.props.currentUser.id,
-      // steps: [],
-      // imgUrl: "FOOD",
       ...this.props.recipe, 
 
       ingredient: "",
@@ -24,9 +16,8 @@ export default class RecipeEditForm extends Component {
 
       step: ""
     }
-
-
     
+    this.backToId = this.backToId.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
     this.addToCategories = this.addToCategories.bind(this);
@@ -38,7 +29,8 @@ export default class RecipeEditForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.action(this.state)
-      .then(this.props.closeModal());
+      .then(this.props.closeModal())
+      .then(this.props.closeSidemenu());
   }
 
   update(field) {
@@ -47,7 +39,7 @@ export default class RecipeEditForm extends Component {
 
   ingredientSelect() {
     return (
-      <select className="ingredients-select-box" onChange={this.update("ingredient")}>
+      <select className="ingredients-select-box" value={this.state.ingredient} onChange={this.update("ingredient")}>
         <option defaultValue>Choose an ingredient</option>
         {this.props.ingredients.map(ingredient => <option id="testing" key={ingredient._id} value={ingredient._id}>{ingredient.name}</option>)}
       </select>
@@ -65,7 +57,7 @@ export default class RecipeEditForm extends Component {
   quantityInput() {
     return (
       <div>Quantity 
-        <input type="text" onChange={this.update("quantity")} />
+        <input type="text" value={this.state.quantity} onChange={this.update("quantity")} />
       </div>
     )
   }
@@ -73,7 +65,7 @@ export default class RecipeEditForm extends Component {
   unitInput() {
     return (
       <div>Unit 
-        <input type="text" placeholder="Ex: grams" onChange={this.update("unit")} />
+        <input type="text" placeholder="Ex: grams" value={this.state.unit} onChange={this.update("unit")} />
       </div>
     )
   }
@@ -110,7 +102,7 @@ export default class RecipeEditForm extends Component {
 
   componentDidMount() {
     this.props.fetchAllCategories();
-    this.setState({ categories: this.props.categories })
+    // this.setState({ categories: this.props.categories })
   }
 
   findName(ingredientId) {
@@ -142,6 +134,39 @@ export default class RecipeEditForm extends Component {
   removeStep(e, stepId) {
     let newSteps = this.state.steps.filter(step => step !== stepId);
     this.setState({ steps: newSteps });
+  }
+
+  backToId() {
+    let newIngredients = [];
+    let newCategories = [];
+
+    let hashCheck = [];
+    let hashMap = {};
+    let propsIngredients = this.props.ingredients.map(ingredient => [ingredient.name, ingredient._id]);
+    
+    for (let z = 0; z < this.props.categories.length; z++) {
+      if (this.state.categories.includes(this.props.categories[z].name)) {
+        newCategories.push(this.props.categories[z]._id);
+      }
+    }
+
+    for (let i = 0; i < this.state.ingredients.length; i++) {
+      hashMap["ingredient"] = this.state.ingredients[i].ingredient;
+      hashMap["quantity"] = this.state.ingredients[i].quantity;
+      hashMap["unit"] = this.state.ingredients[i].unit;
+      hashCheck.push(hashMap);
+      hashMap = {};
+    }
+
+    for (let j = 0; j < propsIngredients.length; j++) {
+      for (let k = 0; k < hashCheck.length; k++) {
+        if (propsIngredients[j][0] === hashCheck[k]["ingredient"]) {
+          newIngredients.push({ ingredient: propsIngredients[j][1], quantity: hashCheck[k]["quantity"], unit: hashCheck[k]["unit"] });
+        }
+      }
+    }
+
+    this.setState({ ingredients: [...newIngredients], categories: [...newCategories] });
   }
 
   render() {
@@ -180,7 +205,7 @@ export default class RecipeEditForm extends Component {
                 <ul>
                   {this.state.ingredients.map(ingredient => 
                   <li key={ingredient.ingredient}>
-                    {this.findName(ingredient.ingredient)}
+                    {ingredient.ingredient}
                     <button onClick={e => this.removeIngredient(e, ingredient.ingredient)}> x</button>
                   </li>)}
                 </ul>
@@ -222,9 +247,9 @@ export default class RecipeEditForm extends Component {
               
                 {this.state.categories.length > 0 ? 
                   <ul>
-                    {this.state.categories.map(categoryId => 
-                    <li>{this.findCateName(categoryId)}
-                    <button onClick={e => this.removeCategory(e, categoryId)}> x</button>
+                    {this.state.categories.map(category => 
+                    <li>{category}
+                      <button onClick={e => this.removeCategory(e, category)}> x</button>
                     </li>)} 
                   </ul> : ""
                 }
@@ -253,7 +278,7 @@ export default class RecipeEditForm extends Component {
             </div>
           </div>
 
-        <input type="submit" onSubmit={this.handleSubmit} value="Create Recipe" />
+        <input type="submit" onClick={this.backToId} onSubmit={this.handleSubmit} value="Edit Recipe" />
         </form>
       </div>
     )
