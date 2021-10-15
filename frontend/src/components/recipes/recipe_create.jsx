@@ -24,25 +24,22 @@ export default class RecipeCreateForm extends Component {
       step: ""
     }
     
-    this.inputUpdate = this.inputUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
     this.addToCategories = this.addToCategories.bind(this);
     this.addToSteps = this.addToSteps.bind(this);
     this.findName = this.findName.bind(this);
+    this.findCateName = this.findCateName.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.action(this.state);
+    this.props.action(this.state)
+      .then(this.props.closeModal());
   }
 
   update(field) {
     return e => this.setState({ [field]: e.target.value });
-  }
-
-  inputUpdate(field) {
-    return e => this.tempIngredient[field] += e.target.value;
   }
 
   ingredientSelect() {
@@ -82,8 +79,8 @@ export default class RecipeCreateForm extends Component {
     this.setState({ ingredients: [...this.state.ingredients,
       { ingredient: this.state.ingredient,
         quantity: this.state.quantity,
-        unit: this.state.unit
-    }]});
+        unit: this.state.unit}]
+    });
 
     this.setState({ ingredient: "", quantity: "", unit: "" })
   }
@@ -114,12 +111,29 @@ export default class RecipeCreateForm extends Component {
   }
 
   findName(ingredientId) {
-    for (let i = 0; i < this.props.ingredients; i++) {
+    for (let i = 0; i < this.props.ingredients.length; i++) {
       if (ingredientId === this.props.ingredients[i]._id) {
-        console.log(this.props.ingredients[i].name)
         return this.props.ingredients[i].name;
       }
     }
+  }
+
+  findCateName(categoryId) {
+    for (let i = 0; i < this.props.categories.length; i++) {
+      if (categoryId === this.props.categories[i]._id) {
+        return this.props.categories[i].name;
+      }
+    }
+  }
+
+  removeIngredient(e, ingredientId) {
+    let newIngredients = this.state.ingredients.filter(ingredient => ingredient.ingredient !== ingredientId);
+    this.setState({ ingredients: newIngredients });
+  }
+  
+  removeCategory(e, categoryId) {
+    let newCategories = this.state.categories.filter(category => category !== categoryId);
+    this.setState({ categories: newCategories })
   }
 
   render() {
@@ -127,7 +141,7 @@ export default class RecipeCreateForm extends Component {
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
-
+    console.log(this.state.ingredients);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -153,10 +167,16 @@ export default class RecipeCreateForm extends Component {
                 {this.ingredientSelect()}
                 {this.quantityInput()}
                 {this.unitInput()}
-                <button onClick={this.addToIngredients}>Add ingredient</button>
-                <div>
-                  {this.state.ingredients.map(ingredient => <p>{this.findName(ingredient._id)}</p>)}
-                </div>
+                <div onClick={this.addToIngredients}>Add ingredient</div>
+                
+                <ul>
+                  {this.state.ingredients.map(ingredient => 
+                  <li key={ingredient.ingredient}>
+                    {this.findName(ingredient.ingredient)}
+                    <button onClick={e => this.removeIngredient(e, ingredient.ingredient)}> x</button>
+                  </li>)}
+                </ul>
+                
               </div>
             </label>
           </div>
@@ -189,7 +209,19 @@ export default class RecipeCreateForm extends Component {
                 {this.props.categories.map(category =>
                   <option key={category._id} value={category._id} >{category.name}</option>)}
               </select>
-              <button onClick={this.addToCategories}>Add category</button>
+              <div onClick={this.addToCategories}>Add category</div>
+              
+              
+                {this.state.categories.length > 0 ? 
+                  <ul>
+                    {this.state.categories.map(categoryId => 
+                    <li>{this.findCateName(categoryId)}
+                    <button onClick={e => this.removeCategory(e, categoryId)}> x</button>
+                    </li>)} 
+                  </ul> : ""
+                }
+              
+
             </label>
           </div>
 
@@ -200,7 +232,7 @@ export default class RecipeCreateForm extends Component {
                 value={this.state.step}
                 onChange={this.update("step")}
               />
-              <button onClick={this.addToSteps}>Add step</button>
+              <div onClick={this.addToSteps}>Add step</div>
             </label>
           </div>
 
