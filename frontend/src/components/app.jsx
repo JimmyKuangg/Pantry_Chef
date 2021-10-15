@@ -18,8 +18,8 @@ const App = () => (
     <Sidemenu />
     <Switch>
       <Route exact path='/recipes/:recipeId' component={RecipeShowContainer} />
-      {/* <Route exact path='/pantries' component={PantryShowContainer} /> */}
-      <AuthRoute exact path="/" component={MainPage} />
+      <Route exact path='/pantries' component={PantryShowContainer} />
+      <Route exact path="/" component={MainPage} />
     </Switch>
   </div>
 );

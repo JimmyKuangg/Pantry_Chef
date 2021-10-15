@@ -4,7 +4,7 @@ import {
 
 const pantry = (oldState = {}, action) => {
   Object.freeze(oldState);
-  let newState = Object.assign({}, oldState);
+  // let newState = Object.assign({}, oldState);
 
   switch (action.type) {
     case RECEIVE_PANTRY:
