@@ -1,0 +1,14 @@
+.ingredients-select-box {
+  overflow: hidden;
+  overflow-y: auto;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+#testing:active {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#testing:after {
+  background: rgba(0, 0, 0, 0.5);
+}

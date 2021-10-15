@@ -10,7 +10,6 @@ export default class Search extends Component {
       ingredientSuggestions: [],
       selectedIngredients: []
     }
-    // this.updateSuggestions = this.updateSuggestions.bind(this)
     this.suggestionClickHandler = this.suggestionClickHandler.bind(this)
     this.removeSelectedClickHandler = this.removeSelectedClickHandler.bind(this)
   }
@@ -30,12 +29,6 @@ export default class Search extends Component {
     })
   }
 
-  // updateSuggestions(){
-  //   let suggestions = this.props.ingredients.filter(ingredient => 
-  //     !this.state.selectedIngredients.includes(ingredient) &&
-  //     ingredient.name.includes(this.state.search))
-  //   this.setState({ingredientSuggestions: suggestions})
-  // }
 
   suggestionClickHandler(e, value){
     e.preventDefault();
@@ -48,12 +41,6 @@ export default class Search extends Component {
     let newSelectedIngredients = this.state.selectedIngredients.filter(ingredient => ingredient.name !== value)
     this.setState({selectedIngredients: newSelectedIngredients})
   }
-
- // let firstFilter = Recipes.filter( recipe => 
- // recipe.ingredients.name.all(ingredient => selectedArray.includes(ingredient)))
-//  let secondFilter = firstFilter.filter( recipe => recipe.category === category)
- 
-
 
 
   render() {
@@ -74,27 +61,29 @@ export default class Search extends Component {
           </div>
           {
             this.state.ingredientSuggestions.length === 0 ? "" : 
-              <div className='ingredient-suggestions'>
-                <ul>
-                  {this.state.ingredientSuggestions.map((suggestion, i) => (
-                    this.state.selectedIngredients.includes(suggestion) ? 
-                    "" :
-                  <li key={i} className="suggestion-item" onClick={e => this.suggestionClickHandler(e, suggestion)}>{suggestion.name}</li>
-                  ))}
-                </ul>      
+              <div className='ingredient-suggestions-background'>
+                <div className='ingredient-suggestions'>
+                  <ul>
+                    {this.state.ingredientSuggestions.map((suggestion, i) => (
+                      this.state.selectedIngredients.includes(suggestion) ? 
+                      "" :
+                    <li key={i} className="suggestion-item" onClick={e => this.suggestionClickHandler(e, suggestion)}>{suggestion.name}</li>
+                    ))}
+                  </ul>      
+                </div>
               </div>
           }
           
           <div className="selected-ingredients-wrapper">
-            <p>Selected ingredients</p>
             <div className="selected-ingredients-box">
               <ul id='selected-ingredients'>
-                {this.state.selectedIngredients.map((ingredient,i) => <li key={i} className="selected-ingredient-item" onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}</li>)}
+                {this.state.selectedIngredients.map((ingredient,i) => 
+                <li key={i} className="selected-ingredient-item" onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}</li>)}
               </ul>
             </div>
           </div>
           <div>
-            {/* <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/> */}
+            <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
           </div>
         </div>
       </div>
