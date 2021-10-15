@@ -48,19 +48,17 @@ export default class Search extends Component {
   addIngredientsToPantry(e){
     e.preventDefault();
     let selectIngredients = this.state.selectedIngredients.map(ingredient => ingredient._id)
-    let hash = {};
-    let merged = [...selectIngredients, ...this.props.pantry.ingredients]
-    
+    let hash = {}
+    let pantryIngredients = this.props.pantry.ingredients.map(ingredient => ingredient.ingredient)
+    let merged = [...selectIngredients, ...pantryIngredients]
+
     merged.forEach(ingredient => {
       if (!hash[ingredient]) hash[ingredient] = 0;
       hash[ingredient] += 1
     })
 
     merged = Object.keys(hash)
-
-    let arrayOfObjects = []
-    merged.forEach(ele => arrayOfObjects.push({ingredient: ele}))
-
+    let arrayOfObjects = merged.map(ele => ({ingredient: ele}))
     let newPantry = {
       ingredients: arrayOfObjects
     }
