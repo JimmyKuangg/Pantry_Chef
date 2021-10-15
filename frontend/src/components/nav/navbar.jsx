@@ -93,11 +93,11 @@ class NavBar extends React.Component {
               </div>
             </div>
 
-            <div className="navbar-item">
+            {/* <div className="navbar-item">
               <div className="navbar-about">
                 {this.props.openRecipeEditModal}
               </div>
-            </div>
+            </div> */}
 
             <div className="navbar-item">
               <div className="navbar-github">
