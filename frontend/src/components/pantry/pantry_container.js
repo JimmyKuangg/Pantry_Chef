@@ -6,6 +6,7 @@ import Pantry from './pantry'
 const mSTP = (state, ownProps) => ({
   pantry: state.pantries,
   ingredients: state.ingredients,
+  recipes: state.recipes,
 });
 
 const mDTP = dispatch => ({

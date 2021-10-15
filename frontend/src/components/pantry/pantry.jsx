@@ -10,8 +10,7 @@ export default class Pantry extends Component {
       showSelect: false,
       notInPantry: [],
       selectedIngredient: '',
-      // selectedQuantity: '',
-      // selectedUnit: '',
+      usersRecipes: [],
     }
     this.removePantryItem = this.removePantryItem.bind(this);
     this.updatePantry = this.updatePantry.bind(this);
