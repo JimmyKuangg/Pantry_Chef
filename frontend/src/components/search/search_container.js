@@ -8,7 +8,7 @@ const mSTP = state => ({
     ingredients: Object.values(state.ingredients),
     recipes: state.recipes,
     pantry: state.pantries,
-    currentUser: state.session.user
+    currentUser: state.session.user.id
 });
 
 const mDTP = dispatch => ({
