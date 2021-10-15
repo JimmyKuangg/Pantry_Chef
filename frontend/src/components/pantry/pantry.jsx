@@ -122,6 +122,19 @@ export default class Pantry extends Component {
         : ''}
         <button onClick={() => this.addToPantry()}>Add items to your pantry</button>
         <button onClick={() => this.updatePantry()}>Save your pantry</button>
+        
+        <h1>My Recipes</h1>
+        <ul>
+          {this.state.usersRecipes ? this.state.usersRecipes.map((recipe, i) => (
+            <li key={i}>
+              {recipe.name}
+              <button className="open-modal signup-button" onClick={() => this.props.openModal('editRecipe', recipe)}>
+                Edit Recipe
+              </button>
+            </li>
+          ))
+          : ''}
+        </ul>
       </div>
     )
   }

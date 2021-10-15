@@ -6,14 +6,15 @@ export default class RecipeEditForm extends Component {
     super(props);
 
     this.state = {
-      name: "",
-      ingredients: [],
-      cookTime: "",
-      calories: "",
-      categories: [],
-      author: this.props.currentUser.id,
-      steps: [],
-      imgUrl: "FOOD",
+      // name: "",
+      // ingredients: [],
+      // cookTime: "",
+      // calories: "",
+      // categories: [],
+      // author: this.props.currentUser.id,
+      // steps: [],
+      // imgUrl: "FOOD",
+      ...this.props.recipe, 
 
       ingredient: "",
       quantity: "",
@@ -23,6 +24,8 @@ export default class RecipeEditForm extends Component {
 
       step: ""
     }
+
+    console.log(this.props.recipe);
     
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
