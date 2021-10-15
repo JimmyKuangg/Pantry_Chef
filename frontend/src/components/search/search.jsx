@@ -16,9 +16,11 @@ export default class Search extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchAllIngredients()
-    this.props.fetchPantry();
-  }  
+    this.props.fetchAllIngredients().then( () => this.props.fetchPantry()).then(()=>  
+      this.setState({selectedIngredients: this.props.pantry.ingredients.map(ingredient => ({_id: ingredient.ingredient, name: ingredient.name}))})
+    )
+
+  }
 
   update(e){
       let search = e.target.value;
@@ -34,6 +36,7 @@ export default class Search extends Component {
 
   suggestionClickHandler(e, value){
     e.preventDefault();
+    console.log(this.state.selectedIngredients)
     this.setState({selectedIngredients: [...this.state.selectedIngredients, value]})
     let filtered = this.state.ingredientSuggestions.filter(ingredient => ingredient.name !== value.name)
 
@@ -48,19 +51,17 @@ export default class Search extends Component {
   addIngredientsToPantry(e){
     e.preventDefault();
     let selectIngredients = this.state.selectedIngredients.map(ingredient => ingredient._id)
-    let hash = {};
-    let merged = [...selectIngredients, ...this.props.pantry.data.ingredients]
-    
+    let hash = {}
+    let pantryIngredients = this.props.pantry.ingredients.map(ingredient => ingredient.ingredient)
+    let merged = [...selectIngredients, ...pantryIngredients]
+
     merged.forEach(ingredient => {
       if (!hash[ingredient]) hash[ingredient] = 0;
       hash[ingredient] += 1
     })
 
     merged = Object.keys(hash)
-
-    let arrayOfObjects = []
-    merged.forEach(ele => arrayOfObjects.push({ingredient: ele}))
-
+    let arrayOfObjects = merged.map(ele => ({ingredient: ele}))
     let newPantry = {
       ingredients: arrayOfObjects
     }
@@ -68,6 +69,7 @@ export default class Search extends Component {
   }
 
   render() {
+    console.log(this.state.selectedIngredients)
     return (
       <div>
         <div className="search-wrapper">
@@ -105,7 +107,7 @@ export default class Search extends Component {
               </ul>
             </div>
           </div>
-            {this.state.selectedIngredients.length > 0 ? <button id='save-to-pantry'onClick={this.addIngredientsToPantry}>Add Ingredients to Pantry</button> : ""}
+            {this.props.currentUser && this.state.selectedIngredients.length > 0 ? <button id='save-to-pantry' onClick={this.addIngredientsToPantry}>Add Ingredients to Pantry</button> : ""}
           <div>
             <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
           </div>

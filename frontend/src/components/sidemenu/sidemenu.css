@@ -1,0 +1,12 @@
+.sidemenu {
+  width: 20%;
+  position: absolute;
+  right: 0;
+  top: 8%;
+}
+
+.close-sidemenu {
+  position: absolute;
+  top: 20;
+  right: 0;
+}

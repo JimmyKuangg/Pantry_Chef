@@ -7,7 +7,8 @@ import { editPantry, fetchPantry } from '../../actions/pantry_actions';
 const mSTP = state => ({
     ingredients: Object.values(state.ingredients),
     recipes: state.recipes,
-    pantry: state.pantries
+    pantry: state.pantries,
+    currentUser: state.session.user.id
 });
 
 const mDTP = dispatch => ({

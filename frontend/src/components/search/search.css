@@ -9,7 +9,6 @@
 
 .search-input-wrapper {
   display: flex;
-  margin-top: 30px;
 }
 
 .search-bar {
@@ -81,6 +80,7 @@
   height: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 13px;
+  color: #3F48CC;
 }
 
 .selected-ingredients-wrapper {
@@ -92,6 +92,7 @@
   overflow: hidden;
   overflow-y: auto;
   justify-content: center;
+  color: #3F48CC;
 }
 
 .selected-ingredient-box {
@@ -124,6 +125,7 @@
 
 
 #save-to-pantry {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #3F48CC;
   color: white;
   border-radius: 5px;

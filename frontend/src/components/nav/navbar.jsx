@@ -19,43 +19,48 @@ class NavBar extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div className="navbar-right">
-
           <div className="navbar-item">
             <div className="navbar-pantry">
-              <Link to="/pantries">My Pantry</Link>
+              <Link to="/pantries">MY PANTRY</Link>
             </div>
           </div>
+
+
+            <div className="navbar-item">
+              <button onClick={this.logoutUser}>LOGOUT</button>
+            </div>
 
           <div className="navbar-item">
-            <div className="navbar-logout">
-              <button onClick={this.logoutUser}>Logout</button>
+            <div className="navbar-github">
+              <a href="https://github.com/JimmyKuangg/Pantry_Chef">
+                <i className="fab fa-github" id="nav-github-logo" />
+              </a>
             </div>
           </div>
-
         </div>
       );
     } else {
       return (
         <div className="navbar-right">
-
           <div className="navbar-item">
-            <div className="navbar-pantry">
-              {this.props.openNavSignupModal}
-            </div>
+            <div className="navbar-pantry">{this.props.openNavSignupModal}</div>
           </div>
 
           <div className="navbar-item">
-            <div className="navbar-login">
-              {this.props.openLoginModal}
-            </div>
+            <div className="navbar-login">{this.props.openLoginModal}</div>
           </div>
 
           <div className="navbar-item">
-            <div className="navbar-signup">
-              {this.props.openSignupModal}
-            </div>
+            <div className="navbar-signup">{this.props.openSignupModal}</div>
           </div>
 
+          <div className="navbar-item">
+            <div className="navbar-github">
+              <a href="https://github.com/JimmyKuangg/Pantry_Chef">
+                <i className="fab fa-github" id="nav-github-logo" />
+              </a>
+            </div>
+          </div>
         </div>
       );
     }
@@ -77,39 +82,21 @@ class NavBar extends React.Component {
 
             <div className="navbar-item">
               <div className="navbar-about">
-                <Link to='/recipes'>All Recipes</Link>
+                <Link to='/recipes'>ALL RECIPES</Link>
               </div>
             </div>
 
             <div className="navbar-item">
               <div className="navbar-about">
-                <Link to='/meet-the-team'>Meet the Team</Link>
+                <Link to='/meet-the-team'>MEET THE TEAM</Link>
               </div>
             </div>
 
-            <div className="navbar-item">
-              <div className="navbar-about">
-                {this.props.openRecipeCreateModal}
-              </div>
-            </div>
-
-            <div className="navbar-item">
-              <div className="navbar-about">
-                {this.props.openRecipeEditModal}
-              </div>
-            </div>
-
-            <div className="navbar-item">
-              <div className="navbar-github">
-                <a href="https://github.com/JimmyKuangg/Pantry_Chef">
-                  <i className="fab fa-github" id="nav-github-logo" />
-                </a>
-              </div>
-            </div>
 
           </div>
 
           {this.getLinks()}
+
 
         </div>
       </div>

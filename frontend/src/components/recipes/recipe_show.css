@@ -146,6 +146,7 @@
     font-weight: 500;
     font-size: 30px;
     margin: 30px;
+    color: rgba(0, 0, 0, 0.795);
     border-top: 2px rgba(63, 72, 204, 0.5) solid;
     padding-top: 10px;
     /* border-bottom: 1px solid black */

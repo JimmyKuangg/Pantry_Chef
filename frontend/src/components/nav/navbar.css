@@ -1,11 +1,11 @@
 .navbar-container {
-  background-color: rgba(255, 255, 255, 0.5);
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  background-color: #3f48cce0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   width: 100vw;
   top: 0;
   left: 0;
   z-index: 999;
-  
 }
 
 .navbar-content {
@@ -20,6 +20,7 @@
 .navbar-right {
   display: flex;
   min-width: 320px;
+  align-items: center;
 }
 
 .navbar-left {
@@ -27,18 +28,19 @@
   align-items: center;
 }
 
+
 .pc-logo {
   width: 35px;
   height: 35px;
   padding: 3px;
   border-radius: 50%;
-  background-color: rgba(255, 252, 62, 0.349);
+  background-color: rgb(255, 255, 255);
   border: 2px solid #3f48cc8f;
 }
 
 a {
   text-decoration: none;
-  color: #3F48CC;
+  color: white;
 }
 
 .navbar-item {
@@ -48,11 +50,18 @@ a {
   min-width: 80px;
   margin: 4px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+.navbar-left > .navbar-item {
+  margin-left: 18px;
 }
 
 .navbar-about {
   display: flex;
   align-items: center;
+  color: white;
+  font-size: 14px;
 }
 
 .navbar-github {
@@ -62,42 +71,28 @@ a {
 
 #nav-github-logo {
   font-size: 35px;
-  color: #3F48CC;
+  color: white;
 }
 
-.navbar-login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 80px;
-}
-
-.navbar-signup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 80px;
-}
-
-.login-button {
-  background-color: #3F48CC;
+.navbar-button {
+  background-color: transparent;
   border: none;
   color: white;
   border-radius: 5px;
   padding: 9px 21px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
+  border: 1px white solid;
 }
 
-.signup-button {
-  margin-left: 3px;
+.navbar-pantry {
   background-color: transparent;
-  border: 1px solid #3F48CC;
-  color: #3F48CC;
+  border: none;
+  color: white;
   border-radius: 5px;
-  padding: 8px 20px;
+  padding: 9px 21px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
 }
