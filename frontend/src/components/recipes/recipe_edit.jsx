@@ -4,7 +4,7 @@ import "./recipe_create.css";
 export default class RecipeEditForm extends Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props.recipe)
     this.state = {
       // name: "",
       // ingredients: [],
@@ -25,7 +25,7 @@ export default class RecipeEditForm extends Component {
       step: ""
     }
 
-    console.log(this.props.recipe);
+    // console.log(this.props.recipe);
     
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
@@ -149,7 +149,7 @@ export default class RecipeEditForm extends Component {
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
-    console.log(this.state.ingredients);
+    // console.log(this.state.ingredients);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

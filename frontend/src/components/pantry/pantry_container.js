@@ -17,7 +17,7 @@ const mDTP = dispatch => ({
   editPantry: pantry => dispatch(editPantry(pantry)),
   fetchAllIngredients: () => dispatch(fetchAllIngredients()),
   fetchRecipes: () => dispatch(fetchRecipes()),
-  openModal: modal => dispatch(openModal(modal))
+  openModal: (modal,props) => dispatch(openModal(modal,props))
 });
 
 export default connect(mSTP, mDTP)(Pantry);

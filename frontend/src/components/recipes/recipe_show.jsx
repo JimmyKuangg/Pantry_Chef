@@ -12,7 +12,6 @@ class RecipeShow extends Component {
     if (recipe === undefined) {
       return null;
     }
-    console.log('recipe', recipe);
     return (
       <div className="show-wrapper">
         <div className="show-header">

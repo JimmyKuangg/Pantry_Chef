@@ -146,7 +146,6 @@ export default class RecipeCreateForm extends Component {
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
-    console.log(this.state.ingredients);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

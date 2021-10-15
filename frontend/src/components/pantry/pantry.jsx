@@ -50,12 +50,11 @@ export default class Pantry extends Component {
   }
 
   filterUsersRecipes() {
-    console.log(this.props.currentUser)
     this.setState({usersRecipes: this.props.recipes.filter(recipe => (
       recipe.author === this.props.currentUser
     ))})
-    console.log(this.props.recipes.filter(recipe => (
-      recipe.author === this.props.currentUser)))
+    // console.log(this.props.recipes.filter(recipe => (
+    //   recipe.author === this.props.currentUser)))
   }
 
   findName(ingredientId) {
