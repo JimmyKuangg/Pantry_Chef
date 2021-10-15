@@ -24,6 +24,7 @@ export default class Pantry extends Component {
   componentDidMount(){
     this.props.fetchPantry();
     this.props.fetchAllIngredients();
+    this.props.fetchRecipes();
   }
   
   componentDidUpdate(prevProps) {
