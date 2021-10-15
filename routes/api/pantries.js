@@ -25,6 +25,7 @@ router.get('/',
                 user: pantry.user.username,
                 ingredients: pantry.ingredients.map(ele => ({
                   ingredient: ele.ingredient.id,
+                  name: ele.ingredient.name,
                   quantity: ele.quantity,
                   unit: ele.unit
                 }))

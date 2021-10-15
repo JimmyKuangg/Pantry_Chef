@@ -10,6 +10,7 @@ const mSTP = (state, ownProps) => ({
   ingredients: state.ingredients,
   recipes: state.recipes,
   currentUser: state.session.user.username
+
 });
 
 const mDTP = dispatch => ({

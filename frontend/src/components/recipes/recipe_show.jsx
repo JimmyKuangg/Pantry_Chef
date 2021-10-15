@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import "./recipe_show.css"
 
 class RecipeShow extends Component {
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.recipeId !== this.props.match.params.recipeId) {
+      this.props.fetchRecipe(this.props.match.params.recipeId)
+    }
+  }
+
   componentDidMount() {
     this.props.fetchRecipe(this.props.match.params.recipeId);
   }
@@ -9,9 +16,10 @@ class RecipeShow extends Component {
   render() {
     const { recipe } = this.props;
 
-    if (recipe === undefined) {
+    if ((recipe === undefined) || (recipe.steps === undefined)) {
       return null;
     }
+
     return (
       <div className="show-wrapper">
         <div className="show-header">
@@ -51,7 +59,7 @@ class RecipeShow extends Component {
         <div className="show-content">
           <div className="show-ingredients">
             <h1 className="directions-header">Ingredients</h1>
-            <ul>
+            <ul className='ul'>
               {recipe.ingredients.map((ingredient, i) => (
                 <li key={i} className="show-ingredient">
                   {ingredient.quantity} {ingredient.ingredient}
@@ -62,9 +70,7 @@ class RecipeShow extends Component {
           <div className="show-directions">
             <h1 className="directions-header">Directions</h1>
             <ol>
-              {recipe.steps[0]
-                .split(".")
-                .slice(0, -1)
+              {recipe.steps
                 .map((step, i) => (
                   <li key={i} className="show-direction">
                     <input type="checkbox"/>

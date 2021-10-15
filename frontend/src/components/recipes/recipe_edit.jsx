@@ -174,7 +174,7 @@ export default class RecipeEditForm extends Component {
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
-    
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

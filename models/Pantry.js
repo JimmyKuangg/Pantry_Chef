@@ -11,9 +11,7 @@ const PantrySchema = new Schema({
         ingredient:{
             type: Schema.Types.ObjectId,
             ref: 'Ingredient'
-        },
-        quantity: String,
-        unit: String,
+        }
     }],
     date: {
       type: Date,

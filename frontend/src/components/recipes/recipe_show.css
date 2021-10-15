@@ -6,9 +6,6 @@
     margin-top: 40px;
 }
 
-body {
-    background-color:rgba(103, 204, 63, 0.068)
-}
 
 .show-header {
     display: flex;
@@ -21,7 +18,6 @@ body {
     max-height:400px; */
     min-width: 400px;
     min-height: 400px;
-    border-radius: 2px;
 }
 
 #recipe-photo {
@@ -30,14 +26,16 @@ body {
     object-fit: cover;
     width: 400px;
     height: 400px;
+    border-radius: 4px;
 }
 
 .recipe-info {
     display: flex;
     flex-direction: column;
+    width: 400px;
+    height: 400px;
     justify-content: center;
-    min-width: 400px;
-    min-height: 400px;
+    align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -55,7 +53,7 @@ body {
 }
 
 .recipe-show-stats > div {
-    margin: 10px;
+    margin: 20px;
     display: flex;
     justify-content: flex-end;
 }
@@ -63,8 +61,8 @@ body {
 .recipe-show-stats-2 {
     border-left:rgba(63, 72, 204, 0.5) 1px solid;
     padding-left: 20px;
+    justify-content: space-between;
 }
-
 
 .recipe-name {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -72,11 +70,20 @@ body {
     color: #3F48CC;
     font-size: 50px;
     display: flex;
-    justify-content: center;
     margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    max-width: 300px;
+    align-items: center;
 }
 
+.recipe-category {
+    display: flex;
+    flex-direction: column;
 
+    margin-bottom: 15px;
+}
 
 .show-content {
     display: flex;
@@ -102,7 +109,15 @@ body {
     list-style-type: circle;
     padding: 5px;
     margin-bottom: 10px;
+    list-style: none;
 }
+
+.show-ingredient::before {
+  content: "•"; 
+  padding-right: 8px;
+  color: rgb(63, 72, 204);
+}
+
 .show-directions {
     min-width: 400px;
     min-height: 400px;
@@ -125,12 +140,25 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
+
 .directions-header {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
     font-size: 30px;
     margin: 30px;
-    border-top: 1px rgba(63, 72, 204, 0.5) solid;
+    color: rgba(0, 0, 0, 0.795);
+    border-top: 2px rgba(63, 72, 204, 0.5) solid;
     padding-top: 10px;
     /* border-bottom: 1px solid black */
+}
+
+
+
+.recipe-favorite-button > button {
+    color:white;
+    background-color:rgba(63, 72, 204);
+    border-radius: 4px;
+    padding: 3px;
+    width: 80px;
+    margin-top: 5px;
 }
