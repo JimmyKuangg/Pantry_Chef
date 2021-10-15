@@ -105,7 +105,7 @@ export default class Search extends Component {
               </ul>
             </div>
           </div>
-            {this.state.selectedIngredients.length > 0 ? <button onClick={this.addIngredientsToPantry}>Add Ingredients to Pantry</button> : ""}
+            {this.state.selectedIngredients.length > 0 ? <button id='save-to-pantry'onClick={this.addIngredientsToPantry}>Add Ingredients to Pantry</button> : ""}
           <div>
             <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
           </div>

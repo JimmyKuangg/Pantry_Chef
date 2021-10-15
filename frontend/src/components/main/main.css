@@ -1,11 +1,11 @@
-body {
-  background: rgba(226, 253, 209, 0.288);
-}
 
 .home-logo {
-  width: 230px;
-  height: 130px;
-  margin-top: 30px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: rgba(255, 252, 101, 0.404);
+  border: 2px solid #3f48ccbe;
+  padding: 20px;
 }
 
 .main-head {
@@ -15,13 +15,27 @@ body {
   text-align: center;
 }
 
+.logo-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  align-items: center;
+}
+
+#title-text {
+  font-size: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, cursive;
+  padding: 10px;
+}
 
 .main-instructions {
   padding-top: 50px;
-  width: 400px;
+  width: 500px;
   display: flex;
   flex-wrap: wrap;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5em;
+  font-weight: 300;
+  font-size: 19px;
 }

@@ -99,14 +99,19 @@ export default class RecipeIndex extends Component {
 
   render() {
     if (this.props.ingredients && [...this.state.exactRecipes, ...this.state.closeRecipes].length === 0){
-      return <h2>
-        Add some more ingredients to see what you can make!
-      </h2>
+      return <div>
+        <div className='add-more-2'>
+          ^
+        </div>
+        <div className='add-more'>
+          Add more ingredients to find recipes!
+        </div>
+      </div>
     }
     return (
         <div className="index-main">
           <div className='category-wrapper'>
-            <h1>Categories</h1>
+            <p id='index-title'>Categories</p>
             <div className='category-list'>
               <li key='clear' id='category-item' onClick={this.clearFilterClickHandler}>Clear all Category Filters</li>
               {this.possibleCategories().map((category, i) => 
@@ -118,7 +123,7 @@ export default class RecipeIndex extends Component {
             </div>
           </div>
           <div className="index-recipes">
-            <h3>Recipes</h3>
+            <p id='index-title'>Recipes</p>
             <ul id='index-recipe-items'> 
 
               { !this.props.ingredients ? 

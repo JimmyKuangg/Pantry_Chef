@@ -1,4 +1,21 @@
+.add-more {
+  /* margin-top: 20px; */
+  font-size: 25px;
+  font-weight: 300;
+}
 
+.add-more-2 {
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+#index-title {
+  margin-top: 20px;
+  font-weight: 600;
+  border-top: 1px solid #3F48CC;
+  padding-top: 10px; 
+}
 
 #index-recipe-items {
     display: flex;

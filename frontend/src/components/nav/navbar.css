@@ -31,8 +31,9 @@
   width: 35px;
   height: 35px;
   padding: 3px;
-  border: 2px solid #3F48CC;
   border-radius: 50%;
+  background-color: rgba(255, 252, 62, 0.349);
+  border: 2px solid #3f48cc8f;
 }
 
 a {
