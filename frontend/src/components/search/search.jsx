@@ -49,7 +49,7 @@ export default class Search extends Component {
     e.preventDefault();
     let selectIngredients = this.state.selectedIngredients.map(ingredient => ingredient._id)
     let hash = {};
-    let merged = [...selectIngredients, ...this.props.pantry.data.ingredients]
+    let merged = [...selectIngredients, ...this.props.pantry.ingredients]
     
     merged.forEach(ingredient => {
       if (!hash[ingredient]) hash[ingredient] = 0;
