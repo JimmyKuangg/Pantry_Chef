@@ -25,10 +25,11 @@ class NavBar extends React.Component {
             </div>
           </div>
 
-
-            <div className="navbar-item">
-              <button onClick={this.logoutUser}>LOGOUT</button>
-            </div>
+          <div>
+            <button className="navbar-button" onClick={this.logoutUser}>
+              LOGOUT
+            </button>
+          </div>
 
           <div className="navbar-item">
             <div className="navbar-github">

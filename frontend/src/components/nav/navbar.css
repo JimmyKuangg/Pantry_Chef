@@ -76,6 +76,7 @@ a {
 
 .navbar-button {
   background-color: transparent;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border: none;
   color: white;
   border-radius: 5px;
