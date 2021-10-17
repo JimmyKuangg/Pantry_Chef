@@ -68,3 +68,8 @@ addToIngredients() {
 ```
 
 This helper method in our recipe create component allowed us to translate the data back into a shape that our backend accepted after through its validations.
+
+# Future ToDo's
+
++ Implemenet a Favorite system
++ Add a way for users to leave reviews
