@@ -152,7 +152,7 @@ export default class RecipeCreateForm extends Component {
       return null;
     }
     return (
-      <div id='create-recipe-form'>
+      <div className='recipe-form'>
         <h2 className='recipe-form-title'>Create Recipe</h2>
         <form id='recipe-create' onSubmit={this.handleSubmit}>
 

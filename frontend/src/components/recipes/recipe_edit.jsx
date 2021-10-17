@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "./recipe_create.css";
+import "./recipe_edit.css";
 
 export default class RecipeEditForm extends Component {
   constructor(props) {
@@ -56,15 +56,17 @@ export default class RecipeEditForm extends Component {
 
   quantityInput() {
     return (
-      <div>Quantity 
-        <input type="text" value={this.state.quantity} onChange={this.update("quantity")} />
+      <div>
+        <h2>Quantity</h2>
+        <input type="number" value={this.state.quantity} onChange={this.update("quantity")} />
       </div>
     )
   }
 
   unitInput() {
     return (
-      <div>Unit 
+      <div>
+        <h2>Unit</h2>
         <input type="text" placeholder="Ex: grams" value={this.state.unit} onChange={this.update("unit")} />
       </div>
     )
@@ -176,109 +178,120 @@ export default class RecipeEditForm extends Component {
     }
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className='recipe-edit'>
+        <form id='recipe-edit-form' onSubmit={this.handleSubmit}>
+        
+          <div id="recipe-edit-wrapper">
+            <div id='first-col'>
+              <header>
+                <h2 className='recipe-form-title'>Edit Recipe</h2>
+              </header>
 
-          <header>
-            <h2>Create Recipe</h2>
-          </header>
+              <div id='recipe-form-info'>
+                <label>Name of recipe
+                  <input 
+                    type="text" 
+                    placeholder="Ex: Scrambled eggs"
+                    value={this.state.name}
+                    onChange={this.update("name")}
+                  />
+                </label>
 
-          <div>
-            <label>Name of recipe
-              <input 
-                type="text" 
-                placeholder="Ex: Scrambled eggs"
-                value={this.state.name}
-                onChange={this.update("name")}
-              />
-            </label>
-          </div>
+                <label>Time to cook
+                  <input 
+                    type="text"
+                    placeholder="Ex: 10 minutes"
+                    value={this.state.cookTime}
+                    onChange={this.update("cookTime")}
+                  />
+                </label>
 
-          <div>
-            <label>Ingredients
-              <div>
-                {this.ingredientSelect()}
-                {this.quantityInput()}
-                {this.unitInput()}
-                <div onClick={this.addToIngredients}>Add ingredient</div>
-                
-                <ul>
-                  {this.state.ingredients.map(ingredient => 
-                  <li key={ingredient.ingredient}>
-                    {ingredient.ingredient}
-                    <button onClick={e => this.removeIngredient(e, ingredient.ingredient)}> x</button>
-                  </li>)}
-                </ul>
-                
+                <label>Calories
+                  <input 
+                    type="text" 
+                    value={this.state.calories}
+                    onChange={this.update("calories")}
+                  />
+                </label>
               </div>
-            </label>
+
+              <div id="first-col-bottom">
+                <label id="category-select">
+                  <div id="recipe-edit-categories">
+                    <h2>Selected Categories</h2>
+
+                    {this.state.categories.length >= 0 ? 
+                      <ul>
+                        {this.state.categories.map((category, i) => 
+                        <li key={i} id='category-list-item'>{category}
+                          <div onClick={e => this.removeCategory(e, category)}>
+                            <i className="fas fa-trash-alt"/>
+                          </div>
+                        </li>)} 
+                      </ul> : ""
+                    }
+                  </div>
+
+                  <div id='category-select-wrapper'>
+                    <select className="ingredients-select-box" onChange={this.update("category")}>
+                      <option defaultValue>Select a category</option>
+                      {this.props.categories.map(category =>
+                        <option key={category._id} value={category._id} >{category.name}</option>)}
+                    </select>
+                    <div className='purple-button' onClick={this.addToCategories}>Add category</div>
+                  </div>
+                </label>
+              </div>
+
           </div>
 
-          <div>
-            <label>Time to cook
-              <input 
-                type="text"
-                placeholder="Ex: 10 minutes"
-                value={this.state.cookTime}
-                onChange={this.update("cookTime")}
-              />
-            </label>
-          </div>
+          <div id='second-col'>
+              <label className="recipe-edit-ingredients">
 
-          <div>
-            <label>Calories
-              <input 
-                type="text" 
-                value={this.state.calories}
-                onChange={this.update("calories")}
-              />
-            </label>
-          </div>
+                <div id='recipe-edit-inputs'>
+                  {this.ingredientSelect()}
+                  {this.quantityInput()}
+                  {this.unitInput()}
+                  <div className='purple-button' onClick={this.addToIngredients}>Add ingredient</div>
+                </div>
+                  
+                <div className='ingredients-list-wrapper'>
+                  <ul id='ingredients-list'>
+                    <h2>Current Ingredients</h2>
+                    {this.state.ingredients.map((ingredient, i) => 
+                    <li key={i} id='selected-ingredient' key={ingredient.ingredient}>
+                      {ingredient.ingredient}
+                      <button onClick={e => this.removeIngredient(e, ingredient.ingredient)}> x</button>
+                    </li>)}
+                  </ul>
+                </div>
 
-          <div>
-            <label>Categories
-              <select className="ingredients-select-box" onChange={this.update("category")}>
-                <option defaultValue>Select a category</option>
-                {this.props.categories.map(category =>
-                  <option key={category._id} value={category._id} >{category.name}</option>)}
-              </select>
-              <div onClick={this.addToCategories}>Add category</div>
-              
-              
-                {this.state.categories.length > 0 ? 
-                  <ul>
-                    {this.state.categories.map(category => 
-                    <li>{category}
-                      <button onClick={e => this.removeCategory(e, category)}> x</button>
-                    </li>)} 
-                  </ul> : ""
-                }
-              
+              </label>
 
-            </label>
-          </div>
-
-          <div>
-            <label>Steps
-              <input 
-                type="text" 
-                value={this.state.step}
-                onChange={this.update("step")}
-              />
-              <div onClick={this.addToSteps}>Add step</div>
-            </label>
-            <div>
+            <div id="recipe-edit-steps">
+              <label>
+                <textarea
+                  id="steps-text-area"
+                  value={this.state.step}
+                  onChange={this.update("step")}
+                />
+                <div className='purple-button' onClick={this.addToSteps}>Add step</div>
+              </label>
+              <div>
               
                 {this.state.steps.length > 0 ?
-                  <ol>
-                    {this.state.steps.map(step => <li>{step}<p onClick={e => this.removeStep(e, step)}> x</p></li>)}
+                  <ol id="steps-list">
+                    {this.state.steps.map(step => <li id="step-list-item">{step}<p onClick={e => this.removeStep(e, step)}> <i className="fas fa-trash-alt"/></p></li>)}
                   </ol> : ""
                 }
               
+              </div>
             </div>
           </div>
-
-        <input type="submit" onClick={this.backToId} onSubmit={this.handleSubmit} value="Edit Recipe" />
+        </div>
+             
+        <input className='purple-button' id="edit-recipe-button" type="submit" onClick={this.backToId} onSubmit={this.handleSubmit} value="Edit Recipe" />
+        <button className='close-modal' onClick={this.props.closeModal}>X</button>
         </form>
       </div>
     )
