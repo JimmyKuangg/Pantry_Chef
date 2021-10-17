@@ -36,7 +36,7 @@
 }
 
 #recipe-actions{
-    min-width: 100px;
+    min-width: 70px;
 }
 
 .purple-button{
@@ -81,9 +81,6 @@
     justify-content: flex-start;
 }
 
-.side-menu-name{
-    min-width: 200px;
-}
 
 #edit-recipe{
     color: #3F48CC;
