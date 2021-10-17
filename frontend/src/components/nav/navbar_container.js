@@ -37,8 +37,6 @@ const mapDispatchToProps = dispatch => ({
       EDIT RECIPE
     </button>
   ),
-  openSidemenu: () => dispatch(openSidemenu()),
-  closeSidemenu: () => dispatch(closeSidemenu()),
   logout: () => dispatch(logout())
 })
 

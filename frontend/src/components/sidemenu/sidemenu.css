@@ -1,12 +1,22 @@
 .sidemenu {
   width: 20%;
-  position: absolute;
+  position: fixed;
+  height: 100vh;
   right: 0;
-  top: 8%;
+  top: 60px;
 }
 
 .close-sidemenu {
   position: absolute;
-  top: 20;
-  right: 0;
+  top: 40px;
+  right: 10px;
+  cursor: pointer;
 }
+
+/* .sidemenu{
+  height: 100vh;
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
+  overflow: hidden;
+} */

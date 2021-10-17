@@ -4,12 +4,13 @@ import logo from './logo.png';
 import "./main.css";
 import "../../index.css"
 import navlogo from "../nav/navlogo.png";
+import Sidemenu from "../sidemenu/sidemenu";
 
 
 class MainPage extends React.Component {
   render() {
     return (
-      <div>
+      <div id='content-body'>
         <div className="main-content">
           
           
@@ -32,6 +33,7 @@ class MainPage extends React.Component {
           </div>
 
         </div>
+        {/* <Sidemenu/> */}
       </div>
     );
   }
