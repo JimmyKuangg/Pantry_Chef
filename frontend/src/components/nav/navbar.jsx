@@ -21,7 +21,9 @@ class NavBar extends React.Component {
         <div className="navbar-right">
           <div className="navbar-item">
             <div className="navbar-pantry">
-              <button onClick={()=>this.props.openSidemenu()}>MY PANTRY</button>
+              <button className="navbar-button" onClick={!this.props.sideMenuOpen ? () => this.props.openSidemenu() : () => this.props.closeSidemenu()}>
+                MY PANTRY
+              </button>
             </div>
           </div>
 

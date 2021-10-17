@@ -120,6 +120,7 @@
   height: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 13px;
+  box-shadow: 1px 1px rgba(0, 0, 0, 0.605);
 }
 
 

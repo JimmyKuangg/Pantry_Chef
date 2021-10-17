@@ -121,3 +121,7 @@
     background-color: rgba(245, 245, 245, 0.719);
     margin: 3px;
   }
+
+#exact-match p {
+  padding-bottom: 8px;
+}
