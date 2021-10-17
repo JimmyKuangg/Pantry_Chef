@@ -12,3 +12,188 @@
 #testing:after {
   background: rgba(0, 0, 0, 0.5);
 }
+
+#create-recipe-form{
+  width: 100;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.recipe-form-title{
+  font-size: 50px;
+  color: #3F48CC;
+}
+
+#recipe-create{
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
+  /* flex-wrap: wrap; */
+  /* justify-content: space-between; */
+}
+
+#recipe-create h3{
+  font-size: 30px;
+  /* margin-bottom: 20px; */
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+#first-row, #second-row{
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+}
+
+#recipe-small-inputs{
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* margin-left: 5px; */
+  width: 45%;
+  height: 250px;
+  /* border-right: 2px solid #3F48CC; */
+  /* border-bottom: 2px solid #3F48CC; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+
+}
+
+#ingredient-input{
+  /* margin-left: 5px; */
+  width: 45%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#ingredient-inputs{
+  /* margin-left: 20px; */
+  width: 50%;
+}
+
+#ingredient-inputs h3{
+  margin-right: 5px;
+}
+
+#ingredient-section{
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  /* align-items: center; */
+  /* width: 100%; */
+}
+
+#selected-ingredient, #category-list-item, #step-list-item{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #3F48CC;
+  border-radius: 25px;
+  margin: 5px;
+}
+
+.space-between{
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding-top: 5px; */
+  /* padding-bottom: 5px; */
+  /* padding-left: 50px; */
+  /* padding-right: 50px; */
+}
+
+#ingredients-list{
+  width: 100%;
+  height: 200px;
+  overflow: scroll;
+}
+
+#create-recipe-form textarea{
+  align-self: center;
+  width: 99%;
+  height: 50px;
+  resize: none;
+}
+
+#create-recipe-form select{
+  align-self: center;
+  /* width: 99%; */
+  height: 56.48px;
+  resize: none;
+}
+
+
+
+.small-space-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  /* padding-left: 20px; */
+  /* padding-right: 20px; */
+}
+
+
+
+.ingredients-select-box{
+  width: 100%;
+}
+
+.ingredients-list-wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding-left: 20px;
+}
+
+#categories-input{
+  width: 45%;
+  height: 250px;
+  display: flex;
+  /* padding: 20px; */
+}
+
+#categories-inputs{
+  width: 50%;
+}
+
+#selected-categories{
+  width: 50%;
+  padding-right: 20px;
+}
+
+#selected-categories-list{
+  overflow: scroll;
+  height: 200px;
+}
+
+#steps-content{
+  width: 45%;
+  display: flex;
+}
+
+#steps-input{
+  width: 50%;
+}
+
+#current-steps{
+  width: 50%;
+  padding-left: 20px;
+  overflow: scroll;
+}
+
+#create-recipe-button{
+  width: 25%;
+  align-self: center;
+}
+
+#steps-list{
+  height: 200px;
+  overflow: scroll;
+}
