@@ -23,7 +23,7 @@ class MainPage extends React.Component {
             </div>
             <div className='tooltip-wrapper'>
               <div className='main-tooltip'>
-                <div classaName='tooltip-mark'>?</div>              
+                <div className='tooltip-mark'>?</div>              
                 <div className='main-instructions'>
                   Search for all ingredients in your pantry to find recipes you can make. Save these ingredients in 'My Pantry' (upper right) to quickly search next time.
                 </div>
