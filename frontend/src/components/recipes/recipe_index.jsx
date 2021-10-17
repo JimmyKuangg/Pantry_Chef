@@ -109,6 +109,7 @@ export default class RecipeIndex extends Component {
     }
     return (
         <div className="index-main">
+          {! this.props.ingredients ? <h1 id='all-recipes-title' style={{"marginTop": "100px"}}>All Recipes</h1>: ""}
           <div className='category-wrapper'>
             <p id='index-title'>CATEGORIES</p>
             <div className='category-list'>
