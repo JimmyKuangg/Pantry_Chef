@@ -17,7 +17,10 @@ export default class RecipeIndex extends Component {
 
   componentDidMount() {
     this.props.fetchRecipes()
-    if (this.props.ingredients) this.filterByIngredients()
+    if (this.props.ingredients) {
+      this.filterByIngredients();
+      this.filterByCategories();
+    }
   }
 
   filterByIngredients(){
@@ -42,7 +45,7 @@ export default class RecipeIndex extends Component {
 
   filterByCategories(){
     if (this.props.ingredients){
-      if (this.state.filteredCategories === []) return null;
+      if (this.state.filterCategories === []) return null;
       let exactFiltered = this.state.exactRecipes.filter( recipe => {
         if (this.state.filterCategories.length  === 0) return true
         return recipe.categories.some(cat => this.state.filterCategories.includes(cat))
@@ -61,7 +64,6 @@ export default class RecipeIndex extends Component {
 
       this.setState({recipes: filtered})
     }
-
   }
 
   possibleCategories(){
