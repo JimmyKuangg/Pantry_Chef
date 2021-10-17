@@ -141,6 +141,7 @@ export default class Pantry extends Component {
               ))
               : ''}
             </ul>
+            <div className="purple-button" onClick={() => this.props.openModal('createRecipe')}>Create Recipe</div>
           </div>
         )
       }
