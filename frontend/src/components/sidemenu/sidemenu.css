@@ -1,5 +1,5 @@
 .sidemenu {
-  width: 20%;
+  min-width: 350px;
   position: fixed;
   height: 100vh;
   right: 0;

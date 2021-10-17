@@ -35,6 +35,10 @@
     overflow: scroll;
 }
 
+#recipe-actions{
+    min-width: 70px;
+}
+
 .purple-button{
     background: #3F48CC;
     padding: 10px;
@@ -76,6 +80,7 @@
     align-items: center;
     justify-content: flex-start;
 }
+
 
 #edit-recipe{
     color: #3F48CC;
