@@ -12,6 +12,7 @@ import "./app.css";
 
 import MainPage from "./main/main_page";
 import MeetTheTeam from "./meet_the_team/meet_the_team";
+import NotFound from "./notfound/not_found";
 
 const App = () => (
   <div>
@@ -24,6 +25,7 @@ const App = () => (
       <Route exact path='/meet-the-team' component={MeetTheTeam}/>
       {/* <Route exact path='/pantries' component={PantryShowContainer} /> */}
       <Route exact path="/" component={MainPage} />
+      <Route component={NotFound}/>
     </Switch>
   </div>
 );
