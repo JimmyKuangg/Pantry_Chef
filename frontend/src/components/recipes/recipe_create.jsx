@@ -159,7 +159,7 @@ export default class RecipeCreateForm extends Component {
           <div id='first-row'>
             <div id='recipe-small-inputs'>
               <div className='space-between'>
-                <h2 >Name of recipe</h2>
+                <h3>Name of recipe</h3>
                 <input 
                   type="text" 
                   placeholder="Ex: Scrambled eggs"
@@ -168,7 +168,7 @@ export default class RecipeCreateForm extends Component {
                 />
               </div>
               <div className='space-between'>
-                <h2>Time to cook</h2>
+                <h3>Time to cook</h3>
                 <input 
                   type="text"
                   placeholder="Ex: 10 minutes"
@@ -177,7 +177,7 @@ export default class RecipeCreateForm extends Component {
                 />
               </div>
               <div className='space-between'>
-                <h2>Calories</h2>
+                <h3>Calories</h3>
                 <input 
                   type="text" 
                   value={this.state.calories}
@@ -200,7 +200,7 @@ export default class RecipeCreateForm extends Component {
               <div className='ingredients-list-wrapper'>
                   <h3>Current Ingredients</h3>
                   <ul id='ingredients-list'>
-                    {this.state.ingredients.length === 0 ? <h4>Add some ingredients!</h4> : ""}
+                    {this.state.ingredients.length === 0 ? <p>Add some ingredients!</p> : ""}
                     {this.state.ingredients.map(ingredient => 
                     <li id='selected-ingredient' key={ingredient.ingredient}>
                       {this.findName(ingredient.ingredient)}
@@ -218,10 +218,11 @@ export default class RecipeCreateForm extends Component {
             <div id='categories-input'>
               <div id='selected-categories'>
                 <h3>Selected Categories</h3>
-                <ul>
+                <ul id='selected-categories-list'>
                   {this.state.categories.length > 0 ? this.state.categories.map((categoryId, i) => 
-                  <li key={i}>{this.findCateName(categoryId)}
-                    <button onClick={e => this.removeCategory(e, categoryId)}> x</button>
+                  <li key={i} id='category-list-item'>
+                    {this.findCateName(categoryId)}
+                    <i class="fas fa-trash-alt" onClick={e => this.removeCategory(e, categoryId)}/>
                   </li>) : <li>Add some Categories!</li>} 
                 </ul>
               </div>
@@ -248,9 +249,12 @@ export default class RecipeCreateForm extends Component {
               <div id='current-steps'>
                 <h3>Current Steps</h3>
                 {this.state.steps.length > 0 ?
-                  <ol>
-                    {this.state.steps.map(step => <li>{step}<p onClick={e => this.removeStep(e, step)}> x</p></li>)}
-                  </ol> : <h3>Add some steps!</h3>
+                  <ol id='steps-list'>
+                    {this.state.steps.map(step => <li id='step-list-item'>
+                      {step}
+                      <i class="fas fa-trash-alt" onClick={e => this.removeStep(e, step)}/>
+                      </li>)}
+                  </ol> : <p>Add some steps!</p>
                 }
               </div>
             </div>
