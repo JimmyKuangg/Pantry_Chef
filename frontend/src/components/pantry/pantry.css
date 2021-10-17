@@ -82,3 +82,8 @@
     margin-left: 5px;
     padding: 5px;
 }
+
+.pantry-select{
+    display: flex;
+    flex-direction: column;
+}

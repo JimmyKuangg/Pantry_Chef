@@ -11,7 +11,8 @@ export default class Pantry extends Component {
       notInPantry: [],
       selectedIngredient: '',
       usersRecipes: [],
-      tab: 'pantry'
+      tab: 'pantry',
+      showAddToPantry: true,
     }
     this.removePantryItem = this.removePantryItem.bind(this);
     this.updatePantry = this.updatePantry.bind(this);
@@ -48,6 +49,7 @@ export default class Pantry extends Component {
     ))})
 
     this.setState({showSelect: true});
+    this.setState({showAddToPantry: false});
   }
 
   filterUsersRecipes() {
@@ -83,13 +85,12 @@ export default class Pantry extends Component {
     let newPantryIngredients = this.state.ingredients
 
     newPantryIngredients.push({
-      ingredient: this.state.selectedIngredient,
-      // quantity: this.state.selectedQuantity,
-      // unit: this.state.selectedUnit
+      ingredient: this.state.selectedIngredient
     });
 
     this.setState({ingredients: newPantryIngredients})
     this.setState({showSelect: false});
+    this.setState({showAddToPantry: true});
   }
 
   tabClickHandler(field){
@@ -111,17 +112,17 @@ export default class Pantry extends Component {
             )) : ''}
           </ul>
           { this.state.showSelect ? 
-          <form onSubmit={this.updateCurrentPantry}>
+          <form className="pantry-select" onSubmit={this.updateCurrentPantry}>
             <select className="ingredients-select-box" onChange={this.updateField('selectedIngredient')} >
-              <option selected disabled hidden>Please select an ingredient</option>
+              <option selected defaultValue hidden>Please select an ingredient</option>
               {this.state.notInPantry.map((ingredient, i) => <option key={i} value={ingredient._id}>{ingredient.name}</option>)}
             </select> 
             {/* <input type="text" placeholder="QUANTITY" onChange={this.updateField('selectedQuantity')}/>
             <input type="text" placeholder="UNIT" onChange={this.updateField('selectedUnit')}/> */}
-            <button type="submit">Add to your current pantry</button>
+            <button className="purple-button" type="submit">Add to your current pantry</button>
           </form>
           : ''}
-          <button className='purple-button' onClick={() => this.addToPantry()}>Add items to pantry</button>
+          {this.state.showAddToPantry ? <button className='purple-button' onClick={() => this.addToPantry()}>Add items to pantry</button> : ''}
           <button className='purple-button' onClick={() => this.updatePantry()}>Save pantry</button>
         </div>
       )
