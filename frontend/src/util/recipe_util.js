@@ -17,5 +17,5 @@ export const editRecipe = (recipe) => {
 }
 
 export const deleteRecipe = (recipeId) => {
-    return axios.post(`/api/recipes/delete/${recipeId}`)
+    return axios.delete(`/api/recipes/delete/${recipeId}`)
 }
