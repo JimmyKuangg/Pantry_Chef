@@ -19,6 +19,11 @@ export default class RecipeIndex extends Component {
     this.props.fetchRecipes()
     if (this.props.ingredients) {
       this.filterByIngredients();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.recipes !== this.props.recipes){
       this.filterByCategories();
     }
   }
