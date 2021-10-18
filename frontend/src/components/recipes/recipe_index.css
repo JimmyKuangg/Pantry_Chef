@@ -98,6 +98,13 @@
   /* padding: 5px; */
   text-decoration: none;
   height: 300px;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.445);
+}
+
+.index-recipe-item:hover{
+  transform: scale(1.1);
+  transition: 0.1s;
+
 }
 
 .index-recipe-item h3{
