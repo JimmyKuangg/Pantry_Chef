@@ -68,6 +68,12 @@
   /* overflow: hidden; */
   list-style: none;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+#category-item:hover{
+  transform: scale(1.1);
+  transition: 0.2s;
 }
 
 #recipe-picture{
