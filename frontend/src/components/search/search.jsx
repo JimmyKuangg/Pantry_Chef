@@ -97,7 +97,7 @@ export default class Search extends Component {
                     {this.state.ingredientSuggestions.map((suggestion, i) => (
                       this.state.selectedIngredients.includes(suggestion) ? 
                       "" :
-                    <li key={i} className="suggestion-item" onClick={e => this.suggestionClickHandler(e, suggestion)}>{suggestion.name}</li>
+                    <li key={i} className="suggestion-item" onClick={e => this.suggestionClickHandler(e, suggestion)}>{suggestion.name} <i class="fas fa-plus"/></li>
                     ))}
                   </ul>      
                 </div>
