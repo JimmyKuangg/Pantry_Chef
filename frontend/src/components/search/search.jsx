@@ -20,7 +20,6 @@ export default class Search extends Component {
     if(this.props.currentUser.id) { this.props.fetchPantry()
       .then(()=>  this.setState({selectedIngredients: this.props.pantry.ingredients.map(ingredient => ({_id: ingredient.ingredient, name: ingredient.name}))})
     )}
-
   }
 
   componentDidUpdate(prevProps){
@@ -93,7 +92,7 @@ export default class Search extends Component {
           {
             this.state.ingredientSuggestions.length === 0 ? "" : 
               <div className='ingredient-suggestions-background' >
-                <div className='ingredient-suggestions' style={{display: this.state.ingredientSuggestions === [] ? 'none' : 'block'}}>
+                <div className='ingredient-suggestions' id='ig-s' style={{display: this.state.ingredientSuggestions === [] ? 'none' : 'block'}}>
                   <ul>
                     {this.state.ingredientSuggestions.map((suggestion, i) => (
                       this.state.selectedIngredients.includes(suggestion) ? 
@@ -109,7 +108,7 @@ export default class Search extends Component {
             <div className="selected-ingredients-box">
               <ul id='selected-ingredients'>
                 {this.state.selectedIngredients.map((ingredient,i) => 
-                <li key={i} className="selected-ingredient-item" onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}</li>)}
+                <li key={i} className="selected-ingredient-item" onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}<i id='xicon'className="fas fa-times"/> </li>)}
               </ul>
             </div>
           </div>

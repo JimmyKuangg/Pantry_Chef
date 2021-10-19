@@ -99,11 +99,12 @@
   text-decoration: none;
   height: 300px;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.445);
+  transition: 0.2s;
 }
 
 .index-recipe-item:hover{
   transform: scale(1.1);
-  transition: 0.1s;
+  transition: 0.2s;
 
 }
 
