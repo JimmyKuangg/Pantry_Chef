@@ -1,8 +1,10 @@
 .navbar-container {
   /* background-color: rgba(255, 255, 255, 0.5); */
-  background-color: #3f48cce0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: fixed;
   width: 100vw;
+  background-color: #3F48CC;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  /* width: 100vw; */
   top: 0;
   left: 0;
   z-index: 999;
@@ -76,6 +78,7 @@ a {
 
 .navbar-button {
   background-color: transparent;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border: none;
   color: white;
   border-radius: 5px;

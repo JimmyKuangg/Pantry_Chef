@@ -10,8 +10,13 @@ const recipes = (state = [], action) => {
         newState.push(action.recipe.data)
         return newState 
     case REMOVE_RECIPE:
-        delete newState[action.recipeId]
-        return newState
+      newState = [...state];
+      for (let i = 0; i < newState.length; i++){
+        if (newState[i].id === action.recipeId) {
+          delete newState[i];
+        }
+      }
+      return newState;
     default:
       return state;
   }

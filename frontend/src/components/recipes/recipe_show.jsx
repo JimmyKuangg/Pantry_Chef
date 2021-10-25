@@ -59,10 +59,10 @@ class RecipeShow extends Component {
         <div className="show-content">
           <div className="show-ingredients">
             <h1 className="directions-header">Ingredients</h1>
-            <ul className='ul'>
+            <ul className="ul">
               {recipe.ingredients.map((ingredient, i) => (
                 <li key={i} className="show-ingredient">
-                  {ingredient.quantity} {ingredient.ingredient}
+                  {ingredient.quantity} {ingredient.unit} {ingredient.ingredient}
                 </li>
               ))}
             </ul>
@@ -70,13 +70,12 @@ class RecipeShow extends Component {
           <div className="show-directions">
             <h1 className="directions-header">Directions</h1>
             <ol>
-              {recipe.steps
-                .map((step, i) => (
-                  <li key={i} className="show-direction">
-                    <input type="checkbox"/>
-                    {step}
-                  </li>
-                ))}
+              {recipe.steps.map((step, i) => (
+                <li key={i} className="show-direction">
+                  <input type="checkbox" />
+                  {step}
+                </li>
+              ))}
             </ol>
           </div>
         </div>

@@ -5,13 +5,13 @@ import { closeSidemenu } from '../../actions/sidemenu_actions';
 import { fetchAllCategories } from '../../actions/category_actions';
 import RecipeEditForm from './recipe_edit';
 
-const mSTP = (state, ownProps) => {
+const mSTP = (state) => ({
   ingredients: state.ingredients,
   categories: state.categories,
   currentUser: state.session.user,
   recipe: state.ui.modalPropsReducer,
   }
-};
+);
 
 const mDTP = dispatch => ({
   action: recipe => dispatch(editRecipe(recipe)),
