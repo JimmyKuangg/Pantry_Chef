@@ -17,13 +17,13 @@ class SignupForm extends React.Component {
     this.clearedErrors = false;
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.signedIn === true) {
-  //     this.props.history.push("/");
-  //   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.signedIn === true) {
+      this.props.history.push("/");
+    }
 
-  //   this.setState({ errors: nextProps.errors });
-  // }
+    this.setState({ errors: nextProps.errors });
+  }
 
   update(field) {
     return (e) =>
@@ -64,6 +64,7 @@ class SignupForm extends React.Component {
   }
 
   render() {
+    console.log(this.props.errors)
     return (
       <div className="signup-form-container">
         <form onSubmit={this.handleSubmit}>
