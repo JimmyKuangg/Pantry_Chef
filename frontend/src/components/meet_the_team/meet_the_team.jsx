@@ -42,7 +42,7 @@ const MeetTheTeam = () => {
                     <h3 id='role'>Frontend Lead</h3>
                     <div className='socials'>
                         <a href='https://www.linkedin.com/in/vincent-hsu-45a6a1220/'><i className="fab fa-linkedin"/></a>
-                        <a href='https://angel.co/u/vincent-hsu-4'><i className="fab fa-angellist"/></a>
+                        <a href='https://angel.co/u/vincent-hsu-7'><i className="fab fa-angellist"/></a>
                         <a href='https://github.com/imvincenth'><i className="fab fa-github"/></a>
                     </div>
                 </div>

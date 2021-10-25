@@ -68,6 +68,7 @@ class LoginForm extends React.Component {
           <div className="login-modal-content">
             <p className='session-input-label'>Email:</p>
             <input className='session-input-field'
+              id={Object.values(this.state.errors).includes('Email') ? 'error-field' : 'null'}
               type="text"
               value={this.state.email}
               onChange={this.update("email")}

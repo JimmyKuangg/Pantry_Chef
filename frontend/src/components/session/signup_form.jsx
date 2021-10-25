@@ -19,7 +19,13 @@ class SignupForm extends React.Component {
     this.openLogin = this.props.openModal.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser === true) {
+      this.props.history.push("/");
+    }
 
+    this.setState({ errors: nextProps.errors });
+  }
 
   update(field) {
     return (e) =>
@@ -90,7 +96,7 @@ class SignupForm extends React.Component {
             <br />
 
             <div id='submit-container'>
-              <input className='purple-button' type="submit" value="Submit" />
+              <input className='purple-button' type="submit" value="Sign Up" />
               {this.renderErrors()}
               <input className="demo-signup-submit purple-button" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
             </div>
