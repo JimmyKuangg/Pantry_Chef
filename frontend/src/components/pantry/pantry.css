@@ -1,0 +1,95 @@
+#side-menu-show{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: white;
+    border-left: 2px solid #3f48cc8f; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%
+}
+
+#side-menu-title{
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.side-menu-items{
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#delete-ingredient{
+    margin-left: 5px;
+    padding: 5px;
+    color: #3F48CC;
+    cursor: pointer;
+}
+
+#side-menu-list{
+    height: 67%;
+    width: 80%;
+    margin-bottom: 5px;
+    overflow: scroll;
+}
+
+#recipe-actions{
+    min-width: 70px;
+}
+
+.purple-button{
+    background: #3F48CC;
+    padding: 10px;
+    text-align: center;
+    border-radius: 25px;
+    margin-top: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#selector{
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 5%;
+}
+.tab{
+    cursor: pointer;
+    width: 50%;
+    height: 35px;
+    text-align: center;
+    border-bottom: 1px solid #3F48CC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#tab-selected{
+    background-color: #3F48CC;
+    color: white;
+}
+
+#side-menu-content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+#edit-recipe{
+    color: #3F48CC;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 5px;
+}
+
+.pantry-select{
+    display: flex;
+    flex-direction: column;
+}

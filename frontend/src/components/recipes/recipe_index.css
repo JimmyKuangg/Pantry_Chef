@@ -1,13 +1,21 @@
+.index-main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
 .add-more {
   /* margin-top: 20px; */
   font-size: 25px;
   font-weight: 300;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   color: #3F48CC;
 }
 
 .add-more-2 {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 20px;
   font-size: 30px;
   font-weight: 700;
@@ -27,7 +35,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 }
 
 
@@ -37,7 +45,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .category-wrapper{
@@ -45,7 +52,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   
 }
 
@@ -62,6 +68,12 @@
   /* overflow: hidden; */
   list-style: none;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+#category-item:hover{
+  transform: scale(1.1);
+  transition: 0.2s;
 }
 
 #recipe-picture{
@@ -90,13 +102,20 @@
   color: white;
   overflow: hidden;
   /* padding: 5px; */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-decoration: none;
   height: 300px;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.445);
+  transition: 0.2s;
+}
+
+.index-recipe-item:hover{
+  transform: scale(1.1);
+  transition: 0.2s;
+
 }
 
 .index-recipe-item h3{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -118,6 +137,15 @@
     border-radius: 25px;
     width: 50%;
     text-align: center;
-    background-color: rgba(245, 245, 245, 0.719);
+    background-color: rgba(245, 245, 245, 0.904);
     margin: 3px;
+    color: black;
   }
+
+#exact-match p, #close-match p {
+  padding-bottom: 8px;
+}
+
+#all-recipes-title{
+  font-size: 50px;
+}

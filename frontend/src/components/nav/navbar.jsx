@@ -21,14 +21,17 @@ class NavBar extends React.Component {
         <div className="navbar-right">
           <div className="navbar-item">
             <div className="navbar-pantry">
-              <Link to="/pantries">MY PANTRY</Link>
+              <button className="navbar-button" onClick={!this.props.sideMenuOpen ? () => this.props.openSidemenu() : () => this.props.closeSidemenu()}>
+                MY PANTRY
+              </button>
             </div>
           </div>
 
-
-            <div className="navbar-item">
-              <button onClick={this.logoutUser}>LOGOUT</button>
-            </div>
+          <div>
+            <button className="navbar-button" onClick={this.logoutUser}>
+              LOGOUT
+            </button>
+          </div>
 
           <div className="navbar-item">
             <div className="navbar-github">

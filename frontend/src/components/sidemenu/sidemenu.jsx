@@ -10,7 +10,7 @@ function SideMenu(props) {
 
   return(
     <div className="sidemenu">
-      <button className="close-sidemenu" onClick={props.closeSidemenu}>X</button>
+      <p className="close-sidemenu" onClick={props.closeSidemenu}><i className="fas fa-times"/></p>
       <Pantry />
     </div>
   )

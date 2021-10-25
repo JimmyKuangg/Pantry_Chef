@@ -7,6 +7,7 @@ import NavBar from "./navbar";
 
 const mapStateToProps = (state) => ({
   loggedIn: state.session.isAuthenticated,
+  sideMenuOpen: state.ui.sideMenu
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -37,8 +38,6 @@ const mapDispatchToProps = dispatch => ({
       EDIT RECIPE
     </button>
   ),
-  openSidemenu: () => dispatch(openSidemenu()),
-  closeSidemenu: () => dispatch(closeSidemenu()),
   logout: () => dispatch(logout())
 })
 

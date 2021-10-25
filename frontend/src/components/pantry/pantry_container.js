@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { fetchPantry, editPantry } from '../../actions/pantry_actions';
 import { fetchAllIngredients } from '../../actions/ingredient_actions';
 import Pantry from './pantry';
-import { fetchRecipes } from '../../actions/recipe_actions';
+import { deleteRecipe, fetchRecipes } from '../../actions/recipe_actions';
 import { openModal } from '../../actions/modal_actions';
 
 const mSTP = (state, ownProps) => ({
@@ -18,6 +18,7 @@ const mDTP = (dispatch) => ({
   fetchAllIngredients: () => dispatch(fetchAllIngredients()),
   fetchRecipes: () => dispatch(fetchRecipes()),
   openModal: (modal, props) => dispatch(openModal(modal, props)),
+  deleteRecipe: (recipeId) => dispatch(deleteRecipe(recipeId)),
 });
 
 export default connect(mSTP, mDTP)(Pantry);

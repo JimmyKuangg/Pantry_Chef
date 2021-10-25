@@ -9,4 +9,4 @@ export default function sideMenuReducer(state = null, action) {
     default:
       return state;
   }
-}
+} 
