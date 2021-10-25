@@ -29,10 +29,14 @@
 }
 
 #side-menu-list{
-    height: 70%;
+    height: 67%;
     width: 80%;
     margin-bottom: 5px;
     overflow: scroll;
+}
+
+#recipe-actions{
+    min-width: 70px;
 }
 
 .purple-button{
@@ -42,6 +46,7 @@
     border-radius: 25px;
     margin-top: 5px;
     color: white;
+    cursor: pointer;
 }
 
 #selector{
@@ -75,6 +80,7 @@
     align-items: center;
     justify-content: flex-start;
 }
+
 
 #edit-recipe{
     color: #3F48CC;

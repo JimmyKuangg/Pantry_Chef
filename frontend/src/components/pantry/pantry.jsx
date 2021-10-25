@@ -134,7 +134,7 @@ export default class Pantry extends Component {
               {this.state.usersRecipes ? this.state.usersRecipes.map((recipe, i) => (
                 <li className='side-menu-items' key={i}>
                   <p className='side-menu-name'>{recipe.name}</p>
-                  <div>
+                  <div id='recipe-actions'>
                     <i id='edit-recipe' className="fas fa-edit" onClick={() => this.props.openModal('editRecipe', recipe)}/>
                     <i className="fas fa-trash-alt" id='delete-ingredient' onClick={() => this.props.deleteRecipe(recipe.id)}/>
                   </div>
@@ -142,6 +142,7 @@ export default class Pantry extends Component {
               ))
               : ''}
             </ul>
+            <div className="purple-button" onClick={() => this.props.openModal('createRecipe')}>Create Recipe</div>
           </div>
         )
       }

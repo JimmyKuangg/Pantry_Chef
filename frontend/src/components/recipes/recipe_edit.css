@@ -1,0 +1,97 @@
+#first-col {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+#first-col-bottom {
+  height: 100%;
+}
+
+#second-col {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+#recipe-edit-wrapper {
+  display: flex;
+}
+
+#recipe-edit-form {
+  width: 100;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#recipe-form-info label {
+  font-size: 30px;
+  display: flex;
+  width: 50%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#recipe-form-info input {
+  height: 20px;
+  vertical-align: middle;
+}
+
+#category-select {
+  display: flex;
+  height: 100%;
+}
+
+#category-select-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+#recipe-edit-categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#recipe-edit-categories h2 {
+  font-size: 30px;
+}
+#recipe-edit-categories ul {
+  overflow: scroll;
+  height: 80%;
+}
+
+#second-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recipe-edit-ingredients {
+  display: flex;
+}
+
+.recipe-edit-ingredients h2 {
+  font-size: 30px;
+  padding-bottom: 5px;
+}
+
+#recipe-edit-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+}
+
+#recipe-edit-steps {
+  display: flex;
+}
+
+#edit-recipe-button {
+  position: relative;
+  left: 35%;
+  width: 30%;
+}

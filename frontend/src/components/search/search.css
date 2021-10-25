@@ -22,10 +22,15 @@
   height: 20px;
   width: 500px;
   box-shadow: 1px 1px 1px grey;
+  /* position: relative; */
 }
 
 .search-bar:focus {
   outline: none;
+}
+
+.ingredient-suggestions-background{
+  position: relative;
 }
 
 .ingredient-suggestions {
@@ -40,6 +45,11 @@
   padding: 15px;
   scrollbar-width: thin;
   scrollbar-color: #3F48CC;
+  position: absolute;
+  top: -5px;
+  left: -264px;
+  /* top: 50%; */
+  /* left: 50%; */
 }
 
 .ingredient-suggestions > ul {
@@ -75,12 +85,23 @@
   border-radius: 25px;
   padding: 6px 10px 6px 10px;
   margin-top: 15px;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: 5px;
+  margin-right: 5px;
   height: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 13px;
   color: #3F48CC;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.suggestion-item:hover{
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.suggestion-item i {
+  margin-left: 5px;
 }
 
 .selected-ingredients-wrapper {
@@ -93,6 +114,7 @@
   overflow-y: auto;
   justify-content: center;
   color: #3F48CC;
+  padding: 10px;
 }
 
 .selected-ingredient-box {
@@ -107,6 +129,8 @@
   max-width: 500px;
 }
 
+
+
 .selected-ingredient-item {
   display: flex;
   align-items: center;
@@ -115,15 +139,26 @@
   border-radius: 25px;
   padding: 6px 10px 6px 10px;
   margin-top: 15px;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: 5px;
+  margin-right: 5px;
   height: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 13px;
   box-shadow: 1px 1px rgba(0, 0, 0, 0.605);
+  transition: 0.2s;
+  background: white;
+  cursor: pointer;
 }
 
+.selected-ingredient-item:hover{
+  transform: scale(1.1);
+  transition: 0.2s;
+}
 
+.selected-ingredient-item i {
+  padding-left: 5px;
+  padding-top: 4px;
+}
 
 #save-to-pantry {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

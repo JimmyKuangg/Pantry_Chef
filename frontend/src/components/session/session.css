@@ -1,0 +1,34 @@
+#login-modal, .signup-form-container{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.session-input-label{
+    /* padding-bottom: 10px; */
+    /* padding-top: 10px; */
+}
+
+.login-modal-content{
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.session-input-field{
+    border-radius: 25px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+#submit-container{
+    display: flex;
+    flex-direction: column;
+}
+
+#modal-link{
+    color: #3F48CC;
+    cursor: pointer;
+}

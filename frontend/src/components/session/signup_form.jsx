@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import './session.css'
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class SignupForm extends React.Component {
     this.demoLogin = this.demoLogin.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
+    this.openLogin = this.props.openModal.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,15 +36,6 @@ class SignupForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.props.signup(this.state)
-    // let user = {
-    //   email: this.state.email,
-    //   username: this.state.username,
-    //   password: this.state.password,
-    //   password2: this.state.password2,
-    // };
-
-    // this.props.signup(user, this.props.history);
     this.props.signup(this.state)
       // .then(this.props.closeModal());
   }
@@ -70,37 +63,46 @@ class SignupForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="signup-form">
             <br />
-            <input
-              type="text"
+            <p className='session-input-label'>Email:</p>
+            <input className='session-input-field'
+              type="email"
               value={this.state.email}
               onChange={this.update("email")}
               placeholder="Email"
             />
             <br />
-            <input
+            <p className='session-input-label'>Username:</p>
+            <input className='session-input-field'
               type="text"
               value={this.state.username}
               onChange={this.update("username")}
               placeholder="Username"
             />
             <br />
-            <input
+            <p className='session-input-label'>Password:</p>
+            <input className='session-input-field'
               type="password"
               value={this.state.password}
               onChange={this.update("password")}
               placeholder="Password"
             />
             <br />
-            <input
+            <p className='session-input-label'>Confirm Password:</p>
+            <input className='session-input-field'
               type="password"
               value={this.state.password2}
               onChange={this.update("password2")}
               placeholder="Confirm Password"
             />
             <br />
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
-            <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+
+            <div id='submit-container'>
+              <input className='purple-button' type="submit" value="Submit" />
+              {this.renderErrors()}
+              <input className="demo-signup-submit purple-button" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+            </div>
+            <br/>
+            <p>Already have an account? <div id='modal-link' onClick={this.openLogin}>Log In</div></p>
           </div>
         </form>
       </div>
