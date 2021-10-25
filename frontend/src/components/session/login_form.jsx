@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import './session.css'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class LoginForm extends React.Component {
     this.demoLogin = this.demoLogin.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this.openSignUp = this.props.openModal.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,23 +66,32 @@ class LoginForm extends React.Component {
       <div className="modal" id="login-modal">
         <form onSubmit={this.handleSubmit}>
           <div className="login-modal-content">
-            <input
+            <p className='session-input-label'>Email:</p>
+            <input className='session-input-field'
               type="text"
               value={this.state.email}
               onChange={this.update("email")}
               placeholder="Email"
             />
             <br />
-            <input
+
+            <p className='session-input-label'>Password:</p>
+            <input className='session-input-field'
               type="password"
               value={this.state.password}
               onChange={this.update("password")}
               placeholder="Password"
             />
             <br />
-            <input type="submit" value="Submit" />
+            <div id='submit-container'>
+              <input className='purple-button' type="submit" value="Log In" id='login'/>
+              <input className="demo-signup-submit purple-button" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+            </div>
+            <br />
+
+            <p>New to pantry chef? <div id='modal-link' onClick={this.openSignUp}>Sign Up</div></p>
+
             {this.renderErrors()}
-            <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
           </div>
         </form>
       </div>
