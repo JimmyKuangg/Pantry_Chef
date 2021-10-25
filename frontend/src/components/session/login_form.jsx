@@ -41,14 +41,14 @@ class LoginForm extends React.Component {
       password: this.state.password,
     };
 
-    this.props.login(user)
-      .then(this.props.closeModal());
+    this.props.login(user);
+      // .then(this.props.closeModal());
   }
 
   demoLogin(e) {
     e.preventDefault();
     this.props.demoLogin();
-    this.props.closeModal();
+    // this.props.closeModal();
   }
 
   renderErrors() {
