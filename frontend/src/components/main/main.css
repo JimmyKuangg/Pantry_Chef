@@ -21,7 +21,6 @@
 .logo-wrapper {
   display: flex;
   flex-direction: row;
-  position: relative;
   margin-top: 70px;
   align-items: center;
   right: 1%;
