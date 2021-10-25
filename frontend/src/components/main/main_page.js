@@ -1,10 +1,8 @@
 import React from "react";
 import Search from '../search/search_container';
-import logo from './logo.png';
 import "./main.css";
 import "../../index.css"
 import navlogo from "../nav/navlogo.png";
-import Sidemenu from "../sidemenu/sidemenu";
 
 
 class MainPage extends React.Component {
