@@ -12,8 +12,11 @@ export default class RecipeEditForm extends Component {
       newIngredient: {},
       quantity: 0,
       unit: "",
+
       newCategory: {},
       step: ""
+
+
     }
     
 
@@ -34,8 +37,14 @@ export default class RecipeEditForm extends Component {
     }
   }
 
+  // componentDidUpdate() {
+  //   this.findName();
+  //   this.findCateName();
+  // }
+
   handleSubmit(e) {
     e.preventDefault();
+
 
     let newIngredients = this.state.ingredients.map(ele => (
       {
@@ -57,6 +66,7 @@ export default class RecipeEditForm extends Component {
       steps: this.state.steps
     }
     this.props.action(recipe)
+
 
   }
 
@@ -117,6 +127,7 @@ export default class RecipeEditForm extends Component {
   removeCategory(e, name){
     this.setState({categories: this.state.categories.filter(cat => cat.name !== name)})
   }
+
 
   removeIngredient(e, name){
     this.setState({ingredients: this.state.ingredients.filter(ing => ing.ingredient !== name)})
@@ -190,11 +201,13 @@ export default class RecipeEditForm extends Component {
                   </div>
 
                   <div id='category-select-wrapper'>
+
                     <div>
                       {this.props.categories.map((category, i) => 
                       <div onClick={()=>this.clickCategory(category)} key={i}>{category.name}</div>)}
                     </div>
                     {/* <div className='purple-button' onClick={this.addToCategories}>Add category</div> */}
+
                   </div>
                 </label>
               </div>
@@ -246,6 +259,7 @@ export default class RecipeEditForm extends Component {
              
         <input className='purple-button' id="edit-recipe-button" type="submit" onClick={this.handleSubmit} value="Edit Recipe" />
         <button className='close-modal' onClick={this.props.closeModal}>X</button>
+        {this.renderErrors()}
         </form>
       </div>
     )
