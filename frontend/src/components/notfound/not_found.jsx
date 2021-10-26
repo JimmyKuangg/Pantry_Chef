@@ -9,7 +9,7 @@ const NotFound = () => {
                 <h1>Hey you're not supposed to be here!</h1>
                 <p>Go Back <Link to='/' id='bold-link'>Home</Link>!!!</p>
             </div>
-            <img id='not-found-image' src={notfound}/>
+            <img id='not-found-image' src={notfound} alt='not-found'/>
         </div>
      );
 }

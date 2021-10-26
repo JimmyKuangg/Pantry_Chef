@@ -22,7 +22,8 @@ router.get('/', (req, res) => {
           ingredients: recipes[i].ingredients.map(ele => ({
             ingredient: ele.ingredient.name,
             quantity: ele.quantity,
-            unit: ele.unit
+            unit: ele.unit,
+            id: ele.id
           })),
           cookTime: recipes[i].cookTime,
           calories: recipes[i].calories,
@@ -51,7 +52,8 @@ router.get('/:recipeId', (req, res) => {
         ingredients: recipe.ingredients.map(ele => ({
           ingredient: ele.ingredient.name,
           quantity: ele.quantity,
-          unit: ele.unit
+          unit: ele.unit,
+          id: ele.id
         })),
         cookTime: recipe.cookTime,
         calories: recipe.calories,
