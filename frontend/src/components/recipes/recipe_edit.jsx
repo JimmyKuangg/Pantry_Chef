@@ -4,171 +4,117 @@ import "./recipe_edit.css";
 export default class RecipeEditForm extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       ...this.props.recipe, 
-
-      ingredient: "",
-      quantity: "",
+      search: '',
+      possibleIngredients: [],
+      newIngredient: {},
+      quantity: 0,
       unit: "",
-
-      category: "",
-
+      newCategory: {},
       step: ""
     }
     
-    this.backToId = this.backToId.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clickIngredient = this.clickIngredient.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
-    this.addToCategories = this.addToCategories.bind(this);
+    this.clickCategory = this.clickCategory.bind(this);
     this.addToSteps = this.addToSteps.bind(this);
-    this.findName = this.findName.bind(this);
-    this.findCateName = this.findCateName.bind(this);
+    this.removeCategory = this.removeCategory.bind(this);
+  }
+
+  possibleIngredients(){
+    if(this.props.recipe){
+      let filtered = this.props.ingredients.filter( ele => !this.props.recipe.ingredients.includes(ele.ingredient) )
+      this.setState({possibleIngredients: filtered})
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.action(this.state)
-      .then(this.props.closeModal())
-      .then(this.props.closeSidemenu());
+
+    let newIngredients = this.state.ingredients.map(ele => {
+      return{
+        ingredient: ele._id,
+        quantity: ele.quantity,
+        unit: ele.unit
+      }
+    })
+
+
+    let recipe = {
+      author: this.state.author,
+      calories: this.state.calories,
+      categories: this.state.categories,
+      name: this.state.name,
+      ingredients: newIngredients,
+      id: this.state.id,
+      cookTime: this.state.cookTime,
+      imgUrl: this.state.imgUrl,
+      steps: this.state.steps
+    }
+    this.props.action(recipe)
   }
 
   update(field) {
-    return e => this.setState({ [field]: e.target.value });
+    return e => {
+      this.setState({ [field]: e.currentTarget.value });
+    }
   }
+
+  clickIngredient(ingredient){
+    this.setState({newIngredient: ingredient})
+    this.possibleIngredients();
+  }
+
 
   ingredientSelect() {
     return (
-      <select className="ingredients-select-box" value={this.state.ingredient} onChange={this.update("ingredient")}>
-        <option defaultValue>Choose an ingredient</option>
-        {this.props.ingredients.map(ingredient => <option id="testing" key={ingredient._id} value={ingredient._id}>{ingredient.name}</option>)}
-      </select>
-
-    )
-  }
-
-  nestedUpdate(field) {
-    return e => this.setState(state => {
-      state.ingredients[0][field] = e.target.value
-      return state;
-    })
-  }
-
-  quantityInput() {
-    return (
-      <div>
-        <h2>Quantity</h2>
-        <input type="number" value={this.state.quantity} onChange={this.update("quantity")} />
+      <div id='edit-search-wrapper'>
+        <div id='possible-ingredients'>
+          {this.state.possibleIngredients.map(ele => <div key={ele.id} onClick={()=>this.clickIngredient(ele)}>{ele.name}</div>)}
+        </div>
+        <input type='number' value={this.state.quantity} onChange={this.update('quantity')}/>
+        <input type='text' value={this.state.unit} onChange={this.update('unit')}/>
       </div>
+
     )
   }
 
-  unitInput() {
-    return (
-      <div>
-        <h2>Unit</h2>
-        <input type="text" placeholder="Ex: grams" value={this.state.unit} onChange={this.update("unit")} />
-      </div>
-    )
-  }
-
-  addToIngredients() {
-    this.setState({ ingredients: [...this.state.ingredients,
-      { ingredient: this.state.ingredient,
-        quantity: this.state.quantity,
-        unit: this.state.unit}]
-    });
-
-    this.setState({ ingredient: "", quantity: "", unit: "" })
-  }
-
-  addToCategories() {
-    if (!Array.isArray(this.state.categories)) {
-      this.setState({ categories: [this.state.category] });
-    } else {
-      this.setState({ categories: [...this.state.categories,
-        this.state.category
-      ]});
+  addToIngredients(){
+    this.setState({ingredients: [...this.state.ingredients,
+    {
+      ingredient: this.state.newIngredient.name,
+      quantity: this.state.quanity,
+      unit: this.state.unit,
+      id: this.state.newIngredient._id
     }
-    
-    this.setState({ category: "" })
+  ]})
   }
 
-  addToSteps() {
-    this.setState({ steps: [...this.state.steps,
-      this.state.step
-    ]});
-
-    this.setState({ step: "" })
+  addCategory(){
+    this.setState({categories: [...this.state.categories, this.state.newCategory]})
   }
+
+  addToSteps(){
+    this.setState({steps: [...this.state.steps, this.state.step]})
+  }
+
+  clickCategory(category){
+    console.log(category)
+    this.setState({categories: [...this.state.categories, category]})
+  }
+
 
   componentDidMount() {
     this.props.fetchAllCategories();
-    // this.setState({ categories: this.props.categories })
+    this.possibleIngredients();
   }
 
-  findName(ingredientId) {
-    for (let i = 0; i < this.props.ingredients.length; i++) {
-      if (ingredientId === this.props.ingredients[i]._id) {
-        return this.props.ingredients[i].name;
-      }
-    }
-  }
-
-  findCateName(categoryId) {
-    for (let i = 0; i < this.props.categories.length; i++) {
-      if (categoryId === this.props.categories[i]._id) {
-        return this.props.categories[i].name;
-      }
-    }
-  }
-
-  removeIngredient(e, ingredientId) {
-    let newIngredients = this.state.ingredients.filter(ingredient => ingredient.ingredient !== ingredientId);
-    this.setState({ ingredients: newIngredients });
-  }
-  
-  removeCategory(e, categoryId) {
-    let newCategories = this.state.categories.filter(category => category !== categoryId);
-    this.setState({ categories: newCategories });
-  }
-
-  removeStep(e, stepId) {
-    let newSteps = this.state.steps.filter(step => step !== stepId);
-    this.setState({ steps: newSteps });
-  }
-
-  backToId() {
-    let newIngredients = [];
-    let newCategories = [];
-
-    let hashCheck = [];
-    let hashMap = {};
-    let propsIngredients = this.props.ingredients.map(ingredient => [ingredient.name, ingredient._id]);
-    
-    for (let z = 0; z < this.props.categories.length; z++) {
-      if (this.state.categories.includes(this.props.categories[z].name)) {
-        newCategories.push(this.props.categories[z]._id);
-      }
-    }
-
-    for (let i = 0; i < this.state.ingredients.length; i++) {
-      hashMap["ingredient"] = this.state.ingredients[i].ingredient;
-      hashMap["quantity"] = this.state.ingredients[i].quantity;
-      hashMap["unit"] = this.state.ingredients[i].unit;
-      hashCheck.push(hashMap);
-      hashMap = {};
-    }
-
-    for (let j = 0; j < propsIngredients.length; j++) {
-      for (let k = 0; k < hashCheck.length; k++) {
-        if (propsIngredients[j][0] === hashCheck[k]["ingredient"]) {
-          newIngredients.push({ ingredient: propsIngredients[j][1], quantity: hashCheck[k]["quantity"], unit: hashCheck[k]["unit"] });
-        }
-      }
-    }
-
-    this.setState({ ingredients: [...newIngredients], categories: [...newCategories] });
+  removeCategory(e, name){
+    this.setState({categories: this.state.categories.filter(cat => cat.name !== name)})
   }
 
   render() {
@@ -177,9 +123,11 @@ export default class RecipeEditForm extends Component {
       return null;
     }
 
+    console.log(this.state.categories)
+
     return (
       <div className='recipe-edit'>
-        <form id='recipe-edit-form' onSubmit={this.handleSubmit}>
+        <form id='recipe-edit-form' >
         
           <div id="recipe-edit-wrapper">
             <div id='first-col'>
@@ -223,8 +171,10 @@ export default class RecipeEditForm extends Component {
                     {this.state.categories.length >= 0 ? 
                       <ul>
                         {this.state.categories.map((category, i) => 
-                        <li key={i} id='category-list-item'>{category}
-                          <div onClick={e => this.removeCategory(e, category)}>
+                        <li key={i} id='category-list-item' >{category.name}
+                          <div 
+                          onClick={e => this.removeCategory(e, category.name)}
+                          >
                             <i className="fas fa-trash-alt"/>
                           </div>
                         </li>)} 
@@ -233,35 +183,32 @@ export default class RecipeEditForm extends Component {
                   </div>
 
                   <div id='category-select-wrapper'>
-                    <select className="ingredients-select-box" onChange={this.update("category")}>
-                      <option defaultValue>Select a category</option>
-                      {this.props.categories.map(category =>
-                        <option key={category._id} value={category._id} >{category.name}</option>)}
-                    </select>
+                    <div>
+                      {this.props.categories.map((category, i) => 
+                      <div onClick={()=>this.clickCategory(category)}>{category.name}</div>)}
+                    </div>
                     <div className='purple-button' onClick={this.addToCategories}>Add category</div>
                   </div>
                 </label>
               </div>
 
-          </div>
+          </div> 
 
           <div id='second-col'>
               <label className="recipe-edit-ingredients">
 
                 <div id='recipe-edit-inputs'>
                   {this.ingredientSelect()}
-                  {this.quantityInput()}
-                  {this.unitInput()}
                   <div className='purple-button' onClick={this.addToIngredients}>Add ingredient</div>
                 </div>
                   
                 <div className='ingredients-list-wrapper'>
                   <ul id='ingredients-list'>
                     <h2>Current Ingredients</h2>
-                    {this.state.ingredients.map((ingredient, i) => 
-                    <li key={i} id='selected-ingredient' key={ingredient.ingredient}>
-                      {ingredient.ingredient}
-                      <button onClick={e => this.removeIngredient(e, ingredient.ingredient)}> x</button>
+                    {this.state.ingredients.map((ele, i) => 
+                    <li key={i} id='selected-ingredient' key={ele.id}>
+                      {ele.ingredient}
+                      {/* <button onClick={e => this.removeIngredient(e, ele.ingredient)}> x</button> */}
                     </li>)}
                   </ul>
                 </div>
@@ -290,7 +237,7 @@ export default class RecipeEditForm extends Component {
           </div>
         </div>
              
-        <input className='purple-button' id="edit-recipe-button" type="submit" onClick={this.backToId} onSubmit={this.handleSubmit} value="Edit Recipe" />
+        <input className='purple-button' id="edit-recipe-button" type="submit" onClick={this.handleSubmit} value="Edit Recipe" />
         <button className='close-modal' onClick={this.props.closeModal}>X</button>
         </form>
       </div>
