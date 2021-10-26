@@ -3,7 +3,7 @@
     height: 100vh; */
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
+
 }
 
 
@@ -161,4 +161,8 @@
     padding: 3px;
     width: 80px;
     margin-top: 5px;
+}
+
+.nav-bar-block {
+    margin: 70px;
 }

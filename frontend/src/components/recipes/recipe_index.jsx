@@ -41,7 +41,7 @@ export default class RecipeIndex extends Component {
       let length = recipe.ingredients.length;
       let ingredients = []
       recipe.ingredients.forEach(ingredient => {if (names.includes(ingredient.ingredient)) ingredients.push(ingredient)})
-      return ingredients.length !== length && ingredients.length >= length * 0.8;
+      return ingredients.length !== length && ingredients.length >= length * 0.5;
     })
 
     this.setState({exactRecipes: exactFiltered})
@@ -111,8 +111,8 @@ export default class RecipeIndex extends Component {
         <div className='add-more-2'>
           ^
         </div>
-        <div className='add-more'>
-          Add more ingredients to find recipes!
+        <div className='add-more'> 
+          No recipes matching selected ingredients. Add more ingredients!
         </div>
       </div>
     }
@@ -126,6 +126,7 @@ export default class RecipeIndex extends Component {
               {this.possibleCategories().map((category, i) => 
               <li key={i} 
                 id='category-item' 
+                className={this.state.filterCategories.includes(category) ? 'selected' : null}
                 onClick={e => this.categoryClickHandler(e, category)}>
                   {category}
               </li>)}

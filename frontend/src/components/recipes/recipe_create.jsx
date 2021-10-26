@@ -21,7 +21,9 @@ export default class RecipeCreateForm extends Component {
 
       category: "",
 
-      step: ""
+      step: "",
+
+      errors: {}
     }
     
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,12 +32,21 @@ export default class RecipeCreateForm extends Component {
     this.addToSteps = this.addToSteps.bind(this);
     this.findName = this.findName.bind(this);
     this.findCateName = this.findCateName.bind(this);
+    this.props.clearRecipeErrors();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser === true) {
+      this.props.history.push("/");
+    }
+
+    this.setState({ errors: Object.values(nextProps.errors)});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.action(this.state)
-      .then(this.props.closeModal());
+    this.props.action(this.state);
+      // .then(this.props.closeModal());
   }
 
   update(field) {
@@ -146,8 +157,18 @@ export default class RecipeCreateForm extends Component {
     this.setState({ steps: newSteps });
   }
 
+  renderErrors() {
+    return (
+      <ul>
+        {Object.keys(this.state.errors).map((error, i) => (
+          <li key={`error-${i}`}>{this.state.errors[error]}</li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
-    
+    console.log(this.props.errors)
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
@@ -209,7 +230,7 @@ export default class RecipeCreateForm extends Component {
                   </ul>
               </div>
 
-                  
+               
               </div>
             </div>
           </div>
@@ -260,6 +281,8 @@ export default class RecipeCreateForm extends Component {
             </div>
         </div>
         <input type="submit" id='create-recipe-button' className='purple-button' onSubmit={this.handleSubmit} value="Create Recipe" />
+
+        {this.renderErrors()}
         </form>
       </div>
     )

@@ -4,11 +4,12 @@
   justify-content: center;
   align-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+  
 }
 
 .add-more {
   /* margin-top: 20px; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 25px;
   font-weight: 300;
 
@@ -69,6 +70,10 @@
   list-style: none;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.selected {
+  background-color: #3f48cca2;
 }
 
 #category-item:hover{

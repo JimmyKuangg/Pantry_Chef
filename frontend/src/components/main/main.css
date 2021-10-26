@@ -43,14 +43,14 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5em;
   font-weight: 300;
-  font-size: 13px;
+  font-size: 15px;
   background-color: #3f48ccda;
   border-radius: 4px;
   padding: 10px;
   color: white;
   visibility: hidden;
   right: 900%;
-  bottom: 900%;
+  bottom: 300%;
   position: relative;
 }
 
@@ -62,7 +62,7 @@
   height: 20px;
   border-radius: 50%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 13px;
+  font-size: 17px;
   background-color: #3f48ccb2;
   color: rgb(255, 255, 255);
   right: 260px;
@@ -77,7 +77,7 @@
 .tooptip-mark {
   display: flex;
   position: relative;
-  top: 10px;
+  
 }
 
 .tooltip-wrapper {
