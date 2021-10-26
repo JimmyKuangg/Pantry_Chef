@@ -1,14 +1,14 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import './session.css'
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import './session.css';
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       errors: {},
     };
 
@@ -20,10 +20,10 @@ class LoginForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser === true) {
-      this.props.history.push("/");
+      this.props.history.push('/');
     }
 
-    this.setState({ errors: Object.values(nextProps.errors)});
+    this.setState({ errors: Object.values(nextProps.errors) });
   }
 
   update(field) {
@@ -41,8 +41,7 @@ class LoginForm extends React.Component {
       password: this.state.password,
     };
 
-    this.props.login(user);
-      // .then(this.props.closeModal());
+    this.props.login(user).then(() => this.props.closeModal());
   }
 
   demoLogin(e) {
@@ -61,60 +60,75 @@ class LoginForm extends React.Component {
   //   );
   // }
 
-  errorId(field){
-    for(let i = 0; i < this.state.errors.length; i++){
-      if (this.state.errors[i].includes(`${field}`)){
-        return 'error-field'
+  errorId(field) {
+    for (let i = 0; i < this.state.errors.length; i++) {
+      if (this.state.errors[i].includes(`${field}`)) {
+        return 'error-field';
       }
     }
     return null;
   }
 
-  errorMessage(field){
-    for(let i = 0; i < this.state.errors.length; i++){
-      if (this.state.errors[i].includes(`${field}`)){
-        return <p id='error-message'>{this.state.errors[i]}</p>
+  errorMessage(field) {
+    for (let i = 0; i < this.state.errors.length; i++) {
+      if (this.state.errors[i].includes(`${field}`)) {
+        return <p id="error-message">{this.state.errors[i]}</p>;
       }
     }
     return null;
   }
-
 
   render() {
-
     return (
       <div className="modal" id="login-modal">
         <form onSubmit={this.handleSubmit}>
           <div className="login-modal-content">
-            <p className='session-input-label'>Email:</p>
-            <input className='session-input-field'
+            <p className="session-input-label">Email:</p>
+            <input
+              className="session-input-field"
               id={this.errorId('Email')}
               type="email"
               value={this.state.email}
-              onChange={this.update("email")}
+              onChange={this.update('email')}
               placeholder="Email"
             />
             {this.errorMessage('Email')}
             <br />
 
-            <p className='session-input-label'>Password:</p>
-            <input className='session-input-field'
+            <p className="session-input-label">Password:</p>
+            <input
+              className="session-input-field"
               id={this.errorId('Password')}
               type="password"
               value={this.state.password}
-              onChange={this.update("password")}
+              onChange={this.update('password')}
               placeholder="Password"
             />
             {this.errorMessage('Password')}
 
             <br />
-            <div id='submit-container'>
-              <input className='purple-button' type="submit" value="Log In" id='login'/>
-              <input className="demo-signup-submit purple-button" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+            <div id="submit-container">
+              <input
+                className="purple-button"
+                type="submit"
+                value="Log In"
+                id="login"
+              />
+              <input
+                className="demo-signup-submit purple-button"
+                type="submit"
+                value={'Demo Login'}
+                onClick={this.demoLogin}
+              />
             </div>
             <br />
 
-            <p>New to pantry chef? <div id='modal-link' onClick={this.openSignUp}>Sign Up</div></p>
+            <p>
+              New to pantry chef?{' '}
+              <div id="modal-link" onClick={this.openSignUp}>
+                Sign Up
+              </div>
+            </p>
 
             {/* {this.renderErrors()} */}
           </div>
