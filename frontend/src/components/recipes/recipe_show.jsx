@@ -41,7 +41,7 @@ class RecipeShow extends Component {
               <div className="recipe-show-stats-2">
                 <ul className="recipe-category">
                   {recipe.categories.map((category, i) => (
-                    <li key={i}>{category}</li>
+                    <li key={i}>{category.name}</li>
                   ))}
                 </ul>
                 <div className="recipe-show-social">

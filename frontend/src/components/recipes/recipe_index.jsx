@@ -75,12 +75,14 @@ export default class RecipeIndex extends Component {
     let possibleCategories = []
     let hash = {}
     if (this.props.ingredients){
-      this.state.exactRecipes.forEach(recipe => possibleCategories.push(...recipe.categories) )
-      this.state.closeRecipes.forEach(recipe => possibleCategories.push(...recipe.categories) )
+      this.state.exactRecipes.forEach(recipe => possibleCategories.push(...recipe.categories.map(cat => cat.name)) )
+      this.state.closeRecipes.forEach(recipe => possibleCategories.push(...recipe.categories.map(cat => cat.name)) )
   
       
     } else {
-      this.props.recipes.forEach(recipe => possibleCategories.push(...recipe.categories) )
+      this.props.recipes.forEach(recipe => 
+        possibleCategories.push(...recipe.categories.map(cat => cat.name)) 
+        )
     }
     possibleCategories.forEach(category => {
       if (!hash[category]) hash[category] = 0
