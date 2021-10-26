@@ -1,12 +1,10 @@
 import React from "react";
-import { AuthRoute } from "../util/route_util";
 import { Route } from "react-router";
 import { Switch } from "react-router-dom";
 import Modal from './modal/modal';
 import Sidemenu from './sidemenu/sidemenu';
 import NavBarContainer from "./nav/navbar_container";
 import RecipeShowContainer from './recipes/recipe_show_container';
-import PantryShowContainer from './pantry/pantry_container';
 import RecipeIndexContainer from "./recipes/recipe_index_container";
 import "./app.css";
 

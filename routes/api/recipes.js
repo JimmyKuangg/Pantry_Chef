@@ -9,22 +9,22 @@ const validateRecipeInput = require('../../validation/recipe.js');
 
 router.get('/', (req, res) => {
   Recipe.find()
-    .populate('ingredients.ingredient', '-_id, name')
+    .populate('ingredients.ingredient')
     .populate('categories')
     .populate('author', '-_id, username')
     .then(recipes => {
       let recipesIndex = [];
-
       for(let i = 0; i < recipes.length; i++) {
         let recipeCard = {
           id: recipes[i]._id,
           name: recipes[i].name,
-          ingredients: recipes[i].ingredients.map(ele => ({
+          ingredients: recipes[i].ingredients.map(ele => {
+            return{
             ingredient: ele.ingredient.name,
             quantity: ele.quantity,
             unit: ele.unit,
-            id: ele.id
-          })),
+            id: ele.ingredient.id
+          }}),
           cookTime: recipes[i].cookTime,
           calories: recipes[i].calories,
           categories:recipes[i].categories,
@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
 
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
-    .populate('ingredients.ingredient', '-_id, name')
+    .populate('ingredients.ingredient')
     .populate('categories')
     .populate('author', '-_id, username')
     .then(recipe => {
@@ -53,7 +53,7 @@ router.get('/:recipeId', (req, res) => {
           ingredient: ele.ingredient.name,
           quantity: ele.quantity,
           unit: ele.unit,
-          id: ele.id
+          id: ele.ingredient.id
         })),
         cookTime: recipe.cookTime,
         calories: recipe.calories,

@@ -43,11 +43,18 @@
   height: 100%;
 }
 
+#selected-categories{
+  height: 100px;
+  overflow: scroll;
+}
+
 #category-select-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 50%;
+  height: 150px;
+  overflow: scroll;
 }
 
 #recipe-edit-categories {
