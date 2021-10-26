@@ -23,7 +23,11 @@ class LoginForm extends React.Component {
       this.props.history.push('/');
     }
 
-    this.setState({ errors: Object.values(nextProps.errors) });
+    this.setState({ errors: Object.values(nextProps.errors) }, () =>
+      Object.values(this.state.errors).length === 0
+        ? this.props.closeModal()
+        : null
+    );
   }
 
   update(field) {
@@ -41,13 +45,14 @@ class LoginForm extends React.Component {
       password: this.state.password,
     };
 
-    this.props.login(user).then(() => this.props.closeModal());
+    this.props.login(user);
+    //.then(window.location.reload());
   }
 
   demoLogin(e) {
     e.preventDefault();
     this.props.demoLogin();
-    // this.props.closeModal();
+    this.props.closeModal();
   }
 
   // renderErrors() {
