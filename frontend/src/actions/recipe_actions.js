@@ -49,6 +49,7 @@ export const createRecipe = recipe => dispatch => (
 );
 
 export const editRecipe = recipe => dispatch => {
+  console.log('hi')
   return RecipeUtil.editRecipe(recipe)
     .then(recipe => dispatch(receiveRecipe(recipe)))
     .catch(err => dispatch(receiveRecipeErrors(err.response.data)))

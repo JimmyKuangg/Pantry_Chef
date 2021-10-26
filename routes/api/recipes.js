@@ -9,25 +9,25 @@ const validateRecipeInput = require('../../validation/recipe.js');
 
 router.get('/', (req, res) => {
   Recipe.find()
-    .populate('ingredients.ingredient', '-_id, name')
-    .populate('categories', '-_id, name')
+    .populate('ingredients.ingredient')
+    .populate('categories')
     .populate('author', '-_id, username')
     .then(recipes => {
       let recipesIndex = [];
-
       for(let i = 0; i < recipes.length; i++) {
         let recipeCard = {
           id: recipes[i]._id,
           name: recipes[i].name,
-          ingredients: recipes[i].ingredients.map(ele => ({
+          ingredients: recipes[i].ingredients.map(ele => {
+            return{
             ingredient: ele.ingredient.name,
             quantity: ele.quantity,
             unit: ele.unit,
-            id: ele.id
-          })),
+            id: ele.ingredient.id
+          }}),
           cookTime: recipes[i].cookTime,
           calories: recipes[i].calories,
-          categories: Object.values(recipes[i].categories).map(obj => (obj.name)),
+          categories:recipes[i].categories,
           steps: recipes[i].steps,
           author: recipes[i].author.username,
           imgUrl: recipes[i].imgUrl
@@ -42,8 +42,8 @@ router.get('/', (req, res) => {
 
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
-    .populate('ingredients.ingredient', '-_id, name')
-    .populate('categories', '-_id, name')
+    .populate('ingredients.ingredient')
+    .populate('categories')
     .populate('author', '-_id, username')
     .then(recipe => {
       let recipeShow = {
@@ -53,11 +53,11 @@ router.get('/:recipeId', (req, res) => {
           ingredient: ele.ingredient.name,
           quantity: ele.quantity,
           unit: ele.unit,
-          id: ele.id
+          id: ele.ingredient.id
         })),
         cookTime: recipe.cookTime,
         calories: recipe.calories,
-        categories: Object.values(recipe.categories).map(obj => (obj.name)),
+        categories: recipe.categories,
         steps: recipe.steps,
         author: recipe.author.username,
         imgUrl: recipe.imgUrl

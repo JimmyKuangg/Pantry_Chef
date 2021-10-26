@@ -26,7 +26,7 @@ router.post('/',
               return res.status(400).json(errors);
             } else {
                 const newCategory = new Category({
-                    name: req.body.name
+                    name: req.body.name,
                 });
         
                 newCategory.save().then( category => res.json(category))

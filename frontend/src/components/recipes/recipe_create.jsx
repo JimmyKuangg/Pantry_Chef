@@ -13,7 +13,7 @@ export default class RecipeCreateForm extends Component {
       categories: [],
       author: this.props.currentUser.id,
       steps: [],
-      imgUrl: "FOOD",
+      imgUrl: "https://i.imgur.com/9h7v94l.png",
 
       ingredient: "",
       quantity: "",
