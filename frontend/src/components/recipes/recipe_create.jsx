@@ -32,6 +32,7 @@ export default class RecipeCreateForm extends Component {
     this.addToSteps = this.addToSteps.bind(this);
     this.findName = this.findName.bind(this);
     this.findCateName = this.findCateName.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
     this.props.clearRecipeErrors();
   }
 
@@ -40,13 +41,19 @@ export default class RecipeCreateForm extends Component {
       this.props.history.push("/");
     }
 
-    this.setState({ errors: Object.values(nextProps.errors)});
+    this.setState({ errors: Object.values(nextProps.errors) });
+
+    // this.setState({ errors: Object.values(nextProps.errors) }, () =>
+    //   Object.values(this.state.errors).length === 0
+    //     ? this.props.closeModal()
+    //     : null
+    // );
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.action(this.state);
-      // .then(this.props.closeModal());
+    this.props.action(this.state)
+      .then(() => Object.values(this.state.errors).length === 0 ? this.props.closeModal() : null);
   }
 
   update(field) {
@@ -168,7 +175,7 @@ export default class RecipeCreateForm extends Component {
   }
 
   render() {
-    console.log(this.props.errors)
+    console.log(this.state.errors)
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
