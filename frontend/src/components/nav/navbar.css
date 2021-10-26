@@ -2,7 +2,7 @@
   /* background-color: rgba(255, 255, 255, 0.5); */
   position: fixed;
   width: 100vw;
-  background-color: #3F48CC;
+  background-color: #3f48cc;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   /* width: 100vw; */
   top: 0;
@@ -29,7 +29,6 @@
   display: flex;
   align-items: center;
 }
-
 
 .pc-logo {
   width: 35px;
@@ -88,6 +87,10 @@ a {
   font-size: 14px;
   min-width: 100px;
   border: 1px white solid;
+}
+
+.navbar-button:hover {
+  cursor: pointer;
 }
 
 .navbar-pantry {

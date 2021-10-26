@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import './pantry.css'
+import React, { Component } from 'react';
+import './pantry.css';
 export default class Pantry extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -13,7 +13,7 @@ export default class Pantry extends Component {
       usersRecipes: [],
       tab: 'pantry',
       showAddToPantry: true,
-    }
+    };
     this.removePantryItem = this.removePantryItem.bind(this);
     this.updatePantry = this.updatePantry.bind(this);
     this.addToPantry = this.addToPantry.bind(this);
@@ -25,12 +25,12 @@ export default class Pantry extends Component {
     this.tabClickHandler = this.tabClickHandler.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchPantry();
     this.props.fetchAllIngredients();
     this.props.fetchRecipes();
   }
-  
+
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.setState(this.props.pantry);
@@ -40,112 +40,170 @@ export default class Pantry extends Component {
 
   addToPantry() {
     let inPantry = [];
-    for(let i = 0; i < this.state.ingredients.length; i++){
+    for (let i = 0; i < this.state.ingredients.length; i++) {
       inPantry.push(this.state.ingredients[i].ingredient);
     }
-   
-    this.setState({notInPantry: this.props.ingredients.filter(ingredient => (
-      !inPantry.includes(ingredient._id)
-    ))})
 
-    this.setState({showSelect: true});
-    this.setState({showAddToPantry: false});
+    this.setState({
+      notInPantry: this.props.ingredients.filter(
+        (ingredient) => !inPantry.includes(ingredient._id)
+      ),
+    });
+
+    this.setState({ showSelect: true });
+    this.setState({ showAddToPantry: false });
   }
 
   filterUsersRecipes() {
-    this.setState({usersRecipes: this.props.recipes.filter(recipe => (
-      recipe.author === this.props.currentUser
-    ))})
-
+    if (this.props.currentUser) {
+      this.setState({
+        usersRecipes: this.props.recipes.filter(
+          (recipe) => recipe.author === this.props.currentUser.username
+        ),
+      });
+    }
   }
 
   findName(ingredientId) {
-    for(let i = 0; i < this.props.ingredients.length; i++){
-      if (ingredientId === this.props.ingredients[i]._id) return this.props.ingredients[i].name
+    for (let i = 0; i < this.props.ingredients.length; i++) {
+      if (ingredientId === this.props.ingredients[i]._id)
+        return this.props.ingredients[i].name;
     }
   }
 
   removePantryItem(e, itemId) {
-    this.setState({ingredients: this.state.ingredients.filter(
-      ingredient => (ingredient.ingredient !== itemId)
-      )})
+    this.setState({
+      ingredients: this.state.ingredients.filter(
+        (ingredient) => ingredient.ingredient !== itemId
+      ),
+    });
   }
-  
+
   updatePantry() {
-    this.props.editPantry({ingredients: this.state.ingredients});
+    this.props.editPantry({ ingredients: this.state.ingredients });
   }
 
   updateField(field) {
-    return e => {
-      this.setState({ [field]: e.target.value })
-    }
+    return (e) => {
+      this.setState({ [field]: e.target.value });
+    };
   }
-  
+
   updateCurrentPantry() {
-    let newPantryIngredients = this.state.ingredients
+    let newPantryIngredients = this.state.ingredients;
 
     newPantryIngredients.push({
-      ingredient: this.state.selectedIngredient
+      ingredient: this.state.selectedIngredient,
     });
 
-    this.setState({ingredients: newPantryIngredients})
-    this.setState({showSelect: false});
-    this.setState({showAddToPantry: true});
+    this.setState({ ingredients: newPantryIngredients });
+    this.setState({ showSelect: false });
+    this.setState({ showAddToPantry: true });
   }
 
-  tabClickHandler(field){
-    this.setState({tab: field})
+  tabClickHandler(field) {
+    this.setState({ tab: field });
   }
 
-  sideMenuContent(){
+  sideMenuContent() {
     let content;
     if (this.state.tab === 'pantry') {
       content = (
-        <div id='side-menu-content'>
-          <h1 id='side-menu-title'>My Pantry</h1>
-          <ul id='side-menu-list'>
-            {this.state.ingredients ? this.state.ingredients.map((ingredient, i) => (
-              <li className='side-menu-items' key={i}>
-                <p id='side-menu-name'>{this.findName(ingredient.ingredient)}</p>
-                <i className="fas fa-trash-alt" id='delete-ingredient' onClick={e => this.removePantryItem(e, ingredient.ingredient)}/>
-              </li>
-            )) : ''}
-          </ul>
-          { this.state.showSelect ? 
-          <form className="pantry-select" onSubmit={this.updateCurrentPantry}>
-            <select className="ingredients-select-box" onChange={this.updateField('selectedIngredient')} >
-              <option selected defaultValue hidden>Please select an ingredient</option>
-              {this.state.notInPantry.map((ingredient, i) => <option key={i} value={ingredient._id}>{ingredient.name}</option>)}
-            </select> 
-            {/* <input type="text" placeholder="QUANTITY" onChange={this.updateField('selectedQuantity')}/>
-            <input type="text" placeholder="UNIT" onChange={this.updateField('selectedUnit')}/> */}
-            <button className="purple-button" type="submit">Add to your current pantry</button>
-          </form>
-          : ''}
-          {this.state.showAddToPantry ? <button className='purple-button' onClick={() => this.addToPantry()}>Add items to pantry</button> : ''}
-          <button className='purple-button' onClick={() => this.updatePantry()}>Save pantry</button>
-        </div>
-      )
-      } else {
-        content = (
-          <div id='side-menu-content'>
-            <h1 id='side-menu-title'>My Recipes</h1>
-            <ul id='side-menu-list'>
-              {this.state.usersRecipes ? this.state.usersRecipes.map((recipe, i) => (
-                <li className='side-menu-items' key={i}>
-                  <p className='side-menu-name'>{recipe.name}</p>
-                  <div id='recipe-actions'>
-                    <i id='edit-recipe' className="fas fa-edit" onClick={() => this.props.openModal('editRecipe', recipe)}/>
-                    <i className="fas fa-trash-alt" id='delete-ingredient' onClick={() => this.props.deleteRecipe(recipe.id)}/>
-                  </div>
-                </li>
-              ))
+        <div id="side-menu-content">
+          <h1 id="side-menu-title">My Pantry</h1>
+          <ul id="side-menu-list">
+            {this.state.ingredients
+              ? this.state.ingredients.map((ingredient, i) => (
+                  <li className="side-menu-items" key={i}>
+                    <p id="side-menu-name">
+                      {this.findName(ingredient.ingredient)}
+                    </p>
+                    <i
+                      className="fas fa-trash-alt"
+                      id="delete-ingredient"
+                      onClick={(e) =>
+                        this.removePantryItem(e, ingredient.ingredient)
+                      }
+                    />
+                  </li>
+                ))
               : ''}
-            </ul>
-            <div className="purple-button" onClick={() => this.props.openModal('createRecipe')}>Create Recipe</div>
+          </ul>
+          {this.state.showSelect ? (
+            <form className="pantry-select" onSubmit={this.updateCurrentPantry}>
+              <select
+                className="ingredients-select-box"
+                onChange={this.updateField('selectedIngredient')}
+              >
+                <option selected defaultValue hidden>
+                  Please select an ingredient
+                </option>
+                {this.state.notInPantry.map((ingredient, i) => (
+                  <option key={i} value={ingredient._id}>
+                    {ingredient.name}
+                  </option>
+                ))}
+              </select>
+              {/* <input type="text" placeholder="QUANTITY" onChange={this.updateField('selectedQuantity')}/>
+            <input type="text" placeholder="UNIT" onChange={this.updateField('selectedUnit')}/> */}
+              <button className="purple-button" type="submit">
+                Add to your current pantry
+              </button>
+            </form>
+          ) : (
+            ''
+          )}
+          {this.state.showAddToPantry ? (
+            <button
+              className="purple-button"
+              onClick={() => this.addToPantry()}
+            >
+              Add items to pantry
+            </button>
+          ) : (
+            ''
+          )}
+          <button className="purple-button" onClick={() => this.updatePantry()}>
+            Save pantry
+          </button>
+        </div>
+      );
+    } else {
+      content = (
+        <div id="side-menu-content">
+          <h1 id="side-menu-title">My Recipes</h1>
+          <ul id="side-menu-list">
+            {this.state.usersRecipes
+              ? this.state.usersRecipes.map((recipe, i) => (
+                  <li className="side-menu-items" key={i}>
+                    <p className="side-menu-name">{recipe.name}</p>
+                    <div id="recipe-actions">
+                      <i
+                        id="edit-recipe"
+                        className="fas fa-edit"
+                        onClick={() =>
+                          this.props.openModal('editRecipe', recipe)
+                        }
+                      />
+                      <i
+                        className="fas fa-trash-alt"
+                        id="delete-ingredient"
+                        onClick={() => this.props.deleteRecipe(recipe.id)}
+                      />
+                    </div>
+                  </li>
+                ))
+              : ''}
+          </ul>
+          <div
+            className="purple-button"
+            onClick={() => this.props.openModal('createRecipe')}
+          >
+            Create Recipe
           </div>
-        )
-      }
+        </div>
+      );
+    }
     return content;
   }
 
@@ -155,18 +213,25 @@ export default class Pantry extends Component {
     }
 
     return (
-      <div id='side-menu-show'>
-        <div id='selector'>
-          <div onClick={() => this.tabClickHandler('pantry')} 
-            className="tab" 
-            id={this.state.tab === 'pantry' ? 'tab-selected' : ""}>My Pantry</div>
-          <div onClick={() => this.tabClickHandler('recipes')} 
-            className='tab'
-            id={this.state.tab === 'recipes' ? 'tab-selected' : ""}>My Recipes</div>
+      <div id="side-menu-show">
+        <div id="selector">
+          <div
+            onClick={() => this.tabClickHandler('pantry')}
+            className="tab"
+            id={this.state.tab === 'pantry' ? 'tab-selected' : ''}
+          >
+            My Pantry
+          </div>
+          <div
+            onClick={() => this.tabClickHandler('recipes')}
+            className="tab"
+            id={this.state.tab === 'recipes' ? 'tab-selected' : ''}
+          >
+            My Recipes
+          </div>
         </div>
         {this.sideMenuContent()}
-
       </div>
-    )
+    );
   }
 }

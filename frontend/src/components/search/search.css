@@ -16,7 +16,7 @@
   border: 2px solid rgba(95, 95, 95, 0.705);
   border-radius: 15px;
   font-size: 18px;
-  color: #3F48CC;
+  color: #3f48cc;
   padding: 15px;
   padding-left: 22px;
   height: 20px;
@@ -29,7 +29,7 @@
   outline: none;
 }
 
-.ingredient-suggestions-background{
+.ingredient-suggestions-background {
   position: relative;
 }
 
@@ -44,7 +44,7 @@
   overflow-y: auto;
   padding: 15px;
   scrollbar-width: thin;
-  scrollbar-color: #3F48CC;
+  scrollbar-color: #3f48cc;
   position: absolute;
   top: -5px;
   left: -264px;
@@ -80,7 +80,7 @@
 .suggestion-item {
   display: flex;
   align-items: center;
-  border: 1px solid #3F48CC;
+  border: 1px solid #3f48cc;
   background-color: rgba();
   border-radius: 25px;
   padding: 6px 10px 6px 10px;
@@ -90,12 +90,12 @@
   height: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 13px;
-  color: #3F48CC;
+  color: #3f48cc;
   transition: 0.2s;
   cursor: pointer;
 }
 
-.suggestion-item:hover{
+.suggestion-item:hover {
   transform: scale(1.1);
   transition: 0.2s;
 }
@@ -113,13 +113,13 @@
   overflow: hidden;
   overflow-y: auto;
   justify-content: center;
-  color: #3F48CC;
+  color: #3f48cc;
   padding: 10px;
 }
 
 .selected-ingredient-box {
   display: flex;
- 
+
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -129,12 +129,10 @@
   max-width: 500px;
 }
 
-
-
 .selected-ingredient-item {
   display: flex;
   align-items: center;
-  border: 1px solid #3F48CC;
+  border: 1px solid #3f48cc;
   background-color: rgba();
   border-radius: 25px;
   padding: 6px 10px 6px 10px;
@@ -150,7 +148,7 @@
   cursor: pointer;
 }
 
-.selected-ingredient-item:hover{
+.selected-ingredient-item:hover {
   transform: scale(1.1);
   transition: 0.2s;
 }
@@ -162,12 +160,16 @@
 
 #save-to-pantry {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #3F48CC;
+  background: #3f48cc;
   color: white;
   border-radius: 5px;
   padding: 8px;
   font-size: 12px;
   margin: 10px;
+}
+
+#save-to-pantry:hover {
+  cursor: pointer;
 }
 
 .search-buttons {
