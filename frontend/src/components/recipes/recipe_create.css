@@ -162,7 +162,7 @@
   height: 250px;
   display: flex;
   /* padding: 20px; */
-  margin-top: 100px;
+  margin-top: 50px;
   border-right: solid 1px black;
 }
 
@@ -185,7 +185,7 @@
 #steps-content{
   width: 45%;
   display: flex;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 #steps-input{

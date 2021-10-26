@@ -88,8 +88,8 @@ export default class RecipeEditForm extends Component {
         <div id='possible-ingredients'>
           {this.state.possibleIngredients.map(ele => <div key={ele.id} onClick={()=>this.clickIngredient(ele)}>{ele.name}</div>)}
         </div>
-        <input type='number' value={this.state.quantity} onChange={this.update('quantity')}/>
-        <input type='text' value={this.state.unit} onChange={this.update('unit')}/>
+        <input type='number' value={this.state.quantity} onChange={this.update('quantity')}/> Quantity
+        <input type='text' value={this.state.unit} onChange={this.update('unit')}/> Unit
       </div>
 
     )
@@ -146,39 +146,45 @@ export default class RecipeEditForm extends Component {
     return (
       <div className='recipe-edit'>
         <form id='recipe-edit-form' >
+          <header>
+            <h2 className='recipe-form-title'>Edit Recipe</h2>
+          </header>
         
           <div id="recipe-edit-wrapper">
             <div id='first-col'>
-              <header>
-                <h2 className='recipe-form-title'>Edit Recipe</h2>
-              </header>
 
               <div id='recipe-form-info'>
-                <label>Name of recipe
-                  <input 
-                    type="text" 
-                    placeholder="Ex: Scrambled eggs"
-                    value={this.state.name}
-                    onChange={this.update("name")}
-                  />
-                </label>
+                <div className='space-between'>
+                  <h2>Name of recipe
+                    </h2>
+                    <input 
+                      type="text" 
+                      placeholder="Ex: Scrambled eggs"
+                      value={this.state.name}
+                      onChange={this.update("name")}
+                      />
+                </div>
 
-                <label>Time to cook
-                  <input 
-                    type="text"
-                    placeholder="Ex: 10 minutes"
-                    value={this.state.cookTime}
-                    onChange={this.update("cookTime")}
-                  />
-                </label>
+                <div className='space-between'>
+                  <h2>Time to cook
+                    </h2>
+                    <input 
+                      type="text"
+                      placeholder="Ex: 10 minutes"
+                      value={this.state.cookTime}
+                      onChange={this.update("cookTime")}
+                    />
+                </div>
 
-                <label>Calories
-                  <input 
-                    type="text" 
-                    value={this.state.calories}
-                    onChange={this.update("calories")}
-                  />
-                </label>
+                <div className='space-between'>
+                  <h2>Calories
+                    </h2>
+                    <input 
+                      type="text" 
+                      value={this.state.calories}
+                      onChange={this.update("calories")}
+                    />
+                </div>
               </div>
 
               <div id="first-col-bottom">
@@ -236,7 +242,7 @@ export default class RecipeEditForm extends Component {
               </label>
 
             <div id="recipe-edit-steps">
-              <label>
+              <label id='recipe-edit-textarea'>
                 <textarea
                   id="steps-text-area"
                   value={this.state.step}
@@ -244,7 +250,7 @@ export default class RecipeEditForm extends Component {
                 />
                 <div className='purple-button' onClick={this.addToSteps}>Add step</div>
               </label>
-              <div>
+              <div id='recipe-edit-steps-wrapper'>
               
                 {this.state.steps.length > 0 ?
                   <ol id="steps-list">
@@ -259,7 +265,7 @@ export default class RecipeEditForm extends Component {
              
         <input className='purple-button' id="edit-recipe-button" type="submit" onClick={this.handleSubmit} value="Edit Recipe" />
         <button className='close-modal' onClick={this.props.closeModal}>X</button>
-        {this.renderErrors()}
+        {/* {this.renderErrors()} */}
         </form>
       </div>
     )
