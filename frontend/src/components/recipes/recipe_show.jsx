@@ -22,9 +22,10 @@ class RecipeShow extends Component {
 
     return (
       <div className="show-wrapper">
+        <div className='nav-bar-block'></div>
         <div className="show-header">
           <div className="recipe-photo-wrapper">
-            <img id="recipe-photo" src={recipe.imgUrl} />
+            <img id="recipe-photo" src={recipe.imgUrl} alt='recipe'/>
           </div>
           <div className="recipe-info">
             <div className="recipe-name"> {recipe.name} </div>

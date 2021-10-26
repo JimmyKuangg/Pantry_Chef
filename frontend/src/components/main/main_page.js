@@ -1,10 +1,8 @@
 import React from "react";
 import Search from '../search/search_container';
-import logo from './logo.png';
 import "./main.css";
 import "../../index.css"
 import navlogo from "../nav/navlogo.png";
-import Sidemenu from "../sidemenu/sidemenu";
 
 
 class MainPage extends React.Component {
@@ -25,7 +23,9 @@ class MainPage extends React.Component {
               <div className='main-tooltip'>
                 <div className='tooltip-mark'>?</div>              
                 <div className='main-instructions'>
-                  Search for all ingredients in your pantry to find recipes you can make. Save these ingredients in 'My Pantry' (upper right) to quickly search next time.
+                  Search for all ingredients in your pantry to find recipes you can make. 
+                  Recipes will only show if at least 50% of its ingredients are searched for.
+                  Try adding 'egg' as a search term to find another recipe!
                 </div>
               </div>
             </div>

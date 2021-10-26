@@ -4,7 +4,9 @@
   height: 100vh;
   right: 0;
   top: 70px;
+  /* background: white; */
 }
+
 
 .close-sidemenu {
   position: absolute;

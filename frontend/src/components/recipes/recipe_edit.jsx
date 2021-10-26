@@ -15,8 +15,10 @@ export default class RecipeEditForm extends Component {
       category: '',
 
       step: '',
-    };
 
+      errors: {}
+    }
+    
     this.backToId = this.backToId.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
@@ -24,13 +26,27 @@ export default class RecipeEditForm extends Component {
     this.addToSteps = this.addToSteps.bind(this);
     this.findName = this.findName.bind(this);
     this.findCateName = this.findCateName.bind(this);
+    this.props.clearRecipeErrors();
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser === true) {
+      this.props.history.push("/");
+    }
+
+    this.setState({ errors: Object.values(nextProps.errors)});
+  }
+
+  // componentDidUpdate() {
+  //   this.findName();
+  //   this.findCateName();
+  // }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props
-      .action(this.state)
-      .then(this.props.closeModal())
+    this.props.action(this.state)
+      // .then(this.props.closeModal())
+      // .then(this.backToId)
       .then(this.props.closeSidemenu());
   }
 
@@ -181,13 +197,14 @@ export default class RecipeEditForm extends Component {
     }
 
     for (let i = 0; i < this.state.ingredients.length; i++) {
-      hashMap['ingredient'] = this.state.ingredients[i].ingredient;
-      hashMap['quantity'] = this.state.ingredients[i].quantity;
-      hashMap['unit'] = this.state.ingredients[i].unit;
+      hashMap["_id"] = this.state.ingredients[i]._id;
+      hashMap["ingredient"] = this.state.ingredients[i].ingredient;
+      hashMap["quantity"] = this.state.ingredients[i].quantity;
+      hashMap["unit"] = this.state.ingredients[i].unit;
       hashCheck.push(hashMap);
       hashMap = {};
     }
-
+    console.log(propsIngredients);
     for (let j = 0; j < propsIngredients.length; j++) {
       for (let k = 0; k < hashCheck.length; k++) {
         if (propsIngredients[j][0] === hashCheck[k]['ingredient']) {
@@ -196,6 +213,8 @@ export default class RecipeEditForm extends Component {
             quantity: hashCheck[k]['quantity'],
             unit: hashCheck[k]['unit'],
           });
+        if (propsIngredients[j][0] === hashCheck[k]["ingredient"]) {
+          newIngredients.push({ _id: propsIngredients[j][1], ingredient: propsIngredients[j][0], quantity: hashCheck[k]["quantity"], unit: hashCheck[k]["unit"] });
         }
       }
     }
@@ -206,10 +225,36 @@ export default class RecipeEditForm extends Component {
     });
   }
 
+  backToName() {
+    for (let i = 0; i < this.state.ingredients.length; i++) {
+      if (this.state.ingredients[i]["_id"] === undefined) {
+        for (let j = 0; j < this.props.ingredients; j++) {
+          if (this.state.ingredients[i]["ingredient"] === this.props.ingredients[j][0]) {
+            this.state.ingredients[i]["_id"] = this.props.ingredients[j][1];
+          }
+        }
+      }
+    }
+  }
+
+  renderErrors() {
+    return (
+      <ul>
+        {Object.keys(this.state.errors).map((error, i) => (
+          <li key={`error-${i}`}>{this.state.errors[error]}</li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
+
+    console.log(this.state)
+
+    this.backToName();
 
     return (
       <div className="recipe-edit">
@@ -280,11 +325,8 @@ export default class RecipeEditForm extends Component {
                       onChange={this.update('category')}
                     >
                       <option defaultValue>Select a category</option>
-                      {this.props.categories.map((category) => (
-                        <option key={category._id} value={category._id}>
-                          {category.name}
-                        </option>
-                      ))}
+                      {this.props.categories.map(category =>
+                        <option key={category._id} value={category} >{category.name}</option>)}
                     </select>
                     <div
                       className="purple-button"
@@ -366,18 +408,11 @@ export default class RecipeEditForm extends Component {
               </div>
             </div>
           </div>
-
-          <input
-            className="purple-button"
-            id="edit-recipe-button"
-            type="submit"
-            onClick={this.backToId}
-            onSubmit={this.handleSubmit}
-            value="Edit Recipe"
-          />
-          <button className="close-modal" onClick={this.props.closeModal}>
-            X
-          </button>
+        </div>
+             
+        <input className='purple-button' id="edit-recipe-button" type="submit" onClick={this.backToId} onSubmit={this.handleSubmit} value="Edit Recipe" />
+        <button className='close-modal' onClick={this.props.closeModal}>X</button>
+        {this.renderErrors()}
         </form>
       </div>
     );

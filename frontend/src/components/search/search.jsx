@@ -13,6 +13,7 @@ export default class Search extends Component {
     this.addIngredientsToPantry = this.addIngredientsToPantry.bind(this)
     this.suggestionClickHandler = this.suggestionClickHandler.bind(this)
     this.removeSelectedClickHandler = this.removeSelectedClickHandler.bind(this)
+    this.clearIngredients = this.clearIngredients.bind(this)
   }
 
   componentDidMount(){
@@ -33,7 +34,7 @@ export default class Search extends Component {
       let search = e.target.value;
       let suggestions = this.props.ingredients.filter(ingredient => 
       !this.state.selectedIngredients.includes(ingredient) &&
-      ingredient.name.includes(search) && search !== '')
+      ingredient.name.includes(search.toLowerCase()) && search !== '')
 
     this.setState({search: search, 
       ingredientSuggestions: suggestions
@@ -74,6 +75,10 @@ export default class Search extends Component {
     this.props.editPantry(newPantry)
   }
 
+  clearIngredients(){
+    this.setState({selectedIngredients: []})
+  }
+
   render() {
     return (
       <div>
@@ -90,9 +95,11 @@ export default class Search extends Component {
             <div className="search-icon"></div>
           </div>
           {
-            this.state.ingredientSuggestions.length === 0 ? "" : 
+            this.state.ingredientSuggestions.length === 0 ? '' : 
               <div className='ingredient-suggestions-background' >
-                <div className='ingredient-suggestions' id='ig-s' style={{display: this.state.ingredientSuggestions === [] ? 'none' : 'block'}}>
+                <div className='ingredient-suggestions' id='ig-s' 
+                // style={{display: this.state.ingredientSuggestions === [] ? 'none' : 'block'}}
+                >
                   <ul>
                     {this.state.ingredientSuggestions.map((suggestion, i) => (
                       this.state.selectedIngredients.includes(suggestion) ? 
@@ -112,7 +119,12 @@ export default class Search extends Component {
               </ul>
             </div>
           </div>
-            {this.props.currentUser && this.state.selectedIngredients.length > 0 ? <button id='save-to-pantry' onClick={this.addIngredientsToPantry}>Add Ingredients to Pantry</button> : ""}
+          <div className='search-buttons'>
+            {this.state.selectedIngredients.length === 0 ? '' : 
+            <button id='save-to-pantry' onClick={this.clearIngredients}>Clear Searched Ingredients</button>
+            }
+            {this.props.currentUser && this.state.selectedIngredients.length > 0 ? <button id='save-to-pantry' onClick={this.addIngredientsToPantry}>Save Searched Ingredients to My Pantry</button> : ""}
+          </div>
           <div>
             <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
           </div>
