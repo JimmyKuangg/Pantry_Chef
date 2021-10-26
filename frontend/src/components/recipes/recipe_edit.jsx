@@ -135,12 +135,11 @@ export default class RecipeEditForm extends Component {
     return (
       <div className='recipe-edit'>
         <form id='recipe-edit-form' >
-        
+        <header>
+          <h2 className='recipe-form-title'>Edit Recipe</h2>
+        </header>
           <div id="recipe-edit-wrapper">
             <div id='first-col'>
-              <header>
-                <h2 className='recipe-form-title'>Edit Recipe</h2>
-              </header>
 
               <div id='recipe-form-info'>
                 <label>Name of recipe
