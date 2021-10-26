@@ -78,8 +78,8 @@ export default class RecipeEditForm extends Component {
         <div id='possible-ingredients'>
           {this.state.possibleIngredients.map(ele => <div key={ele.id} onClick={()=>this.clickIngredient(ele)}>{ele.name}</div>)}
         </div>
-        <input type='number' value={this.state.quantity} onChange={this.update('quantity')}/>
-        <input type='text' value={this.state.unit} onChange={this.update('unit')}/>
+        <input type='number' value={this.state.quantity} onChange={this.update('quantity')}/> Quantity
+        <input type='text' value={this.state.unit} onChange={this.update('unit')}/> Units
       </div>
 
     )
@@ -170,7 +170,7 @@ export default class RecipeEditForm extends Component {
                 </label>
               </div>
 
-              <div id="first-col-bottom">
+              <div id="first-col-bottom"> 
                 <label id="category-select">
                   <div id="recipe-edit-categories">
                     <h2>Selected Categories</h2>

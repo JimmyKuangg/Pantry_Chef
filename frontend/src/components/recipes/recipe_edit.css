@@ -41,10 +41,11 @@
 #category-select {
   display: flex;
   height: 100%;
+  margin-top: 150px;
 }
 
 #selected-categories{
-  height: 100px;
+  height: 200px;
   overflow: scroll;
 }
 
@@ -53,8 +54,11 @@
   flex-direction: column;
   justify-content: center;
   width: 50%;
-  height: 150px;
+  height: 170px;
   overflow: scroll;
+  border: 1px solid black;
+  border-radius: 7px;
+  overflow-x: hidden;
 }
 
 #recipe-edit-categories {
@@ -65,6 +69,7 @@
 
 #recipe-edit-categories h2 {
   font-size: 30px;
+
 }
 #recipe-edit-categories ul {
   overflow: scroll;
@@ -74,7 +79,11 @@
 #possible-ingredients{
   height: 150px;
   overflow: scroll;
+  border: 1px solid black;
+  border-radius: 7px;
+  overflow-x: hidden;
 }
+
 
 #second-col {
   display: flex;
@@ -100,6 +109,13 @@
 
 #recipe-edit-steps {
   display: flex;
+  margin-top: 80px;
+}
+
+#steps-list {
+  border: 1px solid black;
+  border-radius: 7px;
+  overflow-x: hidden;
 }
 
 #edit-recipe-button {
