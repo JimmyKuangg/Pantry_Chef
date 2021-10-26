@@ -63,7 +63,7 @@ export default class RecipeEditForm extends Component {
     let categories = this.state.categories.map((category) => category._id);
 
     let recipe = {
-      author: this.state.author,
+      author: this.props.currentUser.id,
       calories: this.state.calories,
       categories: categories,
       name: this.state.name,
