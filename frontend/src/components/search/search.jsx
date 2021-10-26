@@ -1,135 +1,191 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import RecipeIndexContainer from '../recipes/recipe_index_container';
-import "./search.css";
+import './search.css';
 
 export default class Search extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       search: '',
       ingredientSuggestions: [],
-      selectedIngredients: []
+      selectedIngredients: [],
+    };
+    this.addIngredientsToPantry = this.addIngredientsToPantry.bind(this);
+    this.suggestionClickHandler = this.suggestionClickHandler.bind(this);
+    this.removeSelectedClickHandler =
+      this.removeSelectedClickHandler.bind(this);
+    this.clearIngredients = this.clearIngredients.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchAllIngredients();
+    if (this.props.currentUser.id) {
+      this.props.fetchPantry().then(() =>
+        this.setState({
+          selectedIngredients: this.props.pantry.ingredients.map(
+            (ingredient) => ({
+              _id: ingredient.ingredient,
+              name: ingredient.name,
+            })
+          ),
+        })
+      );
     }
-    this.addIngredientsToPantry = this.addIngredientsToPantry.bind(this)
-    this.suggestionClickHandler = this.suggestionClickHandler.bind(this)
-    this.removeSelectedClickHandler = this.removeSelectedClickHandler.bind(this)
-    this.clearIngredients = this.clearIngredients.bind(this)
   }
 
-  componentDidMount(){
-    this.props.fetchAllIngredients()
-    if(this.props.currentUser.id) { this.props.fetchPantry()
-      .then(()=>  this.setState({selectedIngredients: this.props.pantry.ingredients.map(ingredient => ({_id: ingredient.ingredient, name: ingredient.name}))})
-    )}
-  }
-
-  componentDidUpdate(prevProps){
-    if(prevProps.currentUser !== this.props.currentUser){
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentUser !== this.props.currentUser) {
       window.location.reload();
     }
   }
 
+  update(e) {
+    let search = e.target.value;
+    let suggestions = this.props.ingredients.filter(
+      (ingredient) =>
+        !this.state.selectedIngredients.includes(ingredient) &&
+        ingredient.name.includes(search.toLowerCase()) &&
+        search !== ''
+    );
 
-  update(e){
-      let search = e.target.value;
-      let suggestions = this.props.ingredients.filter(ingredient => 
-      !this.state.selectedIngredients.includes(ingredient) &&
-      ingredient.name.includes(search.toLowerCase()) && search !== '')
-
-    this.setState({search: search, 
-      ingredientSuggestions: suggestions
-    })
+    this.setState({ search: search, ingredientSuggestions: suggestions });
   }
 
-
-  suggestionClickHandler(e, value){
+  suggestionClickHandler(e, value) {
     e.preventDefault();
-    this.setState({selectedIngredients: [...this.state.selectedIngredients, value]})
-    let filtered = this.state.ingredientSuggestions.filter(ingredient => ingredient.name !== value.name)
+    this.setState({
+      selectedIngredients: [...this.state.selectedIngredients, value],
+    });
+    let filtered = this.state.ingredientSuggestions.filter(
+      (ingredient) => ingredient.name !== value.name
+    );
 
-    this.setState({ingredientSuggestions: filtered})
+    this.setState({ ingredientSuggestions: filtered });
   }
 
-  removeSelectedClickHandler(e, value){
-    let newSelectedIngredients = this.state.selectedIngredients.filter(ingredient => ingredient.name !== value)
-    this.setState({selectedIngredients: newSelectedIngredients})
+  removeSelectedClickHandler(e, value) {
+    let newSelectedIngredients = this.state.selectedIngredients.filter(
+      (ingredient) => ingredient.name !== value
+    );
+    this.setState({ selectedIngredients: newSelectedIngredients });
   }
 
-  addIngredientsToPantry(e){
+  addIngredientsToPantry(e) {
     e.preventDefault();
-    let selectIngredients = this.state.selectedIngredients.map(ingredient => ingredient._id)
-    let hash = {}
-    let pantryIngredients = this.props.pantry.ingredients.map(ingredient => ingredient.ingredient)
-    let merged = [...selectIngredients, ...pantryIngredients]
+    let selectIngredients = this.state.selectedIngredients.map(
+      (ingredient) => ingredient._id
+    );
+    let hash = {};
+    let pantryIngredients = this.props.pantry.ingredients.map(
+      (ingredient) => ingredient.ingredient
+    );
+    let merged = [...selectIngredients, ...pantryIngredients];
 
-    merged.forEach(ingredient => {
+    merged.forEach((ingredient) => {
       if (!hash[ingredient]) hash[ingredient] = 0;
-      hash[ingredient] += 1
-    })
+      hash[ingredient] += 1;
+    });
 
-    merged = Object.keys(hash)
-    let arrayOfObjects = merged.map(ele => ({ingredient: ele}))
+    merged = Object.keys(hash);
+    let arrayOfObjects = merged.map((ele) => ({ ingredient: ele }));
     let newPantry = {
-      ingredients: arrayOfObjects
-    }
-    this.props.editPantry(newPantry)
+      ingredients: arrayOfObjects,
+    };
+    this.props.editPantry(newPantry);
   }
 
-  clearIngredients(){
-    this.setState({selectedIngredients: []})
+  clearIngredients() {
+    this.setState({ selectedIngredients: [] });
   }
 
   render() {
     return (
       <div>
         <div className="search-wrapper">
-
           <div className="search-input-wrapper">
-            <input type="text" 
-              className="search-bar" 
-              value={this.state.search} 
+            <input
+              type="text"
+              className="search-bar"
+              value={this.state.search}
               placeholder="Enter an ingredient..."
-              onChange={e => this.update(e)}
+              onChange={(e) => this.update(e)}
             />
-            
+
             <div className="search-icon"></div>
           </div>
-          {
-            this.state.ingredientSuggestions.length === 0 ? '' : 
-              <div className='ingredient-suggestions-background' >
-                <div className='ingredient-suggestions' id='ig-s' 
+          {this.state.ingredientSuggestions.length === 0 ? (
+            ''
+          ) : (
+            <div className="ingredient-suggestions-background">
+              <div
+                className="ingredient-suggestions"
+                id="ig-s"
                 // style={{display: this.state.ingredientSuggestions === [] ? 'none' : 'block'}}
-                >
-                  <ul>
-                    {this.state.ingredientSuggestions.map((suggestion, i) => (
-                      this.state.selectedIngredients.includes(suggestion) ? 
-                      "" :
-                    <li key={i} className="suggestion-item" onClick={e => this.suggestionClickHandler(e, suggestion)}>{suggestion.name} <i class="fas fa-plus"/></li>
-                    ))}
-                  </ul>      
-                </div>
+              >
+                <ul>
+                  {this.state.ingredientSuggestions.map((suggestion, i) =>
+                    this.state.selectedIngredients.includes(suggestion) ? (
+                      ''
+                    ) : (
+                      <li
+                        key={i}
+                        className="suggestion-item"
+                        onClick={(e) =>
+                          this.suggestionClickHandler(e, suggestion)
+                        }
+                      >
+                        {suggestion.name} <i class="fas fa-plus" />
+                      </li>
+                    )
+                  )}
+                </ul>
               </div>
-          }
-          
+            </div>
+          )}
+
           <div className="selected-ingredients-wrapper">
             <div className="selected-ingredients-box">
-              <ul id='selected-ingredients'>
-                {this.state.selectedIngredients.map((ingredient,i) => 
-                <li key={i} className="selected-ingredient-item" onClick={e => this.removeSelectedClickHandler(e, ingredient.name)}>{ingredient.name}<i id='xicon'className="fas fa-times"/> </li>)}
+              <ul id="selected-ingredients">
+                {this.state.selectedIngredients.map((ingredient, i) => (
+                  <li
+                    key={i}
+                    className="selected-ingredient-item"
+                    onClick={(e) =>
+                      this.removeSelectedClickHandler(e, ingredient.name)
+                    }
+                  >
+                    {ingredient.name}
+                    <i id="xicon" className="fas fa-times" />{' '}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
-          <div className='search-buttons'>
-            {this.state.selectedIngredients.length === 0 ? '' : 
-            <button id='save-to-pantry' onClick={this.clearIngredients}>Clear Searched Ingredients</button>
-            }
-            {this.props.currentUser && this.state.selectedIngredients.length > 0 ? <button id='save-to-pantry' onClick={this.addIngredientsToPantry}>Save Searched Ingredients to My Pantry</button> : ""}
+          <div className="search-buttons">
+            {this.state.selectedIngredients.length === 0 ? (
+              ''
+            ) : (
+              <button id="save-to-pantry" onClick={this.clearIngredients}>
+                Clear Searched Ingredients
+              </button>
+            )}
+            {this.props.currentUser &&
+            this.state.selectedIngredients.length > 0 ? (
+              <button id="save-to-pantry" onClick={this.addIngredientsToPantry}>
+                Save Searched Ingredients to My Pantry
+              </button>
+            ) : (
+              ''
+            )}
           </div>
           <div>
-            <RecipeIndexContainer ingredients={this.state.selectedIngredients} key={this.state.selectedIngredients}/>
+            <RecipeIndexContainer
+              ingredients={this.state.selectedIngredients}
+              key={this.state.selectedIngredients}
+            />
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
