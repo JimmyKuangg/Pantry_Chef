@@ -47,7 +47,7 @@ class SignupForm extends React.Component {
   demoLogin(e) {
     e.preventDefault();
     this.props.demoLogin();
-    // this.props.closeModal();
+    this.props.closeModal();
   }
 
   // renderErrors() {
