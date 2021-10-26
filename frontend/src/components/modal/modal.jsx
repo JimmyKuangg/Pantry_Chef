@@ -1,11 +1,11 @@
 import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
-import "./modal.css";
+import './modal.css';
 import LoginFormContainer from '../session/login_form_container';
 import SignupFormContainer from '../session/signup_form_container';
-import CreateRecipeContainer from "../recipes/recipe_create_container";
-import EditRecipeContainer from "../recipes/recipe_edit_container";
+import CreateRecipeContainer from '../recipes/recipe_create_container';
+import EditRecipeContainer from '../recipes/recipe_edit_container';
 
 function Modal(props) {
   if (!props.modal) {
@@ -24,7 +24,7 @@ function Modal(props) {
       component = <CreateRecipeContainer />;
       break;
     case 'editRecipe':
-      component = <EditRecipeContainer potatoes={props.potatoes}/>;
+      component = <EditRecipeContainer potatoes={props.potatoes} />;
       break;
     default:
       return null;
@@ -32,22 +32,22 @@ function Modal(props) {
 
   return (
     <div className="modal-background" onClick={props.closeModal}>
-      <div className="modal-child" onClick={e => e.stopPropagation()}>
-        { component }
+      <div className="modal-child" onClick={(e) => e.stopPropagation()}>
+        {component}
       </div>
     </div>
   );
 }
 
-const mSTP = state => {
+const mSTP = (state) => {
   return {
-    modal: state.ui.modal
+    modal: state.ui.modal,
   };
 };
 
-const mDTP = dispatch => {
+const mDTP = (dispatch) => {
   return {
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
