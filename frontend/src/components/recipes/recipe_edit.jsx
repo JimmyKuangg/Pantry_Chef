@@ -73,7 +73,8 @@ export default class RecipeEditForm extends Component {
       imgUrl: this.state.imgUrl,
       steps: this.state.steps,
     };
-    this.props.action(recipe);
+    this.props.action(recipe)
+      .then(() => Object.values(this.state.errors).length === 0 ? this.props.closeModal() : null);
   }
 
   update(field) {
