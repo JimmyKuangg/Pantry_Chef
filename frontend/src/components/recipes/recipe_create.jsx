@@ -40,13 +40,19 @@ export default class RecipeCreateForm extends Component {
       this.props.history.push("/");
     }
 
-    this.setState({ errors: Object.values(nextProps.errors)});
+    this.setState({ errors: Object.values(nextProps.errors) });
+
+    // this.setState({ errors: Object.values(nextProps.errors) }, () =>
+    //   Object.values(this.state.errors).length === 0
+    //     ? this.props.closeModal()
+    //     : null
+    // );
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.action(this.state);
-      // .then(this.props.closeModal());
+    this.props.action(this.state)
+      .then(() => Object.values(this.state.errors).length === 0 ? this.props.closeModal() : null);
   }
 
   update(field) {
@@ -157,18 +163,36 @@ export default class RecipeCreateForm extends Component {
     this.setState({ steps: newSteps });
   }
 
-  renderErrors() {
-    return (
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>{this.state.errors[error]}</li>
-        ))}
-      </ul>
-    );
+  // renderErrors() {
+  //   return (
+  //     <ul>
+  //       {Object.keys(this.state.errors).map((error, i) => (
+  //         <li key={`error-${i}`}>{this.state.errors[error]}</li>
+  //       ))}
+  //     </ul>
+  //   );
+  // }
+
+  errorId(field) {
+    for (let i = 0; i < this.state.errors.length; i++) {
+      if (this.state.errors[i].includes(`${field}`)) {
+        return 'error-field';
+      }
+    }
+    return null;
+  }
+
+  errorMessage(field) {
+    for (let i = 0; i < this.state.errors.length; i++) {
+      if (this.state.errors[i].includes(`${field}`)) {
+        return <p id="error-message">{this.state.errors[i]}</p>;
+      }
+    }
+    return null;
   }
 
   render() {
-    console.log(this.props.errors)
+    console.log(this.state.errors)
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
@@ -182,28 +206,34 @@ export default class RecipeCreateForm extends Component {
               <div className='space-between'>
                 <h3>Name of recipe</h3>
                 <input 
+                  id={this.errorId("Name")}
                   type="text" 
                   placeholder="Ex: Scrambled eggs"
                   value={this.state.name}
                   onChange={this.update("name")}
                 />
+                {this.errorMessage('Name')}
               </div>
               <div className='space-between'>
                 <h3>Time to cook</h3>
                 <input 
+                  id={this.errorId("Cook")}
                   type="text"
                   placeholder="Ex: 10 minutes"
                   value={this.state.cookTime}
                   onChange={this.update("cookTime")}
                 />
+                {this.errorMessage("Cook")}
               </div>
               <div className='space-between'>
                 <h3>Calories</h3>
                 <input 
+                  id={this.errorId("Calories")}
                   type="text" 
                   value={this.state.calories}
                   onChange={this.update("calories")}
                 />
+                {this.errorMessage("Calories")}
               </div>
             </div>
 
@@ -251,13 +281,15 @@ export default class RecipeCreateForm extends Component {
                     </div>
                   </div>
                   <div id='categories-inputs'>
-                    <select className="ingredients-select-box" onChange={this.update("category")}>
+                    <select id={this.errorId('Categories')} className="ingredients-select-box" onChange={this.update("category")}>
                         <option defaultValue>Select a category</option>
                         {this.props.categories.map(category =>
                         <option key={category._id} value={category._id} >{category.name}</option>)}
                     </select>
+                      {this.errorMessage('Categories')}
                     <div className='purple-button' onClick={this.addToCategories}>Add category</div>
                   </div>
+
               </div>              
 
             </div>
@@ -267,10 +299,11 @@ export default class RecipeCreateForm extends Component {
               <div id='steps-input-and-steps'>
                 <div id='steps-input'>
                   <textarea
-                    id='steps-text-area' 
+                    id={this.errorId('Steps')} 
                     value={this.state.step}
                     onChange={this.update("step")}
                   />
+                  {this.errorMessage('Steps')}
                   <div className='purple-button' onClick={this.addToSteps}>Add step</div>
                 </div>
                 <div id='current-steps'>
@@ -284,12 +317,13 @@ export default class RecipeCreateForm extends Component {
                     </ol> : <p>Add some steps!</p>
                   }
                 </div>
+
               </div>
             </div>
         </div>
         <input type="submit" id='create-recipe-button' className='purple-button' onSubmit={this.handleSubmit} value="Create Recipe" />
 
-        {this.renderErrors()}
+        {/* {this.renderErrors()} */}
         </form>
       </div>
     )

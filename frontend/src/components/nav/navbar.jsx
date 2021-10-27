@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./navbar.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './navbar.css';
 import navlogo from './navlogo.png';
 
 class NavBar extends React.Component {
@@ -13,6 +13,7 @@ class NavBar extends React.Component {
   logoutUser(e) {
     e.preventDefault();
     this.props.logout();
+    window.location.reload();
   }
 
   getLinks() {
@@ -21,7 +22,14 @@ class NavBar extends React.Component {
         <div className="navbar-right">
           <div className="navbar-item">
             <div className="navbar-pantry">
-              <button className="navbar-button" onClick={!this.props.sideMenuOpen ? () => this.props.openSidemenu() : () => this.props.closeSidemenu()}>
+              <button
+                className="navbar-button"
+                onClick={
+                  !this.props.sideMenuOpen
+                    ? () => this.props.openSidemenu()
+                    : () => this.props.closeSidemenu()
+                }
+              >
                 MY PANTRY
               </button>
             </div>
@@ -72,11 +80,8 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="navbar-container">
-
         <div className="navbar-content">
-        
           <div className="navbar-left">
-
             <div className="navbar-logo-box">
               <a href="/">
                 <img className="pc-logo" src={navlogo} alt="Pantry Chef logo" />
@@ -85,21 +90,18 @@ class NavBar extends React.Component {
 
             <div className="navbar-item">
               <div className="navbar-about">
-                <Link to='/recipes'>ALL RECIPES</Link>
+                <Link to="/recipes">ALL RECIPES</Link>
               </div>
             </div>
 
             <div className="navbar-item">
               <div className="navbar-about">
-                <Link to='/meet-the-team'>MEET THE TEAM</Link>
+                <Link to="/meet-the-team">MEET THE TEAM</Link>
               </div>
             </div>
-
           </div>
 
           {this.getLinks()}
-
-
         </div>
       </div>
     );
