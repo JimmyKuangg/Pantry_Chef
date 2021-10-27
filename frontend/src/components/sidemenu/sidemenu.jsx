@@ -6,9 +6,7 @@ import './sidemenu.css';
 import Pantry from '../pantry/pantry_container';
 
 class SideMenu extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   componentDidUpdate(prevProps) {
     if (prevProps.location !== this.props.location) {

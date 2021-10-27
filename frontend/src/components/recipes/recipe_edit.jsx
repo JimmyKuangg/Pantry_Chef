@@ -262,7 +262,6 @@ export default class RecipeEditForm extends Component {
                       {this.state.categories.length >= 0 ? (
                         <ul
                           id={this.errorId('Categories')}
-                          id="selected-categories"
                         >
                           {this.state.categories.map((category, i) => (
                             <li key={i} id="category-list-item">
@@ -304,7 +303,7 @@ export default class RecipeEditForm extends Component {
             <div id="second-col">
               <div id="recipe-ingredients-title">Ingredients</div>
               <label className="recipe-edit-ingredients">
-                <div id="recipe-edit-inputs" id={this.errorId('Ingredients')}>
+                <div id={this.errorId('Ingredients')}>
                   {this.ingredientSelect()}
                   <div
                     className="purple-button"
@@ -319,7 +318,7 @@ export default class RecipeEditForm extends Component {
                   <ul id="ingredients-list">
                     <h2>Current Ingredients</h2>
                     {this.state.ingredients.map((ele, i) => (
-                      <li key={i} id="selected-ingredient" key={ele.id}>
+                      <li id="selected-ingredient" key={ele.id}>
                         {ele.ingredient}
                         <button
                           onClick={(e) =>
