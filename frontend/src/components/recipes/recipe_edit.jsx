@@ -23,7 +23,6 @@ export default class RecipeEditForm extends Component {
     this.addToIngredients = this.addToIngredients.bind(this);
     this.clickCategory = this.clickCategory.bind(this);
     this.addToSteps = this.addToSteps.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
     this.removeStep = this.removeStep.bind(this);
@@ -155,6 +154,24 @@ export default class RecipeEditForm extends Component {
     );
   }
 
+  errorId(field) {
+    for (let i = 0; i < this.state.errors.length; i++) {
+      if (this.state.errors[i].includes(`${field}`)) {
+        return 'error-field';
+      }
+    }
+    return null;
+  }
+
+  errorMessage(field) {
+    for (let i = 0; i < this.state.errors.length; i++) {
+      if (this.state.errors[i].includes(`${field}`)) {
+        return <p id="error-message">{this.state.errors[i]}</p>;
+      }
+    }
+    return null;
+  }
+
   removeCategory(e, name) {
     this.setState({
       categories: this.state.categories.filter((cat) => cat.name !== name),
@@ -190,30 +207,36 @@ export default class RecipeEditForm extends Component {
                 <label>
                   Name of recipe
                   <input
+                    id={this.errorId("Name")}
                     type="text"
                     placeholder="Ex: Scrambled eggs"
                     value={this.state.name}
                     onChange={this.update('name')}
                   />
+                  {this.errorMessage("Name")}
                 </label>
 
                 <label>
                   Time to cook
                   <input
+                    id={this.errorId("Cook")}
                     type="text"
                     placeholder="Ex: 10 minutes"
                     value={this.state.cookTime}
                     onChange={this.update('cookTime')}
                   />
+                  {this.errorMessage("Cook")}
                 </label>
 
                 <label>
                   Calories
                   <input
+                    id={this.errorId("Calories")}
                     type="text"
                     value={this.state.calories}
                     onChange={this.update('calories')}
                   />
+                  {this.errorMessage("Calories")}
                 </label>
               </div>
 
