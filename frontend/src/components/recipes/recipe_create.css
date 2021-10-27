@@ -40,7 +40,7 @@
   font-size: 20px;
   /* margin-bottom: 20px; */
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 
@@ -53,7 +53,7 @@
 #recipe-small-inputs{
   /* display: flex; */
   /* flex-direction: column; */
-  margin: 5px;
+  /* margin: 5px; */
   width: 50%;
   height: 250px;
   /* border-right: 2px solid #3F48CC; */
@@ -84,11 +84,16 @@
 
 #ingredient-section{
   display: flex;
-  /* flex-wrap: wrap; */
   justify-content: center;
   justify-content: space-between;
-  /* align-items: center; */
-  /* width: 100%; */
+}
+
+#ingredient-input h2{
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  padding-bottom: 20px;
+  text-decoration: underline;
 }
 
 #selected-ingredient, #category-list-item, #step-list-item{
@@ -161,6 +166,7 @@
   width: 50%;
   height: 250px;
   display: flex;
+  flex-direction: column;
   /* padding: 20px; */
   margin-top: 50px;
   border-right: solid 1px black;
@@ -171,21 +177,56 @@
 }
 
 #selected-categories{
-  width: 40%;
-  height: 600px;
+  width: 100%;
+  max-height: 300px;
   padding-right: 20px;
-  margin-right: 20px;
+
+}
+
+#selected-categories-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 40px;
 }
 
 #selected-categories-list{
   overflow: scroll;
-  height: 200px;
+  max-height: 500px;
 }
+
+#selected-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin-right: 30px;
+}
+
+#categories-input p {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+
 
 #steps-content{
   width: 45%;
   display: flex;
+  flex-direction: column;
   margin-top: 50px;
+}
+
+#steps-title {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  padding-bottom: 20px;
+  text-decoration: underline;
+}
+
+#steps-input-and-steps {
+  display: flex;
 }
 
 #steps-input{

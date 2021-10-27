@@ -147,7 +147,7 @@ export default class RecipeEditForm extends Component {
       <div className='recipe-edit'>
         <form id='recipe-edit-form' >
           <header>
-            <h2 className='recipe-form-title'>Edit Recipe</h2>
+            <p className='recipe-form-title'>Edit Recipe</p>
           </header>
         
           <div id="recipe-edit-wrapper">
@@ -188,6 +188,8 @@ export default class RecipeEditForm extends Component {
               </div>
 
               <div id="first-col-bottom">
+                <div id='category-title'>Categories</div>
+                <div id='category-content'>
                 <label id="category-select">
                   <div id="recipe-edit-categories">
                     <h2>Selected Categories</h2>
@@ -216,13 +218,15 @@ export default class RecipeEditForm extends Component {
 
                   </div>
                 </label>
+                </div>
               </div>
 
           </div> 
 
           <div id='second-col'>
-              <label className="recipe-edit-ingredients">
 
+            <div id='recipe-ingredients-title'>Ingredients</div>
+              <label className="recipe-edit-ingredients">
                 <div id='recipe-edit-inputs'>
                   {this.ingredientSelect()}
                   <div className='purple-button' onClick={this.addToIngredients}>Add ingredient</div>
@@ -238,9 +242,9 @@ export default class RecipeEditForm extends Component {
                     </li>)}
                   </ul>
                 </div>
-
               </label>
 
+            <div id='recipe-steps-title'>Steps</div>
             <div id="recipe-edit-steps">
               <label id='recipe-edit-textarea'>
                 <textarea
