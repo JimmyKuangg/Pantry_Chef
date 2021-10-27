@@ -10,11 +10,12 @@
 
 .modal-child {
   position: absolute;
-  top: 50%;
+  top: 53%;
   left: 50%;
   width: 100%;
   padding: 20px;
   transform: translate(-50%, -50%);
+  /* transform: scale(0.7); */
   background-color: #ffffff;
   display: flex;
   justify-content: center;

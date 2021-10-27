@@ -238,77 +238,86 @@ export default class RecipeCreateForm extends Component {
             </div>
 
             <div id='ingredient-input'>
-              {/* <h2>Ingredients</h2> */}
-              <div id='ingredient-section'>
+              <h2>Ingredients</h2>
+              <div id='ingredient-section-wrapper'>
+                <div id='ingredient-section'>
+                  <div id='ingredient-inputs'>
+                    {this.ingredientSelect()}
+                    {this.quantityInput()}
+                    {this.unitInput()}
+                    <div className='purple-button' onClick={this.addToIngredients}>Add ingredient</div>
+                  </div>
 
-                <div id='ingredient-inputs'>
-                  {this.ingredientSelect()}
-                  {this.quantityInput()}
-                  {this.unitInput()}
-                  <div className='purple-button' onClick={this.addToIngredients}>Add ingredient</div>
+                  <div className='ingredients-list-wrapper'>
+                      <h3>Current Ingredients</h3>
+                      <ul id='ingredients-list'>
+                        {this.state.ingredients.length === 0 ? <p>Add some ingredients!</p> : ""}
+                        {this.state.ingredients.map(ingredient => 
+                        <li id='selected-ingredient' key={ingredient.ingredient}>
+                          {this.findName(ingredient.ingredient)}
+                          <i class="fas fa-trash-alt" onClick={e => this.removeIngredient(e, ingredient.ingredient)} />
+                        </li>)}
+                      </ul>
+                  </div>
                 </div>
-
-              <div className='ingredients-list-wrapper'>
-                  <h3>Current Ingredients</h3>
-                  <ul id='ingredients-list'>
-                    {this.state.ingredients.length === 0 ? <p>Add some ingredients!</p> : ""}
-                    {this.state.ingredients.map(ingredient => 
-                    <li id='selected-ingredient' key={ingredient.ingredient}>
-                      {this.findName(ingredient.ingredient)}
-                      <i class="fas fa-trash-alt" onClick={e => this.removeIngredient(e, ingredient.ingredient)} />
-                    </li>)}
-                  </ul>
-              </div>
-
-               
               </div>
             </div>
           </div>
 
           <div id='second-row'>
             <div id='categories-input'>
-              <div id='selected-categories'>
-                <h3>Selected Categories</h3>
-                <ul id='selected-categories-list'>
-                  {this.state.categories.length > 0 ? this.state.categories.map((categoryId, i) => 
-                  <li key={i} id='category-list-item'>
-                    {this.findCateName(categoryId)}
-                    <i class="fas fa-trash-alt" onClick={e => this.removeCategory(e, categoryId)}/>
-                  </li>) : <li>Add some Categories!</li>} 
-                </ul>
-              </div>
-              <div id='categories-inputs'>
-                <select id={this.errorId("Categories")} className="ingredients-select-box" onChange={this.update("category")}>
-                    <option defaultValue>Select a category</option>
-                    {this.props.categories.map(category =>
-                    <option key={category._id} value={category._id} >{category.name}</option>)}
-                </select>
-                {this.errorMessage("Categories")}
-                <div className='purple-button' onClick={this.addToCategories}>Add category</div>
+              <p>Categories</p>
+              <div id='selected-categories-wrapper'>
+                <div id='selected-wrapper'>
+                  <h3>Selected Categories</h3>
+                    <div id='selected-categories'>
+                      <ul id='selected-categories-list'>
+                        {this.state.categories.length > 0 ? this.state.categories.map((categoryId, i) => 
+                        <li key={i} id='category-list-item'>
+                          {this.findCateName(categoryId)}
+                          <i class="fas fa-trash-alt" onClick={e => this.removeCategory(e, categoryId)}/>
+                        </li>) : <li>Add some Categories!</li>} 
+                      </ul>
+                    </div>
+                  </div>
+                  <div id='categories-inputs'>
+                    <select id={this.errorId('Categories')} className="ingredients-select-box" onChange={this.update("category")}>
+                        <option defaultValue>Select a category</option>
+                        {this.props.categories.map(category =>
+                        <option key={category._id} value={category._id} >{category.name}</option>)}
+                    </select>
+                      {this.errorMessage('Categories')}
+                    <div className='purple-button' onClick={this.addToCategories}>Add category</div>
+                  </div>
+
               </div>              
 
             </div>
 
             <div id='steps-content'>
-              <div id='steps-input'>
-                <textarea
-                  id={this.errorId("Steps")}
-                  value={this.state.step}
-                  onChange={this.update("step")}
-                />
-                {this.errorMessage("Steps")}
-                <div className='purple-button' onClick={this.addToSteps}>Add step</div>
-              </div>
-              <div id='current-steps'>
-                <h3>Current Steps</h3>
-                {this.state.steps.length > 0 ?
-                  <ol id='steps-list'>
-                    {this.state.steps.map(step => <li id='step-list-item'>
-                      {step}
-                      <i class="fas fa-trash-alt" onClick={e => this.removeStep(e, step)}/>
-                      </li>)}
-                  </ol> : <p>Add some steps!</p>
-                }
+              <div id='steps-title'>Steps</div>
+              <div id='steps-input-and-steps'>
+                <div id='steps-input'>
+                  <textarea
+                    id={this.errorId('Steps')} 
+                    value={this.state.step}
+                    onChange={this.update("step")}
+                  />
+                  {this.errorMessage('Steps')}
+                  <div className='purple-button' onClick={this.addToSteps}>Add step</div>
+                </div>
+                <div id='current-steps'>
+                  <h3>Current Steps</h3>
+                  {this.state.steps.length > 0 ?
+                    <ol id='steps-list'>
+                      {this.state.steps.map(step => <li id='step-list-item'>
+                        {step}
+                        <i class="fas fa-trash-alt" onClick={e => this.removeStep(e, step)}/>
+                        </li>)}
+                    </ol> : <p>Add some steps!</p>
+                  }
+                </div>
+
               </div>
             </div>
         </div>

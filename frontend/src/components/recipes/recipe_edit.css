@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   width: 50%;
+  height: 100%;
 }
 
 #first-col-bottom {
-  height: 100%;
+  height: 300px;
 }
 
 #second-col {
@@ -25,6 +26,33 @@
   padding-right: 20px;
 }
 
+#recipe-edit-form input {
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+#recipe-edit-form h2 {
+  font-size: 20px;
+}
+
+#recipe-form-title {
+  font-size: 35px;
+}
+
+#recipe-form-info {
+  display: flex;
+  flex-direction: column;
+  /* height: 300px; */
+}
+
+.space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+}
+
 #recipe-form-info label {
   font-size: 30px;
   display: flex;
@@ -40,11 +68,12 @@
 
 #category-select {
   display: flex;
-  height: 100%;
+  height: 40%;
+  border-right: 1px solid black;
 }
 
 #selected-categories{
-  height: 100px;
+  max-height: 200px;
   overflow: scroll;
 }
 
@@ -53,19 +82,21 @@
   flex-direction: column;
   justify-content: center;
   width: 50%;
-  height: 150px;
+  height: 170px;
   overflow: scroll;
+  border: 1px solid black;
+  border-radius: 7px;
+  overflow-x: hidden;
 }
 
 #recipe-edit-categories {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 45%
 }
 
-#recipe-edit-categories h2 {
-  font-size: 30px;
-}
+
 #recipe-edit-categories ul {
   overflow: scroll;
   height: 80%;
@@ -74,36 +105,82 @@
 #possible-ingredients{
   height: 150px;
   overflow: scroll;
+  border: 1px solid black;
+  border-radius: 7px;
+  overflow-x: hidden;
 }
+
 
 #second-col {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-left: 10px;
 }
 
 .recipe-edit-ingredients {
   display: flex;
 }
 
-.recipe-edit-ingredients h2 {
-  font-size: 30px;
-  padding-bottom: 5px;
-}
 
 #recipe-edit-inputs {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 50%;
+  border-left: 1px solid black;
+  margin-left: -10px;
+  padding-left: 10px;
 }
+
 
 #recipe-edit-steps {
   display: flex;
+  margin-top: 10px;
+}
+
+#steps-list {
+  border: 1px solid black;
+  border-radius: 7px;
+  overflow-x: hidden;
+  /* width: 50%; */
 }
 
 #edit-recipe-button {
   position: relative;
   left: 35%;
   width: 30%;
+}
+
+#recipe-edit-textarea {
+  width: 50%;
+  margin-right: 10px;
+}
+
+#recipe-edit-steps-wrapper {
+  width: 50%;
+}
+
+#category-title {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  text-decoration: underline;
+  padding-bottom: 20px;
+  padding-top: 200px;
+}
+
+#recipe-ingredients-title {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  text-decoration: underline;
+  padding-bottom: 20px;
+}
+
+#recipe-steps-title {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  text-decoration: underline;
 }
