@@ -53,18 +53,18 @@ export default class RecipeIndex extends Component {
       if (this.state.filterCategories === []) return null;
       let exactFiltered = this.state.exactRecipes.filter( recipe => {
         if (this.state.filterCategories.length  === 0) return true
-        return recipe.categories.some(cat => this.state.filterCategories.includes(cat))
+        return recipe.categories.some(cat => this.state.filterCategories.includes(cat.name))
       })
       let closeFiltered = this.state.closeRecipes.filter( recipe => {
         if (this.state.filterCategories.length  === 0) return true
-        return recipe.categories.some(cat => this.state.filterCategories.includes(cat))
+        return recipe.categories.some(cat => this.state.filterCategories.includes(cat.name))
       })
       this.setState({exactRecipes: exactFiltered})
       this.setState({closeRecipes: closeFiltered})
     } else {
       let filtered = this.props.recipes.filter( recipe => {
         if (this.state.filterCategories.length  === 0) return true
-        return recipe.categories.some(cat => this.state.filterCategories.includes(cat))
+        return recipe.categories.some(cat => this.state.filterCategories.includes(cat.name))
       })
 
       this.setState({recipes: filtered})
@@ -84,6 +84,7 @@ export default class RecipeIndex extends Component {
         possibleCategories.push(...recipe.categories.map(cat => cat.name)) 
         )
     }
+
     possibleCategories.forEach(category => {
       if (!hash[category]) hash[category] = 0
       hash[category] += 1
