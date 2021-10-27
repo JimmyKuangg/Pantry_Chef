@@ -66,7 +66,7 @@ export default class RecipeCreateForm extends Component {
 
   ingredientSelect() {
     return (
-      <select className="ingredients-select-box" value={this.state.ingredient} onChange={this.update("ingredient")}>
+      <select id={this.errorId("Ingredients")} className="ingredients-select-box" value={this.state.ingredient} onChange={this.update("ingredient")}>
         <option defaultValue>Choose an ingredient</option>
         {this.props.ingredients.map(ingredient => <option 
         id="testing" 
@@ -250,6 +250,7 @@ export default class RecipeCreateForm extends Component {
                     {this.ingredientSelect()}
                     {this.quantityInput()}
                     {this.unitInput()}
+                    {this.errorMessage("Ingredients")}
                     <div className='purple-button' onClick={this.addToIngredients}>Add ingredient</div>
                   </div>
 
