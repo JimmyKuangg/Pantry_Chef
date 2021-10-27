@@ -40,6 +40,6 @@
 }
 
 #error-message{
-    color: rgb(122, 122, 122);
+    color: red;
     font-size: 10px;
 }
