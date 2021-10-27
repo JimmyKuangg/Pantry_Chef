@@ -26,6 +26,7 @@ export default class RecipeEditForm extends Component {
     this.removeCategory = this.removeCategory.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
     this.removeStep = this.removeStep.bind(this);
+    this.props.clearRecipeErrors();
   }
 
   possibleIngredients() {
