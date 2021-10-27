@@ -74,9 +74,14 @@ export default class RecipeEditForm extends Component {
       .action(recipe)
       .then(() =>
         Object.values(this.state.errors).length === 0
-          ? this.props.closeModal()
+          ? this.success()
           : null
       );
+  }
+
+  success() {
+    this.props.closeModal();
+    this.props.closeSidemenu();
   }
 
   update(field) {

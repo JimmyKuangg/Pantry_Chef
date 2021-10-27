@@ -52,7 +52,12 @@ export default class RecipeCreateForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.action(this.state)
-      .then(() => Object.values(this.state.errors).length === 0 ? this.props.closeModal() : null);
+      .then(() => Object.values(this.state.errors).length === 0 ? this.success() : null);
+  }
+
+  success() {
+    this.props.closeModal();
+    this.props.closeSidemenu();
   }
 
   update(field) {
