@@ -72,7 +72,7 @@
   border-right: 1px solid black;
 }
 
-#selected-categories{
+#selected-categories {
   max-height: 200px;
   overflow: scroll;
 }
@@ -93,23 +93,21 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 45%
+  width: 45%;
 }
-
 
 #recipe-edit-categories ul {
   overflow: scroll;
   height: 80%;
 }
 
-#possible-ingredients{
+#possible-ingredients {
   height: 150px;
   overflow: scroll;
   border: 1px solid black;
   border-radius: 7px;
   overflow-x: hidden;
 }
-
 
 #second-col {
   display: flex;
@@ -122,7 +120,6 @@
   display: flex;
 }
 
-
 #recipe-edit-inputs {
   display: flex;
   flex-direction: column;
@@ -132,7 +129,6 @@
   margin-left: -10px;
   padding-left: 10px;
 }
-
 
 #recipe-edit-steps {
   display: flex;
@@ -167,7 +163,7 @@
   font-size: 20px;
   text-decoration: underline;
   padding-bottom: 20px;
-  padding-top: 200px;
+  padding-top: 100px;
 }
 
 #recipe-ingredients-title {
