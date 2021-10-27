@@ -42,4 +42,5 @@
 #error-message{
     color: red;
     font-size: 10px;
+    align-self: center;
 }

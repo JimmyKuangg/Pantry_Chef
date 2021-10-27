@@ -225,8 +225,8 @@ export default class RecipeEditForm extends Component {
                     value={this.state.name}
                     onChange={this.update('name')}
                   />
-                  {this.errorMessage('Name')}
                 </div>
+                  {this.errorMessage('Name')}
 
                 <div className="space-between">
                   <h2>Time to cook</h2>
@@ -237,8 +237,8 @@ export default class RecipeEditForm extends Component {
                     value={this.state.cookTime}
                     onChange={this.update('cookTime')}
                   />
-                  {this.errorMessage('Cook')}
                 </div>
+                  {this.errorMessage('Cook')}
 
                 <div className="space-between">
                   <h2>Calories</h2>
@@ -248,8 +248,8 @@ export default class RecipeEditForm extends Component {
                     value={this.state.calories}
                     onChange={this.update('calories')}
                   />
-                  {this.errorMessage('Calories')}
                 </div>
+                  {this.errorMessage('Calories')}
               </div>
 
               <div id="first-col-bottom">
