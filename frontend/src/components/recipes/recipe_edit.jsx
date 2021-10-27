@@ -336,7 +336,6 @@ export default class RecipeEditForm extends Component {
               </div>
             </div>
           </div>
-        </div>
              
         <input className='purple-button' id="edit-recipe-button" type="submit" onClick={this.handleSubmit} value="Edit Recipe" />
         <button className='close-modal' onClick={this.props.closeModal}>X</button>
