@@ -39,7 +39,6 @@
 #recipe-create h3{
   font-size: 20px;
   /* margin-bottom: 20px; */
-  padding-top: 10px;
   padding-bottom: 20px;
 }
 
@@ -55,7 +54,7 @@
   /* flex-direction: column; */
   /* margin: 5px; */
   width: 50%;
-  height: 250px;
+  height: 200px;
   /* border-right: 2px solid #3F48CC; */
   /* border-bottom: 2px solid #3F48CC; */
   display: flex;
@@ -118,7 +117,7 @@
 
 #ingredients-list{
   width: 100%;
-  height: 200px;
+  height: 150px;
   overflow: scroll;
 }
 
@@ -168,7 +167,6 @@
   display: flex;
   flex-direction: column;
   /* padding: 20px; */
-  margin-top: 50px;
   border-right: solid 1px black;
 }
 
@@ -178,7 +176,7 @@
 
 #selected-categories{
   width: 100%;
-  max-height: 300px;
+  height: 150px;
   padding-right: 20px;
 
 }
@@ -191,7 +189,7 @@
 
 #selected-categories-list{
   overflow: scroll;
-  max-height: 500px;
+  /* max-height: 200px; */
 }
 
 #selected-wrapper {
@@ -214,7 +212,7 @@
   width: 45%;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 #steps-title {
@@ -237,16 +235,17 @@
   width: 50%;
   padding-left: 20px;
   overflow: scroll;
+  /* height: 150px; */
 }
 
 #create-recipe-button{
   width: 25%;
   align-self: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 #steps-list{
-  height: 200px;
+  height: 150px;
   overflow: scroll;
 }
 
@@ -272,4 +271,14 @@
   border-radius: 3px;
   height: 50%;
   width: 100%;
+}
+
+.recipe-form h4 {
+  font-size: 15px;
+  padding-bottom: 5px;
+}
+
+.recipe-form textarea {
+  border: 1px solid black;
+  border-radius: 4px;
 }

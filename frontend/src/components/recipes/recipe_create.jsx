@@ -254,7 +254,7 @@ export default class RecipeCreateForm extends Component {
                   </div>
 
                   <div className='ingredients-list-wrapper'>
-                      <h3>Current Ingredients</h3>
+                      <h4>Current Ingredients</h4>
                       <ul id='ingredients-list'>
                         {this.state.ingredients.length === 0 ? <p>Add some ingredients!</p> : ""}
                         {this.state.ingredients.map(ingredient => 
@@ -274,7 +274,7 @@ export default class RecipeCreateForm extends Component {
               <p>Categories</p>
               <div id='selected-categories-wrapper'>
                 <div id='selected-wrapper'>
-                  <h3>Selected Categories</h3>
+                  <h4>Selected Categories</h4>
                     <div id='selected-categories'>
                       <ul id='selected-categories-list'>
                         {this.state.categories.length > 0 ? this.state.categories.map((categoryId, i) => 
@@ -312,7 +312,7 @@ export default class RecipeCreateForm extends Component {
                   <div className='purple-button' onClick={this.addToSteps}>Add step</div>
                 </div>
                 <div id='current-steps'>
-                  <h3>Current Steps</h3>
+                  <h4>Current Steps</h4>
                   {this.state.steps.length > 0 ?
                     <ol id='steps-list'>
                       {this.state.steps.map(step => <li id='step-list-item'>
