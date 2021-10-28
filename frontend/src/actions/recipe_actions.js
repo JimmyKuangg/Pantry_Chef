@@ -33,12 +33,10 @@ export const clearRecipeErrors = () => ({
 export const fetchRecipes = () => (dispatch) =>
   RecipeUtil.fetchAllRecipes()
     .then((recipes) => dispatch(receiveRecipes(recipes)))
-    .catch((err) => console.log(err));
 
 export const fetchRecipe = (recipeId) => (dispatch) =>
   RecipeUtil.fetchRecipe(recipeId)
     .then((recipeId) => dispatch(receiveRecipe(recipeId)))
-    .catch((err) => console.log(err));
 
 export const createRecipe = (recipe) => (dispatch) =>
   RecipeUtil.createRecipe(recipe)
@@ -46,7 +44,6 @@ export const createRecipe = (recipe) => (dispatch) =>
     .catch((err) => dispatch(receiveRecipeErrors(err.response.data)));
 
 export const editRecipe = (recipe) => (dispatch) => {
-  console.log(recipe);
   return RecipeUtil.editRecipe(recipe)
     .then((recipe) => dispatch(receiveRecipe(recipe)))
     .catch((err) => dispatch(receiveRecipeErrors(err.response.data)));
@@ -55,4 +52,3 @@ export const editRecipe = (recipe) => (dispatch) => {
 export const deleteRecipe = (recipeId) => (dispatch) =>
   RecipeUtil.deleteRecipe(recipeId)
     .then(() => dispatch(removeRecipe(recipeId)))
-    .catch((err) => console.log(err));

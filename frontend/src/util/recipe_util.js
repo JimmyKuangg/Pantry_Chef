@@ -13,7 +13,6 @@ export const createRecipe = (recipe) => {
 };
 
 export const editRecipe = (recipe) => {
-  console.log(recipe);
   return axios.patch(`/api/recipes/update/${recipe.id}`, recipe);
 };
 

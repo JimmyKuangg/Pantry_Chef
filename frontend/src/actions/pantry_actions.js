@@ -10,11 +10,9 @@ export const receivePantry = pantry => ({
 export const fetchPantry = () => dispatch => (
   PantryUtil.fetchPantry()
     .then(pantry => dispatch(receivePantry(pantry)))
-    .catch(err => console.log(err))
 );
 
 export const editPantry = pantry => dispatch => (
   PantryUtil.editPantry(pantry)
     .then(pantry => dispatch(receivePantry(pantry)))
-    .catch(err => console.log(err))
 );

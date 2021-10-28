@@ -51,7 +51,6 @@ router.post("/signup", (req, res) => {
                 });
               });
             })
-            .catch(err => console.log(err));
         });
       });
     }

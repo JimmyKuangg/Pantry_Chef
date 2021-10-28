@@ -197,7 +197,6 @@ export default class RecipeCreateForm extends Component {
   }
 
   render() {
-    console.log(this.state.errors)
     if (!Array.isArray(this.props.categories)) {
       return null;
     }

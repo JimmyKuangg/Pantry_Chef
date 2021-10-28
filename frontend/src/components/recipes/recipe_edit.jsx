@@ -173,15 +173,7 @@ export default class RecipeEditForm extends Component {
     this.setState({ steps: this.state.steps.filter((step) => step !== name) });
   }
 
-  // renderErrors() {
-  //   return (
-  //     <ul>
-  //       {Object.values(this.state.errors).map((error, i) => (
-  //         <li key={`error-${i}`}>{this.state.errors[error]}</li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
+
 
   errorId(field) {
     for (let i = 0; i < this.state.errors.length; i++) {
@@ -205,7 +197,6 @@ export default class RecipeEditForm extends Component {
     if (!Array.isArray(this.props.categories)) {
       return null;
     }
-    console.log(this.state);
     return (
       <div className="recipe-edit">
         <form id="recipe-edit-form">
@@ -264,7 +255,7 @@ export default class RecipeEditForm extends Component {
                           id={this.errorId('Categories')}
                         >
                           {this.state.categories.map((category, i) => (
-                            <li key={i} id="category-list-item">
+                            <li key={category.id} id="category-list-item">
                               {category.name}
                               <div
                                 onClick={(e) =>
@@ -287,7 +278,7 @@ export default class RecipeEditForm extends Component {
                         {this.props.categories.map((category, i) => (
                           <div
                             onClick={() => this.clickCategory(category)}
-                            key={i}
+                            key={category.name}
                           >
                             {category.name}
                           </div>
@@ -318,7 +309,7 @@ export default class RecipeEditForm extends Component {
                   <ul id="ingredients-list">
                     <h2>Current Ingredients</h2>
                     {this.state.ingredients.map((ele, i) => (
-                      <li id="selected-ingredient" key={ele.id}>
+                      <li id="selected-ingredient" key={ele.ingredient}>
                         {ele.ingredient}
                         <button
                           onClick={(e) =>
@@ -337,7 +328,6 @@ export default class RecipeEditForm extends Component {
               <div id="recipe-edit-steps">
                 <label id="recipe-edit-textarea">
                   <textarea
-                    // id="steps-text-area"
                     id={this.errorId('Steps')}
                     value={this.state.step}
                     onChange={this.update('step')}
@@ -350,8 +340,8 @@ export default class RecipeEditForm extends Component {
                 <div id="recipe-edit-steps-wrapper">
                   {this.state.steps.length > 0 ? (
                     <ol id="steps-list">
-                      {this.state.steps.map((step) => (
-                        <li id="step-list-item">
+                      {this.state.steps.map((step, i) => (
+                        <li id="step-list-item" key={step}>
                           {step}
                           <p onClick={(e) => this.removeStep(e, step)}>
                             {' '}
