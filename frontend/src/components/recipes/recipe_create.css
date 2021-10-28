@@ -13,22 +13,22 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-.recipe-form{
+.recipe-form {
   width: 100;
   display: flex;
   flex-direction: column;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.recipe-form-title{
+.recipe-form-title {
   display: flex;
   justify-content: center;
   font-size: 50px;
-  color: #3F48CC;
+  color: #3f48cc;
   padding-bottom: 40px;
 }
 
-#recipe-create{
+#recipe-create {
   display: flex;
   flex-direction: column;
   /* width: 100%; */
@@ -36,20 +36,20 @@
   /* justify-content: space-between; */
 }
 
-#recipe-create h3{
+#recipe-create h3 {
   font-size: 20px;
   /* margin-bottom: 20px; */
   padding-bottom: 20px;
 }
 
-
-#first-row, #second-row{
+#first-row,
+#second-row {
   display: flex;
   justify-content: space-between;
   width: 80vw;
 }
 
-#recipe-small-inputs{
+#recipe-small-inputs {
   /* display: flex; */
   /* flex-direction: column; */
   /* margin: 5px; */
@@ -63,31 +63,31 @@
   border-right: 1px solid black;
 }
 
-#ingredient-input{
+#ingredient-input {
   /* margin-left: 5px; */
   width: 45%;
   height: 250px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
-#ingredient-inputs{
-  /* margin-left: 20px; */
+/* #ingredient-inputs {
+  margin-left: 20px;
   width: 50%;
-}
+} */
 
-#ingredient-inputs h3{
+#ingredient-inputs h3 {
   margin-right: 5px;
 }
 
-#ingredient-section{
+#ingredient-section {
   display: flex;
   justify-content: center;
   justify-content: space-between;
 }
 
-#ingredient-input h2{
+#ingredient-input h2 {
   display: flex;
   justify-content: center;
   font-size: 20px;
@@ -95,16 +95,18 @@
   text-decoration: underline;
 }
 
-#selected-ingredient, #category-list-item, #step-list-item{
+#selected-ingredient,
+#category-list-item,
+#step-list-item {
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border: 1px solid #3F48CC;
+  border: 1px solid #3f48cc;
   border-radius: 25px;
   margin: 5px;
 }
 
-.space-between{
+.space-between {
   width: 50%;
   display: flex;
   justify-content: space-between;
@@ -115,29 +117,27 @@
   /* padding-right: 50px; */
 }
 
-#ingredients-list{
+#ingredients-list {
   width: 100%;
   height: 150px;
   overflow: scroll;
 }
 
-#create-recipe-form textarea{
+#create-recipe-form textarea {
   align-self: center;
   width: 99%;
   height: 50px;
   resize: none;
 }
 
-#create-recipe-form select{
+#create-recipe-form select {
   align-self: center;
   /* width: 99%; */
   height: 56.48px;
   resize: none;
 }
 
-
-
-.small-space-between{
+.small-space-between {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -147,20 +147,19 @@
   /* padding-right: 20px; */
 }
 
-
-
-.ingredients-select-box{
+.ingredients-select-box {
   width: 100%;
 }
 
-.ingredients-list-wrapper{
+.ingredients-list-wrapper {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  /* width: 50%; */
   padding-left: 20px;
+  padding-right: 10%;
 }
 
-#categories-input{
+#categories-input {
   /* padding-right: 20px; */
   width: 50%;
   height: 250px;
@@ -170,15 +169,14 @@
   border-right: solid 1px black;
 }
 
-#categories-inputs{
+#categories-inputs {
   width: 40%;
 }
 
-#selected-categories{
+#selected-categories {
   width: 100%;
   height: 150px;
   padding-right: 20px;
-
 }
 
 #selected-categories-wrapper {
@@ -187,7 +185,7 @@
   padding-right: 40px;
 }
 
-#selected-categories-list{
+#selected-categories-list {
   overflow: scroll;
   /* max-height: 200px; */
 }
@@ -199,7 +197,7 @@
   margin-right: 30px;
 }
 
-#categories-input p {
+#categories-input h4 {
   display: flex;
   justify-content: center;
   text-decoration: underline;
@@ -207,8 +205,7 @@
   font-size: 20px;
 }
 
-
-#steps-content{
+#steps-content {
   width: 45%;
   display: flex;
   flex-direction: column;
@@ -227,24 +224,24 @@
   display: flex;
 }
 
-#steps-input{
+#steps-input {
   width: 50%;
 }
 
-#current-steps{
+#current-steps {
   width: 50%;
   padding-left: 20px;
   overflow: scroll;
   /* height: 150px; */
 }
 
-#create-recipe-button{
+#create-recipe-button {
   width: 25%;
   align-self: center;
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
-#steps-list{
+#steps-list {
   height: 150px;
   overflow: scroll;
 }
@@ -258,7 +255,11 @@
   font-size: 25px;
 }
 
-.recipe-form input{
+.close-modal:hover {
+  cursor: pointer;
+}
+
+.recipe-form input {
   padding: 10px;
   margin-top: 5px;
   border: 1px solid black;

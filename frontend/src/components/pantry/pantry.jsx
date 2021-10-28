@@ -190,7 +190,11 @@ export default class Pantry extends Component {
                       <i
                         className="fas fa-trash-alt"
                         id="delete-ingredient"
-                        onClick={() => this.props.deleteRecipe(recipe.id)}
+                        onClick={() =>
+                          this.props
+                            .deleteRecipe(recipe.id)
+                            .then(() => window.location.reload())
+                        }
                       />
                     </div>
                   </li>
