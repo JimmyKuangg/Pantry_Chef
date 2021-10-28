@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './recipe_edit.css';
+import shortid from 'shortid';
 
 export default class RecipeEditForm extends Component {
   constructor(props) {
@@ -101,7 +102,7 @@ export default class RecipeEditForm extends Component {
       <div id="edit-search-wrapper">
         <div id="possible-ingredients">
           {this.state.possibleIngredients.map((ele) => (
-            <div key={ele.id} onClick={() => this.clickIngredient(ele)}>
+            <div key={shortid.generate()} onClick={() => this.clickIngredient(ele)}>
               {ele.name}
             </div>
           ))}
@@ -255,7 +256,7 @@ export default class RecipeEditForm extends Component {
                           id={this.errorId('Categories')}
                         >
                           {this.state.categories.map((category, i) => (
-                            <li key={category.id} id="category-list-item">
+                            <li key={shortid.generate()} id="category-list-item">
                               {category.name}
                               <div
                                 onClick={(e) =>
@@ -278,7 +279,7 @@ export default class RecipeEditForm extends Component {
                         {this.props.categories.map((category, i) => (
                           <div
                             onClick={() => this.clickCategory(category)}
-                            key={category.name}
+                            key={shortid.generate()}
                           >
                             {category.name}
                           </div>
@@ -309,7 +310,7 @@ export default class RecipeEditForm extends Component {
                   <ul id="ingredients-list">
                     <h2>Current Ingredients</h2>
                     {this.state.ingredients.map((ele, i) => (
-                      <li id="selected-ingredient" key={ele.ingredient}>
+                      <li id="selected-ingredient" key={shortid.generate()}>
                         {ele.ingredient}
                         <button
                           onClick={(e) =>
@@ -341,7 +342,7 @@ export default class RecipeEditForm extends Component {
                   {this.state.steps.length > 0 ? (
                     <ol id="steps-list">
                       {this.state.steps.map((step, i) => (
-                        <li id="step-list-item" key={step}>
+                        <li id="step-list-item" key={shortid.generate()}>
                           {step}
                           <p onClick={(e) => this.removeStep(e, step)}>
                             {' '}
