@@ -10,6 +10,7 @@ class RecipeShow extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.recipe)
     this.props.fetchRecipe(this.props.match.params.recipeId);
   }
 

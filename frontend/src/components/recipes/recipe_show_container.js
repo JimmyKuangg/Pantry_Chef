@@ -3,11 +3,9 @@ import RecipeShow from "./recipe_show";
 import { fetchRecipe } from "../../actions/recipe_actions";
 
 
-const mSTP = (state) => {
-
+const mSTP = (state,ownProps) => {
     return {
-        recipe: state.recipes[0]
-        // recipe: {}
+        recipe: state.recipes.filter(ele => ele.id === ownProps.match.params.recipeId)[0]
     }
 };
 
