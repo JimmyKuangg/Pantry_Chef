@@ -10,6 +10,7 @@ export default class RecipeEditForm extends Component {
       ...this.props.recipe,
       search: '',
       possibleIngredients: [],
+      // possibleCategories: [],
       newIngredient: {},
       quantity: 0,
       unit: '',
@@ -27,22 +28,30 @@ export default class RecipeEditForm extends Component {
     this.removeCategory = this.removeCategory.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
     this.removeStep = this.removeStep.bind(this);
+    this.possibleCategories = this.possibleCategories.bind(this);
     this.props.clearRecipeErrors();
   }
 
   possibleIngredients() {
     if (this.props.recipe) {
       let filtered = this.props.ingredients.filter(
-        (ele) => !this.props.recipe.ingredients.includes(ele.ingredient)
+        (ele) =>
+          !this.state.ingredients.some((ig) => ele.name === ig.ingredient)
       );
+
       this.setState({ possibleIngredients: filtered });
     }
   }
 
-  // componentDidUpdate() {
-  //   this.findName();
-  //   this.findCateName();
-  // }
+  possibleCategories() {
+    if (this.props.recipe) {
+      let filtered = this.props.categories.filter(
+        (ele) => !this.state.categories.some((cat) => ele.name === cat.name)
+      );
+
+      return filtered;
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser === true) {
@@ -75,9 +84,7 @@ export default class RecipeEditForm extends Component {
     this.props
       .action(recipe)
       .then(() =>
-        Object.values(this.state.errors).length === 0
-          ? this.success()
-          : null
+        Object.values(this.state.errors).length === 0 ? this.success() : null
       );
   }
 
@@ -102,7 +109,10 @@ export default class RecipeEditForm extends Component {
       <div id="edit-search-wrapper">
         <div id="possible-ingredients">
           {this.state.possibleIngredients.map((ele) => (
-            <div key={shortid.generate()} onClick={() => this.clickIngredient(ele)}>
+            <div
+              key={shortid.generate()}
+              onClick={() => this.clickIngredient(ele)}
+            >
               {ele.name}
             </div>
           ))}
@@ -124,17 +134,20 @@ export default class RecipeEditForm extends Component {
   }
 
   addToIngredients() {
-    this.setState({
-      ingredients: [
-        ...this.state.ingredients,
-        {
-          ingredient: this.state.newIngredient.name,
-          quantity: this.state.quanity,
-          unit: this.state.unit,
-          id: this.state.newIngredient._id,
-        },
-      ],
-    });
+    this.setState(
+      {
+        ingredients: [
+          ...this.state.ingredients,
+          {
+            ingredient: this.state.newIngredient.name,
+            quantity: this.state.quanity,
+            unit: this.state.unit,
+            id: this.state.newIngredient._id,
+          },
+        ],
+      },
+      () => this.possibleIngredients()
+    );
   }
 
   addCategory() {
@@ -163,18 +176,19 @@ export default class RecipeEditForm extends Component {
   }
 
   removeIngredient(e, name) {
-    this.setState({
-      ingredients: this.state.ingredients.filter(
-        (ing) => ing.ingredient !== name
-      ),
-    });
+    this.setState(
+      {
+        ingredients: this.state.ingredients.filter(
+          (ing) => ing.ingredient !== name
+        ),
+      },
+      () => this.possibleIngredients()
+    );
   }
 
   removeStep(e, name) {
     this.setState({ steps: this.state.steps.filter((step) => step !== name) });
   }
-
-
 
   errorId(field) {
     for (let i = 0; i < this.state.errors.length; i++) {
@@ -218,7 +232,7 @@ export default class RecipeEditForm extends Component {
                     onChange={this.update('name')}
                   />
                 </div>
-                  {this.errorMessage('Name')}
+                {this.errorMessage('Name')}
 
                 <div className="space-between">
                   <h2>Time to cook</h2>
@@ -230,7 +244,7 @@ export default class RecipeEditForm extends Component {
                     onChange={this.update('cookTime')}
                   />
                 </div>
-                  {this.errorMessage('Cook')}
+                {this.errorMessage('Cook')}
 
                 <div className="space-between">
                   <h2>Calories</h2>
@@ -241,7 +255,7 @@ export default class RecipeEditForm extends Component {
                     onChange={this.update('calories')}
                   />
                 </div>
-                  {this.errorMessage('Calories')}
+                {this.errorMessage('Calories')}
               </div>
 
               <div id="first-col-bottom">
@@ -252,18 +266,22 @@ export default class RecipeEditForm extends Component {
                       <h2>Selected Categories</h2>
 
                       {this.state.categories.length >= 0 ? (
-                        <ul
-                          id={this.errorId('Categories')}
-                        >
+                        <ul id={this.errorId('Categories')}>
                           {this.state.categories.map((category, i) => (
-                            <li key={shortid.generate()} id="category-list-item">
+                            <li
+                              key={shortid.generate()}
+                              id="category-list-item"
+                            >
                               {category.name}
                               <div
                                 onClick={(e) =>
                                   this.removeCategory(e, category.name)
                                 }
                               >
-                                <i className="fas fa-trash-alt" />
+                                <i
+                                  id="remove-recipe-details"
+                                  className="fas fa-trash-alt"
+                                />
                               </div>
                             </li>
                           ))}
@@ -276,7 +294,7 @@ export default class RecipeEditForm extends Component {
 
                     <div id="category-select-wrapper">
                       <div>
-                        {this.props.categories.map((category, i) => (
+                        {this.possibleCategories().map((category, i) => (
                           <div
                             onClick={() => this.clickCategory(category)}
                             key={shortid.generate()}
@@ -317,7 +335,10 @@ export default class RecipeEditForm extends Component {
                             this.removeIngredient(e, ele.ingredient)
                           }
                         >
-                          <i className="fas fa-trash-alt" />
+                          <i
+                            id="remove-recipe-details"
+                            className="fas fa-trash-alt"
+                          />
                         </button>
                       </li>
                     ))}
@@ -346,7 +367,10 @@ export default class RecipeEditForm extends Component {
                           {step}
                           <p onClick={(e) => this.removeStep(e, step)}>
                             {' '}
-                            <i className="fas fa-trash-alt" />
+                            <i
+                              id="remove-recipe-details"
+                              className="fas fa-trash-alt"
+                            />
                           </p>
                         </li>
                       ))}

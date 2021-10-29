@@ -33,6 +33,7 @@ export default class RecipeCreateForm extends Component {
     this.addToSteps = this.addToSteps.bind(this);
     this.findName = this.findName.bind(this);
     this.findCateName = this.findCateName.bind(this);
+    this.possibleIngredients = this.possibleIngredients.bind(this);
     this.props.clearRecipeErrors();
   }
 
@@ -48,6 +49,22 @@ export default class RecipeCreateForm extends Component {
     //     ? this.props.closeModal()
     //     : null
     // );
+  }
+
+  possibleIngredients() {
+    let filtered = this.props.ingredients.filter(
+      (ele) => !this.state.ingredients.some((ig) => ele._id === ig.ingredient)
+    );
+
+    return filtered;
+  }
+
+  possibleCategories() {
+    let filtered = this.props.categories.filter(
+      (ele) => !this.state.categories.some((cat) => ele._id === cat)
+    );
+
+    return filtered;
   }
 
   handleSubmit(e) {
@@ -77,7 +94,7 @@ export default class RecipeCreateForm extends Component {
         onChange={this.update('ingredient')}
       >
         <option defaultValue>Choose an ingredient</option>
-        {this.props.ingredients.map((ingredient) => (
+        {this.possibleIngredients().map((ingredient) => (
           <option id="testing" key={shortid.generate()} value={ingredient._id}>
             {ingredient.name}
           </option>
@@ -136,7 +153,9 @@ export default class RecipeCreateForm extends Component {
       ],
     });
 
-    this.setState({ ingredient: '', quantity: '', unit: '' });
+    this.setState({ ingredient: '', quantity: '', unit: '' }, () =>
+      this.possibleIngredients()
+    );
   }
 
   addToCategories() {
@@ -311,6 +330,7 @@ export default class RecipeCreateForm extends Component {
                         <li id="selected-ingredient" key={shortid.generate()}>
                           {this.findName(ingredient.ingredient)}
                           <i
+                            id="remove-recipe-details"
                             className="fas fa-trash-alt"
                             onClick={(e) =>
                               this.removeIngredient(e, ingredient.ingredient)
@@ -338,6 +358,7 @@ export default class RecipeCreateForm extends Component {
                           <li key={shortid.generate()} id="category-list-item">
                             {this.findCateName(categoryId)}
                             <i
+                              id="remove-recipe-details"
                               className="fas fa-trash-alt"
                               onClick={(e) =>
                                 this.removeCategory(e, categoryId)
@@ -359,7 +380,7 @@ export default class RecipeCreateForm extends Component {
                     value={this.state.category}
                   >
                     <option defaultValue>Select a category</option>
-                    {this.props.categories.map((category) => (
+                    {this.possibleCategories().map((category) => (
                       <option key={shortid.generate()} value={category._id}>
                         {category.name}
                       </option>
@@ -395,6 +416,7 @@ export default class RecipeCreateForm extends Component {
                         <li key={shortid.generate()} id="step-list-item">
                           {step}
                           <i
+                            id="remove-recipe-details"
                             className="fas fa-trash-alt"
                             onClick={(e) => this.removeStep(e, step)}
                           />
