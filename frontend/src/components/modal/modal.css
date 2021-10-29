@@ -12,12 +12,8 @@
   position: absolute;
   top: 53%;
   left: 50%;
-<<<<<<< HEAD
-  /* width: 100%; */
-=======
   width: 80%;
   height: 80%;
->>>>>>> a1d06c6612f77f6d6a516f0e2d2d13c85749f01f
   padding: 20px;
   transform: translate(-50%, -50%);
   /* transform: scale(0.7); */
