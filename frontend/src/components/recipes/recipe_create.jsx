@@ -1,43 +1,45 @@
-import React, { Component } from 'react'
-import "./recipe_create.css";
+import React, { Component } from 'react';
+import './recipe_create.css';
+import shortid from 'shortid';
 
 export default class RecipeCreateForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: "",
+      name: '',
       ingredients: [],
-      cookTime: "",
-      calories: "",
+      cookTime: '',
+      calories: '',
       categories: [],
       author: this.props.currentUser.id,
       steps: [],
-      imgUrl: "https://i.imgur.com/9h7v94l.png",
+      imgUrl: 'https://i.imgur.com/9h7v94l.png',
 
-      ingredient: "",
-      quantity: "",
-      unit: "",
+      ingredient: '',
+      quantity: '',
+      unit: '',
 
-      category: "",
+      category: '',
 
-      step: "",
+      step: '',
 
-      errors: {}
-    }
-    
+      errors: {},
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIngredients = this.addToIngredients.bind(this);
     this.addToCategories = this.addToCategories.bind(this);
     this.addToSteps = this.addToSteps.bind(this);
     this.findName = this.findName.bind(this);
     this.findCateName = this.findCateName.bind(this);
+    this.possibleIngredients = this.possibleIngredients.bind(this);
     this.props.clearRecipeErrors();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser === true) {
-      this.props.history.push("/");
+      this.props.history.push('/');
     }
 
     this.setState({ errors: Object.values(nextProps.errors) });
@@ -49,10 +51,29 @@ export default class RecipeCreateForm extends Component {
     // );
   }
 
+  possibleIngredients() {
+    let filtered = this.props.ingredients.filter(
+      (ele) => !this.state.ingredients.some((ig) => ele._id === ig.ingredient)
+    );
+
+    return filtered;
+  }
+
+  possibleCategories() {
+    let filtered = this.props.categories.filter(
+      (ele) => !this.state.categories.some((cat) => ele._id === cat)
+    );
+
+    return filtered;
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    this.props.action(this.state)
-      .then(() => Object.values(this.state.errors).length === 0 ? this.success() : null);
+    this.props
+      .action(this.state)
+      .then(() =>
+        Object.values(this.state.errors).length === 0 ? this.success() : null
+      );
   }
 
   success() {
@@ -61,75 +82,105 @@ export default class RecipeCreateForm extends Component {
   }
 
   update(field) {
-    return e => this.setState({ [field]: e.target.value });
+    return (e) => this.setState({ [field]: e.target.value });
   }
 
   ingredientSelect() {
     return (
-      <select id={this.errorId("Ingredients")} className="ingredients-select-box" value={this.state.ingredient} onChange={this.update("ingredient")}>
+      <select
+        id={this.errorId('Ingredients')}
+        className="ingredients-select-box"
+        value={this.state.ingredient}
+        onChange={this.update('ingredient')}
+      >
         <option defaultValue>Choose an ingredient</option>
-        {this.props.ingredients.map(ingredient => <option 
-        id="testing" 
-        key={ingredient._id} 
-        value={ingredient._id}>{ingredient.name}</option>)}
+        {this.possibleIngredients().map((ingredient) => (
+          <option id="testing" key={shortid.generate()} value={ingredient._id}>
+            {ingredient.name}
+          </option>
+        ))}
       </select>
-
-    )
+    );
   }
 
   nestedUpdate(field) {
-    return e => this.setState(state => {
-      state.ingredients[0][field] = e.target.value
-      return state;
-    })
+    return (e) =>
+      this.setState((state) => {
+        state.ingredients[0][field] = e.target.value;
+        return state;
+      });
   }
 
   quantityInput() {
     return (
-      <div className='small-space-between'>
-        <h3>Quantity</h3> 
-        <input type="number" value={this.state.quantity} onChange={this.update("quantity")} />
+      <div className="small-space-between">
+        <h3>Quantity</h3>
+        <input
+          type="number"
+          value={this.state.quantity}
+          onChange={this.update('quantity')}
+        />
       </div>
-    )
+    );
   }
 
   unitInput() {
     return (
-      <div className='small-space-between'>
-        <h3>Unit</h3> 
-        <input type="text" placeholder="Ex: grams" value={this.state.unit} onChange={this.update("unit")} />
+      <div className="small-space-between">
+        <h3>Unit</h3>
+        <input
+          type="text"
+          placeholder="Ex: grams"
+          value={this.state.unit}
+          onChange={this.update('unit')}
+        />
       </div>
-    )
+    );
   }
 
   addToIngredients() {
-    this.setState({ ingredients: [...this.state.ingredients,
-      { ingredient: this.state.ingredient,
-        quantity: this.state.quantity,
-        unit: this.state.unit}]
+    if (!this.state.ingredient || !this.state.quantity || !this.state.unit) {
+      return null;
+    }
+    this.setState({
+      ingredients: [
+        ...this.state.ingredients,
+        {
+          ingredient: this.state.ingredient,
+          quantity: this.state.quantity,
+          unit: this.state.unit,
+        },
+      ],
     });
 
-    this.setState({ ingredient: "", quantity: "", unit: "" })
+    this.setState({ ingredient: '', quantity: '', unit: '' }, () =>
+      this.possibleIngredients()
+    );
   }
 
   addToCategories() {
+    if (!this.state.category) {
+      return null;
+    }
+
     if (!Array.isArray(this.state.categories)) {
       this.setState({ categories: [this.state.category] });
     } else {
-      this.setState({ categories: [...this.state.categories,
-        this.state.category
-      ]});
+      this.setState({
+        categories: [...this.state.categories, this.state.category],
+      });
     }
-    
-    this.setState({ category: "" })
+
+    this.setState({ category: '' });
   }
 
   addToSteps() {
-    this.setState({ steps: [...this.state.steps,
-      this.state.step
-    ]});
+    if (!this.state.step) {
+      return null;
+    }
+    this.setState({ steps: [...this.state.steps, this.state.step] });
 
-    this.setState({ step: "" })
+    this.setState({ step: '' });
   }
 
   componentDidMount() {
@@ -154,33 +205,42 @@ export default class RecipeCreateForm extends Component {
   }
 
   removeIngredient(e, ingredientId) {
-    let newIngredients = this.state.ingredients.filter(ingredient => ingredient.ingredient !== ingredientId);
+    let newIngredients = this.state.ingredients.filter(
+      (ingredient) => ingredient.ingredient !== ingredientId
+    );
     this.setState({ ingredients: newIngredients });
   }
-  
+
   removeCategory(e, categoryId) {
-    let newCategories = this.state.categories.filter(category => category !== categoryId);
+    let newCategories = this.state.categories.filter(
+      (category) => category !== categoryId
+    );
     this.setState({ categories: newCategories });
   }
 
   removeStep(e, stepId) {
-    let newSteps = this.state.steps.filter(step => step !== stepId);
+    let newSteps = this.state.steps.filter((step) => step !== stepId);
     this.setState({ steps: newSteps });
   }
 
   // renderErrors() {
+  //   for (const error of Object.keys(this.state.errors)) {
+  //     if (error)
+  //   }
   //   return (
   //     <ul>
-  //       {Object.keys(this.state.errors).map((error, i) => (
-  //         <li key={`error-${i}`}>{this.state.errors[error]}</li>
-  //       ))}
+  //       {Object.keys(this.state.errors)((error, i) => {
+  //         if (error.includes('exists')) {
+  //           return;
+  //         }
+  //       })}
   //     </ul>
   //   );
   // }
 
   errorId(field) {
     for (let i = 0; i < this.state.errors.length; i++) {
-      if (this.state.errors[i].includes(`${field}`)) {
+      if (this.state.errors[i].includes(`${field}`.toLowerCase())) {
         return 'error-field';
       }
     }
@@ -201,136 +261,188 @@ export default class RecipeCreateForm extends Component {
       return null;
     }
     return (
-      <div className='recipe-form'>
-        <h2 className='recipe-form-title'>Create Recipe</h2>
-        <form id='recipe-create' onSubmit={this.handleSubmit}>
-
-          <div id='first-row'>
-            <div id='recipe-small-inputs'>
-              <div className='space-between'>
+      <div className="recipe-form">
+        <h2 className="recipe-form-title">Create Recipe</h2>
+        <form id="recipe-create" onSubmit={this.handleSubmit}>
+          <div id="first-row">
+            <div id="recipe-small-inputs">
+              <div className="space-between">
                 <h3>Name of recipe</h3>
-                <input 
-                  id={this.errorId("Name")}
-                  type="text" 
+                <input
+                  id={this.errorId('Name')}
+                  type="text"
                   placeholder="Ex: Scrambled eggs"
                   value={this.state.name}
-                  onChange={this.update("name")}
+                  onChange={this.update('name')}
                 />
-                {this.errorMessage('Name')}
+                {this.errorMessage('name')}
               </div>
-              <div className='space-between'>
+              {this.errorMessage('Name')}
+              <div className="space-between">
                 <h3>Time to cook</h3>
-                <input 
-                  id={this.errorId("Cook")}
+                <input
+                  id={this.errorId('Cook')}
                   type="text"
                   placeholder="Ex: 10 minutes"
                   value={this.state.cookTime}
-                  onChange={this.update("cookTime")}
+                  onChange={this.update('cookTime')}
                 />
-                {this.errorMessage("Cook")}
               </div>
-              <div className='space-between'>
+              {this.errorMessage('Cook')}
+              <div className="space-between">
                 <h3>Calories</h3>
-                <input 
-                  id={this.errorId("Calories")}
-                  type="text" 
+                <input
+                  id={this.errorId('Calories')}
+                  type="text"
                   value={this.state.calories}
-                  onChange={this.update("calories")}
+                  onChange={this.update('calories')}
                 />
-                {this.errorMessage("Calories")}
               </div>
+              {this.errorMessage('Calories')}
             </div>
 
-            <div id='ingredient-input'>
+            <div id="ingredient-input">
               <h2>Ingredients</h2>
-              <div id='ingredient-section-wrapper'>
-                <div id='ingredient-section'>
-                  <div id='ingredient-inputs'>
+              <div id="ingredient-section-wrapper">
+                <div id="ingredient-section">
+                  <div id="ingredient-inputs">
                     {this.ingredientSelect()}
                     {this.quantityInput()}
                     {this.unitInput()}
-                    {this.errorMessage("Ingredients")}
-                    <div className='purple-button' onClick={this.addToIngredients}>Add ingredient</div>
+                    {this.errorMessage('Ingredients')}
+                    <div
+                      className="purple-button"
+                      onClick={this.addToIngredients}
+                    >
+                      Add ingredient
+                    </div>
                   </div>
 
-                  <div className='ingredients-list-wrapper'>
-                      <h3>Current Ingredients</h3>
-                      <ul id='ingredients-list'>
-                        {this.state.ingredients.length === 0 ? <p>Add some ingredients!</p> : ""}
-                        {this.state.ingredients.map(ingredient => 
-                        <li id='selected-ingredient' key={ingredient.ingredient}>
+                  <div className="ingredients-list-wrapper">
+                    <h4>Current Ingredients</h4>
+                    <ul id="ingredients-list">
+                      {this.state.ingredients.length === 0 ? (
+                        <p>Add some ingredients!</p>
+                      ) : (
+                        ''
+                      )}
+                      {this.state.ingredients.map((ingredient) => (
+                        <li id="selected-ingredient" key={shortid.generate()}>
                           {this.findName(ingredient.ingredient)}
-                          <i class="fas fa-trash-alt" onClick={e => this.removeIngredient(e, ingredient.ingredient)} />
-                        </li>)}
-                      </ul>
+                          <i
+                            id="remove-recipe-details"
+                            className="fas fa-trash-alt"
+                            onClick={(e) =>
+                              this.removeIngredient(e, ingredient.ingredient)
+                            }
+                          />
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div id='second-row'>
-            <div id='categories-input'>
-              <p>Categories</p>
-              <div id='selected-categories-wrapper'>
-                <div id='selected-wrapper'>
-                  <h3>Selected Categories</h3>
-                    <div id='selected-categories'>
-                      <ul id='selected-categories-list'>
-                        {this.state.categories.length > 0 ? this.state.categories.map((categoryId, i) => 
-                        <li key={i} id='category-list-item'>
-                          {this.findCateName(categoryId)}
-                          <i class="fas fa-trash-alt" onClick={e => this.removeCategory(e, categoryId)}/>
-                        </li>) : <li>Add some Categories!</li>} 
-                      </ul>
-                    </div>
+          <div id="second-row">
+            <div id="categories-input">
+              <h4>Categories</h4>
+              <div id="selected-categories-wrapper">
+                <div id="selected-wrapper">
+                  <h4>Selected Categories</h4>
+                  <div id="selected-categories">
+                    <ul id="selected-categories-list">
+                      {this.state.categories.length > 0 ? (
+                        this.state.categories.map((categoryId, i) => (
+                          <li key={shortid.generate()} id="category-list-item">
+                            {this.findCateName(categoryId)}
+                            <i
+                              id="remove-recipe-details"
+                              className="fas fa-trash-alt"
+                              onClick={(e) =>
+                                this.removeCategory(e, categoryId)
+                              }
+                            />
+                          </li>
+                        ))
+                      ) : (
+                        <li>Add some Categories!</li>
+                      )}
+                    </ul>
                   </div>
-                  <div id='categories-inputs'>
-                    <select id={this.errorId('Categories')} className="ingredients-select-box" onChange={this.update("category")}>
-                        <option defaultValue>Select a category</option>
-                        {this.props.categories.map(category =>
-                        <option key={category._id} value={category._id} >{category.name}</option>)}
-                    </select>
-                      {this.errorMessage('Categories')}
-                    <div className='purple-button' onClick={this.addToCategories}>Add category</div>
+                </div>
+                <div id="categories-inputs">
+                  <select
+                    id={this.errorId('Categories')}
+                    className="ingredients-select-box"
+                    onChange={this.update('category')}
+                    value={this.state.category}
+                  >
+                    <option defaultValue>Select a category</option>
+                    {this.possibleCategories().map((category) => (
+                      <option key={shortid.generate()} value={category._id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="purple-button" onClick={this.addToCategories}>
+                    Add category
                   </div>
-
-              </div>              
-
-            </div>
-
-            <div id='steps-content'>
-              <div id='steps-title'>Steps</div>
-              <div id='steps-input-and-steps'>
-                <div id='steps-input'>
-                  <textarea
-                    id={this.errorId('Steps')} 
-                    value={this.state.step}
-                    onChange={this.update("step")}
-                  />
-                  {this.errorMessage('Steps')}
-                  <div className='purple-button' onClick={this.addToSteps}>Add step</div>
+                  {this.errorMessage('Categories')}
                 </div>
-                <div id='current-steps'>
-                  <h3>Current Steps</h3>
-                  {this.state.steps.length > 0 ?
-                    <ol id='steps-list'>
-                      {this.state.steps.map(step => <li id='step-list-item'>
-                        {step}
-                        <i class="fas fa-trash-alt" onClick={e => this.removeStep(e, step)}/>
-                        </li>)}
-                    </ol> : <p>Add some steps!</p>
-                  }
-                </div>
-
               </div>
             </div>
-        </div>
-        <input type="submit" id='create-recipe-button' className='purple-button' onSubmit={this.handleSubmit} value="Create Recipe" />
 
-        {/* {this.renderErrors()} */}
+            <div id="steps-content">
+              <div id="steps-title">Steps</div>
+              <div id="steps-input-and-steps">
+                <div id="steps-input">
+                  <textarea
+                    id={this.errorId('Steps')}
+                    value={this.state.step}
+                    onChange={this.update('step')}
+                  />
+                  {this.errorMessage('Steps')}
+                  <div className="purple-button" onClick={this.addToSteps}>
+                    Add step
+                  </div>
+                </div>
+                <div id="current-steps">
+                  <h4>Current Steps</h4>
+                  {this.state.steps.length > 0 ? (
+                    <ol id="steps-list">
+                      {this.state.steps.map((step, i) => (
+                        <li key={shortid.generate()} id="step-list-item">
+                          {step}
+                          <i
+                            id="remove-recipe-details"
+                            className="fas fa-trash-alt"
+                            onClick={(e) => this.removeStep(e, step)}
+                          />
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <p>Add some steps!</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <input
+            type="submit"
+            id="create-recipe-button"
+            className="purple-button"
+            onSubmit={this.handleSubmit}
+            value="Create Recipe"
+          />
+          <button className="close-modal" onClick={this.props.closeModal}>
+            X
+          </button>
+          {/* {this.renderErrors()} */}
         </form>
       </div>
-    )
+    );
   }
 }

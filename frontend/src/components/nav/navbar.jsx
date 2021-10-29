@@ -43,7 +43,11 @@ class NavBar extends React.Component {
 
           <div className="navbar-item">
             <div className="navbar-github">
-              <a href="https://github.com/JimmyKuangg/Pantry_Chef">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/JimmyKuangg/Pantry_Chef"
+              >
                 <i className="fab fa-github" id="nav-github-logo" />
               </a>
             </div>

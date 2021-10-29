@@ -1,32 +1,30 @@
-import React, { Component } from "react";
-import "./recipe_show.css"
+import React, { Component } from 'react';
+import './recipe_show.css';
 
 class RecipeShow extends Component {
-
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.recipeId !== this.props.match.params.recipeId) {
-      this.props.fetchRecipe(this.props.match.params.recipeId)
+      this.props.fetchRecipe(this.props.match.params.recipeId);
     }
   }
 
   componentDidMount() {
-    console.log(this.props.recipe)
     this.props.fetchRecipe(this.props.match.params.recipeId);
   }
 
   render() {
     const { recipe } = this.props;
 
-    if ((recipe === undefined) || (recipe.steps === undefined)) {
+    if (recipe === undefined || recipe.steps === undefined) {
       return null;
     }
 
     return (
       <div className="show-wrapper">
-        <div className='nav-bar-block'></div>
+        <div className="nav-bar-block"></div>
         <div className="show-header">
           <div className="recipe-photo-wrapper">
-            <img id="recipe-photo" src={recipe.imgUrl} alt='recipe'/>
+            <img id="recipe-photo" src={recipe.imgUrl} alt="recipe" />
           </div>
           <div className="recipe-info">
             <div className="recipe-name"> {recipe.name} </div>
@@ -64,7 +62,8 @@ class RecipeShow extends Component {
             <ul className="ul">
               {recipe.ingredients.map((ingredient, i) => (
                 <li key={i} className="show-ingredient">
-                  {ingredient.quantity} {ingredient.unit} {ingredient.ingredient}
+                  {ingredient.quantity} {ingredient.unit}{' '}
+                  {ingredient.ingredient}
                 </li>
               ))}
             </ul>

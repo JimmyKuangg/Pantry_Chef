@@ -16,7 +16,7 @@ export default class Search extends Component {
       this.removeSelectedClickHandler.bind(this);
     this.clearIngredients = this.clearIngredients.bind(this);
   }
-  
+
   componentDidMount() {
     this.props.fetchAllIngredients();
     if (this.props.currentUser.id) {
@@ -134,7 +134,7 @@ export default class Search extends Component {
                           this.suggestionClickHandler(e, suggestion)
                         }
                       >
-                        {suggestion.name} <i class="fas fa-plus" />
+                        {suggestion.name} <i className="fas fa-plus" />
                       </li>
                     )
                   )}

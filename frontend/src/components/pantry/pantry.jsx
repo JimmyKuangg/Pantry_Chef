@@ -29,7 +29,6 @@ export default class Pantry extends Component {
     this.props.fetchPantry();
     this.props.fetchAllIngredients();
     this.props.fetchRecipes();
-    // console.log(this.props.recipes)
     // this.filterUsersRecipes();
   }
 
@@ -190,7 +189,11 @@ export default class Pantry extends Component {
                       <i
                         className="fas fa-trash-alt"
                         id="delete-ingredient"
-                        onClick={() => this.props.deleteRecipe(recipe.id)}
+                        onClick={() =>
+                          this.props
+                            .deleteRecipe(recipe.id)
+                            .then(() => window.location.reload())
+                        }
                       />
                     </div>
                   </li>
