@@ -6,6 +6,7 @@ import LoginFormContainer from '../session/login_form_container';
 import SignupFormContainer from '../session/signup_form_container';
 import CreateRecipeContainer from "../recipes/recipe_create_container";
 import EditRecipeContainer from "../recipes/recipe_edit_container";
+import { withRouter } from 'react-router';
 
 function Modal(props) {
   if (!props.modal) {
@@ -51,4 +52,4 @@ const mDTP = dispatch => {
   };
 };
 
-export default connect(mSTP, mDTP)(Modal);
+export default withRouter(connect(mSTP, mDTP)(Modal));

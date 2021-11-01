@@ -4,6 +4,7 @@ import { clearRecipeErrors, createRecipe } from '../../actions/recipe_actions';
 import { closeSidemenu } from '../../actions/sidemenu_actions';
 import { fetchAllCategories } from '../../actions/category_actions';
 import RecipeCreateForm from './recipe_create';
+import { withRouter } from 'react-router';
 
 const mSTP = state => ({
   ingredients: state.ingredients,
@@ -20,4 +21,4 @@ const mDTP = dispatch => ({
   clearRecipeErrors: () => dispatch(clearRecipeErrors())
 });
 
-export default connect(mSTP, mDTP)(RecipeCreateForm);
+export default withRouter(connect(mSTP, mDTP)(RecipeCreateForm));

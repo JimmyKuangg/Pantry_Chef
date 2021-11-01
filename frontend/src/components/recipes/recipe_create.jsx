@@ -79,6 +79,7 @@ export default class RecipeCreateForm extends Component {
   success() {
     this.props.closeModal();
     this.props.closeSidemenu();
+    this.props.history.push(`/recipes`)
   }
 
   update(field) {
@@ -222,21 +223,6 @@ export default class RecipeCreateForm extends Component {
     let newSteps = this.state.steps.filter((step) => step !== stepId);
     this.setState({ steps: newSteps });
   }
-
-  // renderErrors() {
-  //   for (const error of Object.keys(this.state.errors)) {
-  //     if (error)
-  //   }
-  //   return (
-  //     <ul>
-  //       {Object.keys(this.state.errors)((error, i) => {
-  //         if (error.includes('exists')) {
-  //           return;
-  //         }
-  //       })}
-  //     </ul>
-  //   );
-  // }
 
   errorId(field) {
     for (let i = 0; i < this.state.errors.length; i++) {
